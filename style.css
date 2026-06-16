@@ -628,11 +628,6 @@ img {
   background-color: transparent;
 }
 
-/* 代表挨拶パネル：顔（上半身）を中央上部に表示 */
-.about-section__panels > a:nth-child(4).about-section__panel--bg-img {
-  background-size: cover;
-  background-position: center 20%;
-}
 
 /* 動画背景パネル */
 .about-section__panel--video {
@@ -651,6 +646,11 @@ img {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  pointer-events: none;
+}
+
+.about-section__panels > a:nth-child(4) .about-section__panel-video {
+  object-position: center 35%;
 }
 
 .about-section__panel-overlay {
@@ -658,6 +658,7 @@ img {
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   z-index: 1;
+  pointer-events: none;
 }
 
 .about-section__panel--video > *:not(.about-section__panel-video):not(.about-section__panel-overlay) {
@@ -775,6 +776,32 @@ img {
   border-radius: 50%;
   background: linear-gradient(135deg, rgba(21,92,89,0.5) 0%, rgba(255,255,255,0.08) 100%);
   border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.members-section__avatar-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.members-section__avatar-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(0, 200, 150, 0.08);
+  border: 2px solid rgba(0, 200, 150, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  color: rgba(0, 200, 150, 0.5);
+  flex-shrink: 0;
+}
+
+.members-section__item--coming-soon {
+  opacity: 0.45;
 }
 
 .members-section__role {
@@ -1141,6 +1168,14 @@ img {
   font-size: 0.88rem;
   color: rgba(255, 255, 255, 0.5);
   letter-spacing: 0.1em;
+}
+
+.results-section__note {
+  text-align: right;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: -56px;
+  margin-bottom: 72px;
 }
 
 @media (min-width: 768px) {
@@ -1981,6 +2016,37 @@ img {
   z-index: 2;
 }
 
+.services-section__item--coming-soon {
+  position: relative;
+}
+
+.services-section__item--coming-soon .services-section__card-link {
+  cursor: not-allowed;
+}
+
+.services-section__item--coming-soon::after {
+  content: 'Coming Soon';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.72);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  border-radius: var(--radius);
+  opacity: 0;
+  transition: opacity var(--transition);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.services-section__item--coming-soon:hover::after {
+  opacity: 1;
+}
+
 /* === SERVICE PAGES === */
 
 /* --- Service Hero --- */
@@ -2347,6 +2413,22 @@ img {
   letter-spacing: 0.06em;
 }
 
+.service-cases-section__note {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+  margin-left: 2px;
+  vertical-align: super;
+}
+
+.service-cases-section__footnote {
+  margin-top: 32px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.7;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 16px;
+}
+
 .service-cases-section__list {
   list-style: none;
   display: grid;
@@ -2657,6 +2739,73 @@ img {
 @media (min-width: 768px) {
   .about-page-hero {
     padding: 180px 48px 100px;
+  }
+}
+
+/* 弊社の特徴セクション */
+.about-features-section {
+  padding: 80px 32px 60px;
+  background-color: #0a0a0f;
+}
+
+.about-features-section__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.about-features-section__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.about-features-section__card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 36px 40px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.about-features-section__num {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  opacity: 0.7;
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 40px;
+}
+
+.about-features-section__card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 10px;
+}
+
+.about-features-section__card-text {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.52);
+  line-height: 1.85;
+}
+
+@media (min-width: 768px) {
+  .about-features-section {
+    padding: 100px 48px 60px;
+  }
+
+  .about-features-section__grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .about-features-section__card {
+    flex-direction: column;
+    gap: 16px;
   }
 }
 

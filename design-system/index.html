@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YZ PARTNERS Design System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <nav class="ds-sidebar">
+    <div class="ds-sidebar__logo">
+      <span class="ds-sidebar__logo-mark">YZP</span>
+      <span class="ds-sidebar__logo-text">Design System</span>
+    </div>
+    <ul class="ds-sidebar__nav">
+      <li><a href="#tokens">Design Tokens</a></li>
+      <li><a href="#colors">Colors</a></li>
+      <li><a href="#typography">Typography</a></li>
+      <li><a href="#spacing">Spacing</a></li>
+      <li><a href="#shadows">Shadows & Radius</a></li>
+      <li><a href="#buttons">Buttons</a></li>
+      <li><a href="#cards">Cards</a></li>
+      <li><a href="#forms">Forms</a></li>
+      <li><a href="#navigation">Navigation</a></li>
+      <li><a href="#layout">Layout</a></li>
+      <li><a href="#animation">Animation</a></li>
+      <li><a href="#backgrounds">Backgrounds</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="ds-main">
+
+    <!-- Hero -->
+    <header class="ds-hero">
+      <div class="ds-hero__inner">
+        <p class="ds-hero__label">DESIGN SYSTEM</p>
+        <h1 class="ds-hero__title">YZ PARTNERS</h1>
+        <p class="ds-hero__desc">コーポレートホームページのデザインシステム。カラー・タイポグラフィ・コンポーネント・レイアウトのすべての基準を定義します。</p>
+        <div class="ds-hero__meta">
+          <span>Version 1.0</span>
+          <span>2026</span>
+          <span>Noto Sans JP</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================== DESIGN TOKENS ===================== -->
+    <section id="tokens" class="ds-section">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">01</span>
+          <h2 class="ds-section__title">Design Tokens</h2>
+          <p class="ds-section__desc">すべてのスタイルの基礎となる変数定義。CSS カスタムプロパティとして管理します。</p>
+        </div>
+
+        <div class="ds-code-block">
+          <div class="ds-code-block__header">
+            <span>style.css — :root</span>
+          </div>
+          <pre><code>:root {
+  /* Color */
+  --color-main:         #FFFFFF;
+  --color-bg:           #f0ede8;
+  --color-bg-light:     #f0ede8;
+  --color-accent:       #00C896;
+  --color-accent-hover: #00DBA9;
+  --color-text:         #0a0a0f;
+  --color-text-muted:   #6b6b72;
+  --color-dark:         #0a0a0f;
+  --color-dark-alt:     #1a1a1a;
+  --color-error:        #e05c5c;
+
+  /* Shadow */
+  --shadow-card:        0 4px 20px rgba(0, 0, 0, 0.07);
+  --shadow-card-hover:  0 12px 36px rgba(0, 0, 0, 0.13);
+
+  /* Radius */
+  --radius-sm:   4px;
+  --radius:      6px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-full: 100px;
+
+  /* Transition */
+  --transition: 0.25s ease;
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COLORS ===================== -->
+    <section id="colors" class="ds-section">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">02</span>
+          <h2 class="ds-section__title">Colors</h2>
+          <p class="ds-section__desc">ダークテーマをベースに、ミントグリーンのアクセントカラーでブランドを表現します。</p>
+        </div>
+
+        <h3 class="ds-subsection__title">Primary Palette</h3>
+        <div class="ds-color-grid">
+          <div class="ds-color-swatch ds-color-swatch--dark" style="background:#0a0a0f;">
+            <div class="ds-color-swatch__info">
+              <span class="ds-color-swatch__name">Dark / Background</span>
+              <span class="ds-color-swatch__var">--color-dark</span>
+              <span class="ds-color-swatch__hex">#0a0a0f</span>
+            </div>
+          </div>
+          <div class="ds-color-swatch ds-color-swatch--dark" style="background:#1a1a1a;">
+            <div class="ds-color-swatch__info">
+              <span class="ds-color-swatch__name">Dark Alt</span>
+              <span class="ds-color-swatch__var">--color-dark-alt</span>
+              <span class="ds-color-swatch__hex">#1a1a1a</span>
+            </div>
+          </div>
+          <div class="ds-color-swatch ds-color-swatch--accent" style="background:#00C896;">
+            <div class="ds-color-swatch__info ds-color-swatch__info--dark">
+              <span class="ds-color-swatch__name">Accent</span>
+              <span class="ds-color-swatch__var">--color-accent</span>
+              <span class="ds-color-swatch__hex">#00C896</span>
+            </div>
+          </div>
+          <div class="ds-color-swatch ds-color-swatch--accent" style="background:#00DBA9;">
+            <div class="ds-color-swatch__info ds-color-swatch__info--dark">
+              <span class="ds-color-swatch__name">Accent Hover</span>
+              <span class="ds-color-swatch__var">--color-accent-hover</span>
+              <span class="ds-color-swatch__hex">#00DBA9</span>
+            </div>
+          </div>
+          <div class="ds-color-swatch" style="background:#FFFFFF; border:1px solid #e0e0e0;">
+            <div class="ds-color-swatch__info ds-color-swatch__info--dark">
+              <span class="ds-color-swatch__name">Main / White</span>
+              <span class="ds-color-swatch__var">--color-main</span>
+              <span class="ds-color-swatch__hex">#FFFFFF</span>
+            </div>
+          </div>
+          <div class="ds-color-swatch" style="background:#f0ede8; border:1px solid #e0e0e0;">
+            <div class="ds-color-swatch__info ds-color-swatch__info--dark">
+              <span class="ds-color-swatch__name">Background Light</span>
+              <span class="ds-color-swatch__var">--color-bg</span>
+              <span class="ds-color-swatch__hex">#f0ede8</span>
+            </div>
+          </div>
+          <div class="ds-color-swatch" style="background:#0a0a0f;">
+            <div class="ds-color-swatch__info">
+              <span class="ds-color-swatch__name">Text Dark</span>
+              <span class="ds-color-swatch__var">--color-text</span>
+              <span class="ds-color-swatch__hex">#0a0a0f</span>
+            </div>
+          </div>
+          <div class="ds-color-swatch" style="background:#6b6b72;">
+            <div class="ds-color-swatch__info">
+              <span class="ds-color-swatch__name">Text Muted</span>
+              <span class="ds-color-swatch__var">--color-text-muted</span>
+              <span class="ds-color-swatch__hex">#6b6b72</span>
+            </div>
+          </div>
+          <div class="ds-color-swatch ds-color-swatch--dark" style="background:#e05c5c;">
+            <div class="ds-color-swatch__info">
+              <span class="ds-color-swatch__name">Error</span>
+              <span class="ds-color-swatch__var">--color-error</span>
+              <span class="ds-color-swatch__hex">#e05c5c</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Dark Theme Alpha Palette</h3>
+        <p class="ds-subsection__desc">ダークテーマ内で使用するアルファ（透明度付き）カラーセット。</p>
+        <div class="ds-alpha-grid">
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(255,255,255,0.95);"></div>
+            <div class="ds-alpha-label">
+              <span>White / 95%</span>
+              <code>rgba(255,255,255,0.95)</code>
+            </div>
+            <span class="ds-alpha-usage">メインテキスト</span>
+          </div>
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(255,255,255,0.85);"></div>
+            <div class="ds-alpha-label">
+              <span>White / 85%</span>
+              <code>rgba(255,255,255,0.85)</code>
+            </div>
+            <span class="ds-alpha-usage">本文テキスト</span>
+          </div>
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(255,255,255,0.5);"></div>
+            <div class="ds-alpha-label">
+              <span>White / 50%</span>
+              <code>rgba(255,255,255,0.50)</code>
+            </div>
+            <span class="ds-alpha-usage">リード文・サブテキスト</span>
+          </div>
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(255,255,255,0.35);"></div>
+            <div class="ds-alpha-label">
+              <span>White / 35%</span>
+              <code>rgba(255,255,255,0.35)</code>
+            </div>
+            <span class="ds-alpha-usage">補足テキスト</span>
+          </div>
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(255,255,255,0.15);"></div>
+            <div class="ds-alpha-label">
+              <span>White / 15%</span>
+              <code>rgba(255,255,255,0.15)</code>
+            </div>
+            <span class="ds-alpha-usage">ボーダー（強）</span>
+          </div>
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(255,255,255,0.09);"></div>
+            <div class="ds-alpha-label">
+              <span>White / 9%</span>
+              <code>rgba(255,255,255,0.09)</code>
+            </div>
+            <span class="ds-alpha-usage">カードボーダー</span>
+          </div>
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(255,255,255,0.05);"></div>
+            <div class="ds-alpha-label">
+              <span>White / 5%</span>
+              <code>rgba(255,255,255,0.05)</code>
+            </div>
+            <span class="ds-alpha-usage">カード背景（薄）</span>
+          </div>
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(0,200,150,0.5);"></div>
+            <div class="ds-alpha-label">
+              <span>Accent / 50%</span>
+              <code>rgba(0,200,150,0.50)</code>
+            </div>
+            <span class="ds-alpha-usage">カードhoverボーダー</span>
+          </div>
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(0,200,150,0.22);"></div>
+            <div class="ds-alpha-label">
+              <span>Accent / 22%</span>
+              <code>rgba(0,200,150,0.22)</code>
+            </div>
+            <span class="ds-alpha-usage">グラデーション光源（強）</span>
+          </div>
+          <div class="ds-alpha-item">
+            <div class="ds-alpha-swatch" style="background:rgba(0,200,150,0.15);"></div>
+            <div class="ds-alpha-label">
+              <span>Accent / 15%</span>
+              <code>rgba(0,200,150,0.15)</code>
+            </div>
+            <span class="ds-alpha-usage">成果ボックス背景</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TYPOGRAPHY ===================== -->
+    <section id="typography" class="ds-section ds-section--alt">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">03</span>
+          <h2 class="ds-section__title">Typography</h2>
+          <p class="ds-section__desc">Noto Sans JP のみを使用。3段階のウェイトと明確なサイズ階層でプロフェッショナルを表現します。</p>
+        </div>
+
+        <h3 class="ds-subsection__title">Font Family</h3>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>Google Fonts</span></div>
+          <pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"&gt;
+
+font-family: 'Noto Sans JP', sans-serif;</code></pre>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Type Scale — Dark Theme</h3>
+        <div class="ds-type-preview ds-type-preview--dark">
+          <div class="ds-type-item">
+            <div class="ds-type-item__spec">
+              <code>.hero-title</code>
+              <span>3.25rem / 700 / ls:0.04em</span>
+            </div>
+            <p class="ds-type-sample ds-type-sample--hero">変革を、共に。</p>
+          </div>
+          <div class="ds-type-item">
+            <div class="ds-type-item__spec">
+              <code>.section-title</code>
+              <span>2.1rem / 700 / ls:0.06em</span>
+            </div>
+            <p class="ds-type-sample ds-type-sample--section">SERVICE</p>
+          </div>
+          <div class="ds-type-item">
+            <div class="ds-type-item__spec">
+              <code>.card-title</code>
+              <span>1.15rem / 700 / ls:0.04em</span>
+            </div>
+            <p class="ds-type-sample ds-type-sample--card">戦略コンサルティング</p>
+          </div>
+          <div class="ds-type-item">
+            <div class="ds-type-item__spec">
+              <code>.section-lead</code>
+              <span>0.975rem / 400 / lh:1.9</span>
+            </div>
+            <p class="ds-type-sample ds-type-sample--lead">経営課題の本質を見極め、実行まで伴走するパートナーとして、貴社の成長を支援します。</p>
+          </div>
+          <div class="ds-type-item">
+            <div class="ds-type-item__spec">
+              <code>.label</code>
+              <span>0.75rem / 700 / ls:0.22em</span>
+            </div>
+            <p class="ds-type-sample ds-type-sample--label">CONSULTING</p>
+          </div>
+          <div class="ds-type-item">
+            <div class="ds-type-item__spec">
+              <code>.body</code>
+              <span>0.95rem / 400 / lh:1.8</span>
+            </div>
+            <p class="ds-type-sample ds-type-sample--body">YZ PARTNERSは、戦略立案から実行支援まで、クライアント企業の変革を一気通貫でサポートするコンサルティングファームです。</p>
+          </div>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Type Scale — Light Theme</h3>
+        <div class="ds-type-preview ds-type-preview--light">
+          <div class="ds-type-item">
+            <div class="ds-type-item__spec ds-type-item__spec--light">
+              <code>.page-hero-title</code>
+              <span>2.6rem / 700 / ls:0.04em</span>
+            </div>
+            <p class="ds-type-sample ds-type-sample--page-title">COMPANY</p>
+          </div>
+          <div class="ds-type-item">
+            <div class="ds-type-item__spec ds-type-item__spec--light">
+              <code>.content-title</code>
+              <span>1.5rem / 700</span>
+            </div>
+            <p class="ds-type-sample ds-type-sample--content-title">会社概要</p>
+          </div>
+          <div class="ds-type-item">
+            <div class="ds-type-item__spec ds-type-item__spec--light">
+              <code>.body</code>
+              <span>0.95rem / 400 / lh:1.8</span>
+            </div>
+            <p class="ds-type-sample ds-type-sample--body-light">YZ PARTNERSは、変革を志す企業に寄り添い、戦略から実行まで一貫した支援を提供します。</p>
+          </div>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Font Weight & Letter Spacing</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead>
+              <tr>
+                <th>用途</th>
+                <th>font-weight</th>
+                <th>letter-spacing</th>
+                <th>line-height</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>大見出し（Hero / Section）</td>
+                <td>700</td>
+                <td>0.04em – 0.08em</td>
+                <td>1.2 – 1.4</td>
+              </tr>
+              <tr>
+                <td>ラベル・タグ</td>
+                <td>700</td>
+                <td>0.1em – 0.22em</td>
+                <td>1.0</td>
+              </tr>
+              <tr>
+                <td>ボタンテキスト</td>
+                <td>500</td>
+                <td>0.16em</td>
+                <td>1.0</td>
+              </tr>
+              <tr>
+                <td>カード見出し</td>
+                <td>700</td>
+                <td>0.04em</td>
+                <td>1.5</td>
+              </tr>
+              <tr>
+                <td>本文・説明文</td>
+                <td>400</td>
+                <td>標準</td>
+                <td>1.8 – 1.9</td>
+              </tr>
+              <tr>
+                <td>サブ見出し・ナビ</td>
+                <td>500</td>
+                <td>0.04em – 0.06em</td>
+                <td>1.0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SPACING ===================== -->
+    <section id="spacing" class="ds-section">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">04</span>
+          <h2 class="ds-section__title">Spacing</h2>
+          <p class="ds-section__desc">セクション・コンテナ・コンポーネント内のスペーシング基準。</p>
+        </div>
+
+        <div class="ds-spacing-grid">
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:2px;"></div>
+            <span class="ds-spacing-label">2px</span>
+            <span class="ds-spacing-usage">統計グリッドgap</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:4px;"></div>
+            <span class="ds-spacing-label">4px</span>
+            <span class="ds-spacing-usage">最小マージン</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:8px;"></div>
+            <span class="ds-spacing-label">8px</span>
+            <span class="ds-spacing-usage">タグ内padding</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:12px;"></div>
+            <span class="ds-spacing-label">12px</span>
+            <span class="ds-spacing-usage">inline要素間</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:16px;"></div>
+            <span class="ds-spacing-label">16px</span>
+            <span class="ds-spacing-usage">ボタンpaddingY / 要素間</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:20px;"></div>
+            <span class="ds-spacing-label">20px</span>
+            <span class="ds-spacing-usage">aboutパネルgap</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:24px;"></div>
+            <span class="ds-spacing-label">24px</span>
+            <span class="ds-spacing-usage">カードgap（一部）</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:28px;"></div>
+            <span class="ds-spacing-label">28px</span>
+            <span class="ds-spacing-usage">カードgap（標準）</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:32px;"></div>
+            <span class="ds-spacing-label">32px</span>
+            <span class="ds-spacing-usage">セクション横padding(SP) / カードgap(PC)</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:40px;"></div>
+            <span class="ds-spacing-label">40px</span>
+            <span class="ds-spacing-usage">カード内padding / 要素間margin</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:48px;"></div>
+            <span class="ds-spacing-label">48px</span>
+            <span class="ds-spacing-usage">ボタンpaddingX / セクション横padding(PC)</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:56px;"></div>
+            <span class="ds-spacing-label">56px</span>
+            <span class="ds-spacing-usage">CTAボタンpaddingX(大)</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:72px;"></div>
+            <span class="ds-spacing-label">72px</span>
+            <span class="ds-spacing-usage">セクション内要素間</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:80px;"></div>
+            <span class="ds-spacing-label">80px</span>
+            <span class="ds-spacing-usage">footer padding / hero下部</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:120px;"></div>
+            <span class="ds-spacing-label">120px</span>
+            <span class="ds-spacing-usage">セクションpaddingY(SP)</span>
+          </div>
+          <div class="ds-spacing-item">
+            <div class="ds-spacing-bar" style="height:140px;"></div>
+            <span class="ds-spacing-label">140px</span>
+            <span class="ds-spacing-usage">セクションpaddingY(PC)</span>
+          </div>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Container & Max-Width</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead>
+              <tr>
+                <th>max-width</th>
+                <th>用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1100px</strong></td>
+                <td>標準コンテンツコンテナ（全セクション共通 .inner）</td>
+              </tr>
+              <tr>
+                <td><strong>900px</strong></td>
+                <td>事例詳細 / サービス詳細ヒーロー（狭いコンテンツ）</td>
+              </tr>
+              <tr>
+                <td><strong>700px</strong></td>
+                <td>Contact / CTA など単一カラムコンテンツ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Section Padding</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead>
+              <tr>
+                <th>種別</th>
+                <th>モバイル（〜767px）</th>
+                <th>デスクトップ（768px〜）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>標準セクション</td>
+                <td>120px 32px</td>
+                <td>140px 48px</td>
+              </tr>
+              <tr>
+                <td>ページヒーロー</td>
+                <td>160px 32px 80px</td>
+                <td>180px 48px 100px</td>
+              </tr>
+              <tr>
+                <td>Footer</td>
+                <td>80px 32px</td>
+                <td>80px 48px</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SHADOWS & RADIUS ===================== -->
+    <section id="shadows" class="ds-section ds-section--alt">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">05</span>
+          <h2 class="ds-section__title">Shadows & Radius</h2>
+        </div>
+
+        <div class="ds-two-col">
+          <div>
+            <h3 class="ds-subsection__title">Border Radius</h3>
+            <div class="ds-radius-grid">
+              <div class="ds-radius-item">
+                <div class="ds-radius-box" style="border-radius:4px;"></div>
+                <span class="ds-radius-label">--radius-sm</span>
+                <span class="ds-radius-val">4px</span>
+                <span class="ds-radius-usage">タグ・バッジ</span>
+              </div>
+              <div class="ds-radius-item">
+                <div class="ds-radius-box" style="border-radius:6px;"></div>
+                <span class="ds-radius-label">--radius</span>
+                <span class="ds-radius-val">6px</span>
+                <span class="ds-radius-usage">標準カード・ボタン</span>
+              </div>
+              <div class="ds-radius-item">
+                <div class="ds-radius-box" style="border-radius:8px;"></div>
+                <span class="ds-radius-label">--radius-md</span>
+                <span class="ds-radius-val">8px</span>
+                <span class="ds-radius-usage">パネルカード</span>
+              </div>
+              <div class="ds-radius-item">
+                <div class="ds-radius-box" style="border-radius:12px;"></div>
+                <span class="ds-radius-label">--radius-lg</span>
+                <span class="ds-radius-val">12px</span>
+                <span class="ds-radius-usage">メンバーカード</span>
+              </div>
+              <div class="ds-radius-item">
+                <div class="ds-radius-box" style="border-radius:100px;"></div>
+                <span class="ds-radius-label">--radius-full</span>
+                <span class="ds-radius-val">100px</span>
+                <span class="ds-radius-usage">ピルボタン・タグ</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 class="ds-subsection__title">Box Shadow</h3>
+            <div class="ds-shadow-grid">
+              <div class="ds-shadow-item">
+                <div class="ds-shadow-box" style="box-shadow:0 4px 20px rgba(0,0,0,0.07);"></div>
+                <div class="ds-shadow-info">
+                  <span class="ds-shadow-name">--shadow-card</span>
+                  <code>0 4px 20px rgba(0,0,0,0.07)</code>
+                  <span>カード通常時</span>
+                </div>
+              </div>
+              <div class="ds-shadow-item">
+                <div class="ds-shadow-box" style="box-shadow:0 12px 36px rgba(0,0,0,0.13);"></div>
+                <div class="ds-shadow-info">
+                  <span class="ds-shadow-name">--shadow-card-hover</span>
+                  <code>0 12px 36px rgba(0,0,0,0.13)</code>
+                  <span>カードhover時</span>
+                </div>
+              </div>
+              <div class="ds-shadow-item">
+                <div class="ds-shadow-box" style="box-shadow:0 8px 32px rgba(0,0,0,0.3);"></div>
+                <div class="ds-shadow-info">
+                  <span class="ds-shadow-name">shadow-button-hover</span>
+                  <code>0 8px 32px rgba(0,0,0,0.3)</code>
+                  <span>ダーク上のボタンhover</span>
+                </div>
+              </div>
+              <div class="ds-shadow-item">
+                <div class="ds-shadow-box" style="box-shadow:0 0 0 3px rgba(0,200,150,0.2);"></div>
+                <div class="ds-shadow-info">
+                  <span class="ds-shadow-name">shadow-focus</span>
+                  <code>0 0 0 3px rgba(0,200,150,0.2)</code>
+                  <span>フォームフォーカスリング</span>
+                </div>
+              </div>
+              <div class="ds-shadow-item">
+                <div class="ds-shadow-box" style="box-shadow:0 0 0 3px rgba(224,92,92,0.2);"></div>
+                <div class="ds-shadow-info">
+                  <span class="ds-shadow-name">shadow-error</span>
+                  <code>0 0 0 3px rgba(224,92,92,0.2)</code>
+                  <span>フォームエラーリング</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BUTTONS ===================== -->
+    <section id="buttons" class="ds-section">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">06</span>
+          <h2 class="ds-section__title">Buttons</h2>
+          <p class="ds-section__desc">3種類のボタンスタイル。すべてホバー時にシマーエフェクトが走ります。</p>
+        </div>
+
+        <!-- Primary Button Dark -->
+        <h3 class="ds-subsection__title">Primary CTA — Dark Theme</h3>
+        <div class="ds-component-preview ds-component-preview--dark">
+          <button class="btn-primary-dark">サービスを見る</button>
+          <button class="btn-primary-dark" style="opacity:0.5;cursor:not-allowed;">Disabled</button>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>padding: 16px 48px;
+border: 1px solid rgba(255, 255, 255, 0.5);
+color: #FFFFFF;
+background: transparent;
+border-radius: var(--radius);        /* 6px */
+font-weight: 500;
+font-size: 0.88rem;
+letter-spacing: 0.16em;
+transition: all var(--transition);   /* 0.25s ease */
+position: relative;
+overflow: hidden;
+
+/* Hover */
+background: rgba(255, 255, 255, 0.1);
+border-color: rgba(255, 255, 255, 0.85);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+transform: translateY(-2px);</code></pre>
+        </div>
+
+        <!-- Service CTA Button -->
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Service CTA — Large</h3>
+        <div class="ds-component-preview ds-component-preview--dark">
+          <button class="btn-service-dark">お問い合わせはこちら</button>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>padding: 18px 56px;
+font-weight: 700;
+font-size: 0.95rem;
+letter-spacing: 0.1em;
+/* 他はPrimary CTAと共通 */</code></pre>
+        </div>
+
+        <!-- Pill / Detail Link Button -->
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Pill / Detail Link</h3>
+        <div class="ds-component-preview ds-component-preview--dark">
+          <button class="btn-pill-dark">詳細を見る →</button>
+          <button class="btn-pill-dark">事例を読む →</button>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>padding: 9px 20px;
+border: 1px solid rgba(255, 255, 255, 0.25);
+border-radius: var(--radius-full);   /* 100px */
+font-size: 0.82rem;
+color: rgba(255,255,255,0.75);
+
+/* Hover */
+border-color: rgba(255, 255, 255, 0.55);
+color: #FFFFFF;</code></pre>
+        </div>
+
+        <!-- Shimmer Effect -->
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Shimmer Effect (共通)</h3>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS — ボタン共通の光るエフェクト</span></div>
+          <pre><code>button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%) skewX(-20deg);
+}
+
+button:hover::before {
+  animation: shimmerPass 0.65s ease forwards;
+}
+
+@keyframes shimmerPass {
+  from { transform: translateX(-120%) skewX(-20deg); }
+  to   { transform: translateX(220%) skewX(-20deg); }
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CARDS ===================== -->
+    <section id="cards" class="ds-section ds-section--alt">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">07</span>
+          <h2 class="ds-section__title">Cards</h2>
+          <p class="ds-section__desc">ダークテーマ上で使用する4種類のグラスカードパターン。</p>
+        </div>
+
+        <!-- Glass Card -->
+        <h3 class="ds-subsection__title">Glassmorphism Card（サービスカード）</h3>
+        <div class="ds-component-preview ds-component-preview--dark" style="padding:40px 32px;">
+          <div class="demo-card-glass">
+            <div class="demo-card-glass__img"></div>
+            <p class="demo-card-glass__label">AX CONSULTING</p>
+            <h4 class="demo-card-glass__title">戦略・変革支援</h4>
+            <p class="demo-card-glass__body">経営課題の本質を見極め、実行まで伴走するパートナーとして支援します。</p>
+            <button class="btn-pill-dark" style="margin-top:24px;">詳細を見る →</button>
+          </div>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>padding: 40px 32px;
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.09);
+border-radius: var(--radius);         /* 6px */
+transition: all 0.35s ease;
+
+/* Hover */
+background: rgba(255, 255, 255, 0.09);
+border-color: rgba(0, 200, 150, 0.5);
+transform: translateY(-10px);
+box-shadow:
+  0 20px 60px rgba(0, 0, 0, 0.4),
+  0 0 0 1px rgba(0, 200, 150, 0.15) inset;</code></pre>
+        </div>
+
+        <!-- Panel Card -->
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Panel Card（About・ページ内カード）</h3>
+        <div class="ds-component-preview ds-component-preview--dark" style="padding:40px 32px;">
+          <div class="demo-card-panel">
+            <p class="demo-card-panel__label">MISSION</p>
+            <h4 class="demo-card-panel__title">経営変革の実現</h4>
+            <p class="demo-card-panel__body">クライアントの持続的成長を実現するため、戦略・組織・ITの三位一体支援を行います。</p>
+          </div>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>padding: 40px;
+background-color: #1a1a1a;
+border: 1px solid rgba(255, 255, 255, 0.09);
+border-radius: var(--radius-md);      /* 8px */
+min-height: 280px;
+
+/* Hover */
+background: #252525;
+border-color: var(--color-accent);   /* #00C896 */
+transform: translateY(-4px);</code></pre>
+        </div>
+
+        <!-- Member Card -->
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Member Card</h3>
+        <div class="ds-component-preview ds-component-preview--dark" style="padding:40px 32px;">
+          <div class="demo-card-member">
+            <div class="demo-card-member__avatar"></div>
+            <h4 class="demo-card-member__name">山田 太郎</h4>
+            <p class="demo-card-member__role">代表取締役</p>
+            <p class="demo-card-member__bio">戦略コンサルティングファームにて10年以上の経験を持つ。DX・組織変革を専門とする。</p>
+          </div>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>padding: 48px 32px 40px;
+background: rgba(255, 255, 255, 0.04);
+border: 1px solid rgba(255, 255, 255, 0.09);
+border-radius: var(--radius-lg);     /* 12px */
+text-align: center;
+
+/* Avatar */
+width: 96px; height: 96px;
+border-radius: 50%;
+background: linear-gradient(
+  135deg,
+  rgba(21, 92, 89, 0.5) 0%,
+  rgba(255, 255, 255, 0.08) 100%
+);
+margin: 0 auto 24px;</code></pre>
+        </div>
+
+        <!-- Results Card -->
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Results / Metrics Card</h3>
+        <div class="ds-component-preview ds-component-preview--dark" style="padding:40px 32px;">
+          <div class="demo-results-grid">
+            <div class="demo-result-item">
+              <span class="demo-result-num">95<span>%</span></span>
+              <span class="demo-result-label">顧客満足度</span>
+            </div>
+            <div class="demo-result-item">
+              <span class="demo-result-num">120<span>+</span></span>
+              <span class="demo-result-label">支援実績</span>
+            </div>
+            <div class="demo-result-item">
+              <span class="demo-result-num">3.5<span>倍</span></span>
+              <span class="demo-result-label">平均ROI</span>
+            </div>
+          </div>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS — 数値ハイライト</span></div>
+          <pre><code>/* Number */
+font-size: 4.5rem;   /* モバイル: 3.5rem */
+font-weight: 700;
+color: var(--color-accent);   /* #00C896 */
+line-height: 1;
+
+/* Left accent border（事例内）*/
+border-left: 3px solid var(--color-accent);
+padding-left: 20px;
+background: rgba(0, 200, 150, 0.15);</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FORMS ===================== -->
+    <section id="forms" class="ds-section">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">08</span>
+          <h2 class="ds-section__title">Forms</h2>
+          <p class="ds-section__desc">お問い合わせフォーム用のフィールドスタイル。Formspree でサーバーレス送信。</p>
+        </div>
+
+        <div class="ds-component-preview ds-component-preview--dark" style="padding:40px;">
+          <form class="demo-form">
+            <div class="demo-form__field">
+              <label class="demo-form__label">会社名 <span class="demo-form__required">必須</span></label>
+              <input type="text" class="demo-form__input" placeholder="株式会社○○">
+            </div>
+            <div class="demo-form__field">
+              <label class="demo-form__label">お問い合わせ種別 <span class="demo-form__required">必須</span></label>
+              <select class="demo-form__select">
+                <option value="">選択してください</option>
+                <option>サービスについて</option>
+                <option>採用について</option>
+              </select>
+            </div>
+            <div class="demo-form__field">
+              <label class="demo-form__label">メッセージ <span class="demo-form__required">必須</span></label>
+              <textarea class="demo-form__textarea" placeholder="ご相談内容をご記入ください"></textarea>
+            </div>
+            <div class="demo-form__field">
+              <input type="text" class="demo-form__input demo-form__input--error" value="不正な値">
+              <p class="demo-form__error-msg">このフィールドは必須です。</p>
+            </div>
+            <div class="demo-form__check">
+              <input type="checkbox" id="demo-privacy" style="width:18px;height:18px;accent-color:#00C896;">
+              <label for="demo-privacy">プライバシーポリシーに同意する</label>
+            </div>
+            <button type="submit" class="btn-primary-dark" style="width:100%;margin-top:8px;">送信する</button>
+          </form>
+        </div>
+
+        <div class="ds-code-block" style="margin-top:32px;">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>/* Input / Textarea / Select */
+padding: 14px 18px;
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid rgba(255, 255, 255, 0.15);
+border-radius: var(--radius);   /* 6px */
+color: #FFFFFF;
+font-size: 0.95rem;
+width: 100%;
+transition: border-color var(--transition), box-shadow var(--transition);
+
+/* Focus */
+border-color: var(--color-accent);                /* #00C896 */
+box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.2);
+
+/* Error */
+border-color: var(--color-error);                 /* #e05c5c */
+box-shadow: 0 0 0 3px rgba(224, 92, 92, 0.2);
+
+/* Textarea */
+height: 150px;
+resize: vertical;
+
+/* Select — カスタムアイコン */
+appearance: none;
+background-image: url("data:image/svg+xml,...");
+background-position: right 16px center;
+background-repeat: no-repeat;
+padding-right: 44px;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== NAVIGATION ===================== -->
+    <section id="navigation" class="ds-section ds-section--alt">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">09</span>
+          <h2 class="ds-section__title">Navigation</h2>
+          <p class="ds-section__desc">固定ヘッダー。スクロール時に影追加、モバイルはフルスクリーンメニュー。</p>
+        </div>
+
+        <div class="ds-component-preview ds-component-preview--dark" style="padding:0; overflow:hidden; border-radius:6px;">
+          <nav class="demo-navbar">
+            <div class="demo-navbar__logo">YZ PARTNERS</div>
+            <ul class="demo-navbar__list">
+              <li><a href="#">SERVICE</a></li>
+              <li><a href="#">COMPANY</a></li>
+              <li><a href="#">CASES</a></li>
+              <li><a href="#">RECRUIT</a></li>
+              <li><a href="#" class="demo-navbar__contact">CONTACT</a></li>
+            </ul>
+            <button class="demo-navbar__toggle">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </nav>
+        </div>
+
+        <div class="ds-code-block" style="margin-top:32px;">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 68px;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  transition: box-shadow var(--transition);
+}
+
+/* スクロール時 */
+.navbar.is-scrolled {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* リンク hover */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-accent);
+  transition: width 0.3s ease;
+}
+.navbar__link:hover::after { width: 100%; }</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LAYOUT ===================== -->
+    <section id="layout" class="ds-section">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">10</span>
+          <h2 class="ds-section__title">Layout Patterns</h2>
+          <p class="ds-section__desc">3段階のブレークポイントと代表的なグリッドパターン。</p>
+        </div>
+
+        <h3 class="ds-subsection__title">Breakpoints</h3>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead>
+              <tr>
+                <th>名称</th>
+                <th>条件</th>
+                <th>代表的な変化</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Mobile</strong></td>
+                <td>〜 767px</td>
+                <td>1カラム / ハンバーガーメニュー / セクションpadding 120px 32px</td>
+              </tr>
+              <tr>
+                <td><strong>Small Tablet</strong></td>
+                <td>480px 〜</td>
+                <td>採用ペルソナ 2カラム</td>
+              </tr>
+              <tr>
+                <td><strong>Tablet / Desktop</strong></td>
+                <td>768px 〜</td>
+                <td>2〜5カラム / ナビ横並び / セクションpadding 140px 48px</td>
+              </tr>
+              <tr>
+                <td><strong>Wide Desktop</strong></td>
+                <td>1100px 〜</td>
+                <td>サービス4カラム / 大見出しサイズ拡大</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Grid Patterns</h3>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS — 代表的なグリッド定義</span></div>
+          <pre><code>/* サービスカード（4枚）*/
+.services-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+@media (min-width: 768px)  { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+@media (min-width: 1100px) { grid-template-columns: repeat(4, 1fr); }
+
+/* メンバーカード */
+.members-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px)  { grid-template-columns: repeat(2, 1fr); }
+
+/* 統計（5項目）*/
+.results-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+@media (min-width: 768px)  { grid-template-columns: repeat(5, 1fr); }
+
+/* フッター */
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+@media (min-width: 768px)  { grid-template-columns: repeat(5, 1fr); }</code></pre>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Section Structure</h3>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>HTML — 標準セクション構造</span></div>
+          <pre><code>&lt;section class="section-name"&gt;
+  &lt;div class="inner"&gt;          &lt;!-- max-width: 1100px; margin: 0 auto --&gt;
+    &lt;div class="section-head"&gt;
+      &lt;p class="section-label"&gt;LABEL&lt;/p&gt;
+      &lt;h2 class="section-title"&gt;タイトル&lt;/h2&gt;
+      &lt;p class="section-lead"&gt;説明文&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;ul class="section-list"&gt;
+      &lt;li class="section-item animate-on-scroll"&gt;...&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ANIMATION ===================== -->
+    <section id="animation" class="ds-section ds-section--alt">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">11</span>
+          <h2 class="ds-section__title">Animation</h2>
+          <p class="ds-section__desc">ページロード・スクロール連動・ホバーの3層アニメーション。</p>
+        </div>
+
+        <div class="ds-anim-grid">
+          <div class="ds-anim-item">
+            <div class="ds-anim-demo ds-anim-demo--fadein">
+              <div class="ds-anim-box">FadeUp</div>
+            </div>
+            <div class="ds-anim-info">
+              <h4>heroFadeUp（ページロード）</h4>
+              <code>opacity: 0 + translateY(32px) → visible<br>duration: 0.9s ease both</code>
+            </div>
+          </div>
+          <div class="ds-anim-item">
+            <div class="ds-anim-demo">
+              <div class="ds-anim-box ds-anim-box--scroll">Scroll Reveal</div>
+            </div>
+            <div class="ds-anim-info">
+              <h4>animate-on-scroll（IntersectionObserver）</h4>
+              <code>opacity: 0 + translateY(28px) → visible<br>duration: 0.7s ease<br>stagger: 130ms（カード）</code>
+            </div>
+          </div>
+          <div class="ds-anim-item">
+            <div class="ds-anim-demo">
+              <div class="ds-anim-box ds-anim-box--hover">Hover me</div>
+            </div>
+            <div class="ds-anim-info">
+              <h4>カードホバー</h4>
+              <code>transform: translateY(-10px)<br>+ border-color: rgba(0,200,150,0.5)<br>transition: 0.35s ease</code>
+            </div>
+          </div>
+          <div class="ds-anim-item">
+            <div class="ds-anim-demo">
+              <div class="ds-anim-box ds-anim-box--img">IMAGE</div>
+            </div>
+            <div class="ds-anim-info">
+              <h4>画像ホバー</h4>
+              <code>transform: scale(1.05)<br>transition: 0.5s ease<br>overflow: hidden</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="ds-code-block" style="margin-top:40px;">
+          <div class="ds-code-block__header"><span>JavaScript — スクロールアニメーション</span></div>
+          <pre><code>const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const delay = entry.target.dataset.delay || i * 130;
+      setTimeout(() => {
+        entry.target.classList.add('is-visible');
+      }, delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.animate-on-scroll')
+  .forEach(el => observer.observe(el));</code></pre>
+        </div>
+
+        <div class="ds-code-block" style="margin-top:24px;">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: none;
+}</code></pre>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:48px;">Parallax</h3>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>JavaScript — Heroパララックス</span></div>
+          <pre><code>window.addEventListener('scroll', () => {
+  const scrollY = window.pageYOffset;
+  heroVideo.style.transform = `translateY(${scrollY * 0.28}px)`;
+});</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BACKGROUNDS ===================== -->
+    <section id="backgrounds" class="ds-section">
+      <div class="ds-section__inner">
+        <div class="ds-section__header">
+          <span class="ds-section__label">12</span>
+          <h2 class="ds-section__title">Backgrounds</h2>
+          <p class="ds-section__desc">ラジアルグラデーションでミントグリーンの光源を演出するダークセクション背景。</p>
+        </div>
+
+        <h3 class="ds-subsection__title">Section Background（共通パターン）</h3>
+        <div class="ds-bg-preview ds-bg-preview--standard">
+          <p>Standard Dark Section</p>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>background:
+  radial-gradient(ellipse 60% 55% at 8% 50%,  rgba(0, 200, 150, 0.22) 0%, transparent 55%),
+  radial-gradient(ellipse 45% 60% at 92% 30%, rgba(0, 200, 150, 0.14) 0%, transparent 50%),
+  #0a0a0f;</code></pre>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:40px;">Navbar Background</h3>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>background: rgba(0, 0, 0, 0.92);
+backdrop-filter: blur(12px);</code></pre>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:40px;">Panel Background with Image Overlay</h3>
+        <div class="ds-bg-preview ds-bg-preview--overlay">
+          <p>Image + rgba(0,0,0,0.55) overlay</p>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>.panel--bg-img {
+  background-image: url('...');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+.panel--bg-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}</code></pre>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:40px;">Hero Video Background</h3>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>HTML + CSS</span></div>
+          <pre><code>&lt;section class="hero-section"&gt;
+  &lt;video class="hero-section__video" autoplay muted loop playsinline&gt;
+    &lt;source src="image/hero.mp4" type="video/mp4"&gt;
+  &lt;/video&gt;
+  &lt;div class="hero-section__overlay"&gt;&lt;/div&gt;
+  &lt;div class="hero-section__inner"&gt;...&lt;/div&gt;
+&lt;/section&gt;
+
+/* CSS */
+.hero-section__video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-section__overlay {
+  position: absolute; inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}</code></pre>
+        </div>
+
+        <h3 class="ds-subsection__title" style="margin-top:40px;">Light Theme Background（サブページ）</h3>
+        <div class="ds-bg-preview ds-bg-preview--light">
+          <p style="color:#0a0a0f;">Light Background — #f0ede8</p>
+        </div>
+        <div class="ds-code-block">
+          <div class="ds-code-block__header"><span>CSS</span></div>
+          <pre><code>background-color: var(--color-bg);   /* #f0ede8 — ウォームベージュ */</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="ds-footer">
+      <div class="ds-footer__inner">
+        <span>YZ PARTNERS Design System</span>
+        <span>Version 1.0 · 2026</span>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>
