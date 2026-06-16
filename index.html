@@ -214,7 +214,7 @@
 
         <a href="about.html#company" class="about-section__panel about-section__panel--video">
           <video class="about-section__panel-video" autoplay muted loop playsinline>
-            <source src="image/黒 シンプル 東京 YouTube 動画.mp4" type="video/mp4">
+            <source src="image/about-company.mp4" type="video/mp4">
           </video>
           <div class="about-section__panel-overlay"></div>
           <p class="about-section__panel-title">会社概要</p>
@@ -224,7 +224,7 @@
 
         <a href="mission.html" class="about-section__panel about-section__panel--video">
           <video class="about-section__panel-video" autoplay muted loop playsinline>
-            <source src="image/Blue and Pink Modern Thanks for Watching Video.mp4" type="video/mp4">
+            <source src="image/about-mission.mp4" type="video/mp4">
           </video>
           <div class="about-section__panel-overlay"></div>
           <p class="about-section__panel-title">ミッション</p>
@@ -234,7 +234,7 @@
 
         <a href="members.html" class="about-section__panel about-section__panel--video">
           <video class="about-section__panel-video" autoplay muted loop playsinline>
-            <source src="image/White Blue Minimalist Join the Business Video (1).mp4" type="video/mp4">
+            <source src="image/about-members.mp4" type="video/mp4">
           </video>
           <div class="about-section__panel-overlay"></div>
           <p class="about-section__panel-title">メンバー紹介</p>
@@ -244,7 +244,7 @@
 
         <a href="message.html" class="about-section__panel about-section__panel--video">
           <video class="about-section__panel-video" autoplay muted loop playsinline>
-            <source src="image/代表動画.mp4" type="video/mp4">
+            <source src="image/about-message.mp4" type="video/mp4">
           </video>
           <div class="about-section__panel-overlay"></div>
           <p class="about-section__panel-title">代表挨拶</p>
@@ -429,11 +429,42 @@
   <script src="script.js"></script>
   <script>
     // === 動画自動再生フォールバック（スマホ対応）===
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('video[autoplay]').forEach(function (v) {
-        v.play().catch(function () {});
+    // iOS Safari は autoplay 属性だけでは再生しないことがあるため、
+    // muted/playsInline をJSで明示設定し、複数のタイミングで play() を試みる。
+    (function () {
+      var videos = Array.prototype.slice.call(document.querySelectorAll('video[autoplay]'));
+
+      function tryPlay(v) {
+        // iOS では muted/playsInline をプロパティとして明示しないと自動再生が拒否される
+        v.muted = true;
+        v.defaultMuted = true;
+        v.setAttribute('muted', '');
+        v.playsInline = true;
+        var p = v.play();
+        if (p && typeof p.catch === 'function') { p.catch(function () {}); }
+      }
+
+      function playAll() { videos.forEach(tryPlay); }
+
+      videos.forEach(function (v) {
+        // メタデータ／再生可能になった時点でそれぞれ再生を試みる
+        v.addEventListener('loadeddata', function () { tryPlay(v); });
+        v.addEventListener('canplay', function () { tryPlay(v); });
+        tryPlay(v);
       });
-    });
+
+      // ページ表示時・初回ユーザー操作時のフォールバック（省電力モード等への保険）
+      window.addEventListener('load', playAll);
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) playAll();
+      });
+      ['touchstart', 'click', 'scroll'].forEach(function (evt) {
+        window.addEventListener(evt, function once() {
+          playAll();
+          window.removeEventListener(evt, once);
+        }, { passive: true });
+      });
+    })();
   </script>
   <script>
     // === ABOUT パネル：クリックナビゲーション保証 ===
