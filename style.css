@@ -697,6 +697,36 @@ img {
   margin-top: 24px;
 }
 
+/* Coming Soon パネル（メンバー紹介：ページ準備中） */
+.about-section__panel--soon {
+  cursor: default;
+}
+
+.about-section__panel--soon:hover {
+  transform: none;
+}
+
+.about-section__panel-soon {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  background: rgba(0, 0, 0, 0.72);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+
+.about-section__panel--soon:hover .about-section__panel-soon {
+  opacity: 1;
+}
+
 /* === MEMBERS PAGE === */
 .members-hero {
   padding: 160px 32px 80px;
@@ -1504,6 +1534,28 @@ img {
 
 .footer__links a:hover {
   color: #ffffff;
+}
+
+/* メンバー紹介：ページ準備中（Coming Soon） */
+.footer__link-soon {
+  position: relative;
+  font-size: 0.85rem;
+  color: #aaaaaa;
+  letter-spacing: 0.04em;
+  cursor: default;
+}
+
+.footer__link-soon-badge {
+  margin-left: 8px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.footer__link-soon:hover .footer__link-soon-badge {
+  opacity: 1;
 }
 
 .footer__bottom {
