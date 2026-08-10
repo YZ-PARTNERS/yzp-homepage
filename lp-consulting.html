@@ -1072,24 +1072,6 @@
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    /* クリック時：ミントグリーンのパルスリングが広がる */
-    .lp-float-cta::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 12px;
-      pointer-events: none;
-    }
-
-    .lp-float-cta.is-pulsing::after {
-      animation: lpCtaPulse 0.65s ease-out;
-    }
-
-    @keyframes lpCtaPulse {
-      from { box-shadow: 0 0 0 0 rgba(0, 200, 150, 0.65); }
-      to   { box-shadow: 0 0 0 30px rgba(0, 200, 150, 0); }
-    }
-
     .lp-float-cta.is-hidden {
       opacity: 0;
       pointer-events: none;
@@ -1108,17 +1090,9 @@
       transition: transform var(--transition), box-shadow var(--transition);
     }
 
-    /* ホバー時：ミントグリーンのグロー（発光）＋浮き上がり */
     .lp-float-cta__btn:hover {
       transform: translateY(-3px);
-      box-shadow:
-        0 0 0 2px rgba(0, 200, 150, 0.55),
-        0 0 36px rgba(0, 200, 150, 0.45),
-        0 18px 48px rgba(0, 0, 0, 0.55);
-    }
-
-    .lp-float-cta__btn:active {
-      transform: translateY(-1px) scale(0.97);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.65);
     }
 
     .lp-float-cta__figure {
@@ -1133,25 +1107,6 @@
       background-color: var(--color-accent);
       padding: 13px 10px;
       transition: background-color var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* ホバー時：緑バーを光の帯が走る */
-    .lp-float-cta__text::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 45%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.45) 50%, transparent 100%);
-      transform: translateX(-120%) skewX(-20deg);
-      pointer-events: none;
-    }
-
-    .lp-float-cta__btn:hover .lp-float-cta__text::before {
-      animation: shimmerPass 0.65s ease forwards;
     }
 
     .lp-float-cta__btn:hover .lp-float-cta__text {
@@ -1357,7 +1312,7 @@
       <nav class="navbar__nav">
         <ul class="navbar__list">
           <li><a href="index.html#services">サービス</a></li>
-          <li><a href="a-tenth.html">a tenth</a></li>
+          <li><a href="lp-consulting.html">a tenth</a></li>
           <li><a href="index.html#results">実績</a></li>
           <li><a href="index.html#cases">事例</a></li>
           <li><a href="index.html#about">私たちについて</a></li>
@@ -1868,20 +1823,6 @@
         });
       }, { threshold: 0.05 });
       observer.observe(contact);
-    })();
-  </script>
-  <script>
-    // === フローティングCTA：クリック時のパルスエフェクト ===
-    (function () {
-      var cta = document.getElementById('lp-float-cta');
-      var btn = cta && cta.querySelector('.lp-float-cta__btn');
-      if (!btn) return;
-      btn.addEventListener('click', function () {
-        cta.classList.remove('is-pulsing');
-        void cta.offsetWidth; // リフローを挟んでアニメーションを再発火可能にする
-        cta.classList.add('is-pulsing');
-        setTimeout(function () { cta.classList.remove('is-pulsing'); }, 700);
-      });
     })();
   </script>
   <script>
