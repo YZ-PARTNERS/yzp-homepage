@@ -383,3 +383,29 @@ if (contactForm) {
 ### 未作成ページ
 
 - `recruit.html`：採用情報ページ。ナビバーおよびフッターからリンク済みだが、ページ本体は未作成。
+
+---
+
+## LP「a tenth（アテンス）」（2026-08-07 セッション）
+
+### `lp-consulting.html` — リード獲得用ランディングページ
+
+- **サービス内容**: マッキンゼー・BCG・アクセンチュア・Big4等ビッグファーム出身コンサルタントを低稼働（10〜30%）・低価格（月14〜40万円）でお試し活用できる中小企業向けサービス。AIサービス導入（500〜2000万円規模）受注への「入り口」という位置づけ（大きく儲けない前提）。
+- **サービス名**: 「a tenth（アテンス）」= 英語で「10分の1」。価格破壊（従来の1/10）に由来
+- **フローティングCTA**: 白カード（`.lp-float-cta__btn`）に代表・清川の全身写真（`image/ceo-standing.png`）を入れ、下辺にアクセント色のバー「CEO清川に相談する」を付けた縦型カード。
+  - **写真は加工しない方針**（ユーザー指示）。背景透明化を試すと白シャツ・腕まで削れるため禁止。元画像 `ceo_standing.png`（純白背景・アルファなし）に対し、縦方向の余白トリミングとリサイズのみ実施（369×440px）。白背景はカードの白地と同化させて活用する
+  - `image/ceo-avatar.jpg`（顔クロップ丸アバター）は旧版で現在未使用
+- **構成**: ヒーロー → 課題共感(PROBLEM) → 選ばれる理由(WHY) → 価格比較(PRICE) → 料金プラン(PLAN: 10%/14万・20%/27万・30%/40万) → 実績(TRUST) → 活用シーン(USE CASE) → 利用の流れ(FLOW) → FAQ → 日程調整(RESERVE)
+- **実装方針**:
+  - `style.css` を読み込み、LP固有スタイルは `<head>` 内の `<style>` にインライン記述（クラス名は `lp-*-section` 規則）
+  - ヘッダー・フッターは既存サイトと共通の `.navbar` / `.footer` を使用
+  - CTAボタンはアクセント塗りつぶし（`.lp-cta-btn`、シマーループ 2.8s infinite）。リンク先は `#contact`（RESERVEセクション）
+  - フローティングCTA（`.lp-float-cta`）はRESERVEセクション表示中に自動非表示
+  - CVは TimeRex 埋め込みウィジェットで日程調整（`#timerex_calendar`、URL: timerex.net/s/kiyokawa.0712_fd05/9671619e）。お問い合わせフォーム（Formspree）は廃止済み
+  - FAQ は `<details>` を Web Animations API でスムーズ開閉（インラインスクリプト）
+- どこからもリンクされていない独立LP（広告・営業用URL想定）
+- **出身ファームロゴマーキー**: ヒーロー下部に `image/logos/`（mckinsey / bcg / accenture / kearney / deloitte / pwc / kpmg / ey / baycurrent / sigmaxyz / northsand / fpt の透明PNG、高さ80px）を左→右に流す無限ループ（`.lp-logo-marquee`、48s linear）。bain.png はファイルとして残っているがマーキーからは除外済み（ユーザー指示）。ダーク背景で視認できるよう `filter: brightness(0) invert(1)` で白色モノクロ化（この1行を消せば元のカラーロゴに戻る）。ロゴ元画像の白背景透明化は sharp の白マット除去スクリプトで実施
+
+### ローカルプレビュー
+
+- `.claude/launch.json` に `static-site`（npx http-server ポート8123）を定義済み
