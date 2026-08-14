@@ -409,3 +409,36 @@ if (contactForm) {
 ### ローカルプレビュー
 
 - `.claude/launch.json` に `static-site`（npx http-server ポート8123）を定義済み
+
+---
+
+## LP刷新「サブスク参謀」「ゼロイチ伴走」（2026-08-14 セッション・lp-renewalブランチ）
+
+### 概要
+
+`a-tenth.html` を2つのサービスLPに分割するリニューアル。修正仕様は `G:\マイドライブ\Claude\LP修正内容_a-tenth.md` に集約。
+
+| ファイル | 役割 |
+|---|---|
+| `sanbo.html` | LP-A「サブスク参謀」— 社長の右腕をつくる経営参謀サービス |
+| `launch.html` | LP-B「ゼロイチ伴走」— 新規事業立ち上げ伴走サービス |
+| `request-thanks.html` | 資料請求サンクスページ（TimeRex埋め込み・noindex） |
+| `lp-shared.css` | 上記3ページ共通の白テーマスタイル |
+
+### ⚠️ ダークテーマ例外ルール
+
+この3ページは **白背景テーマ（`.lpw-body`）** で、サイト全体のダークテーマ統一ルールの例外。
+ナビバー・フッターは共通の `style.css`（ダーク）をそのまま使用。白テーマの色変数は `lp-shared.css` の `.lpw-body` に定義（`--lpw-*`）。アクセントはミントグリーンを継承しつつ、白背景上の小さめテキストにはコントラスト確保のため濃色 `--lpw-accent-text: #009270` を使用。
+
+### 主な仕様（旧 a-tenth.html との差分）
+
+- CV は全て「資料請求する」（旧: 無料相談）。フォームは Formspree（ID: `xpqolqvp`）AJAX送信 → `request-thanks.html` にリダイレクト。hidden の `service` / `_subject` でどちらのLPからの請求か判別
+- 金額表示は「月20万円〜」に統一。料金プラン（LIGHT/STANDARD/GROWTH）セクションは廃止
+- 「価格破壊」「稼働率」という言葉は使用禁止（削除済み）
+- FVの数字コンテンツ（稼働率など）は削除
+- 選ばれる理由: ①大手ファーム出身トップ10%（実績審査・ケース面接）②1ヶ月単位・最短1週間・初期費用0円 ③実行伴走
+- コンサルタント紹介は横スクロールカルーセル（`.lp-members-section__track`、scroll-snap + PC用矢印ボタン）。プロフィールは members.html から流用
+- ロゴマーキーは白背景なので `invert` フィルタなし（カラーのまま）。bain.png は除外（既存方針）
+- TimeRex はサンクスページのみ。白背景なので invert フィルタ不要
+- 資料送付メールの自動化は未実装（Formspree の自動返信 or 手動運用。要検討）
+- 旧 `a-tenth.html` は現状維持。公開時のリダイレクト/振り分けは未決定

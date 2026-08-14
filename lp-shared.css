@@ -1,0 +1,1062 @@
+/* ============================================================
+   lp-shared.css
+   「サブスク参謀」(sanbo.html) /「ゼロイチ伴走」(launch.html) /
+   資料請求サンクスページ (request-thanks.html) 共通スタイル。
+   白背景テーマ（サイト全体のダークテーマの例外。CLAUDE.md参照）。
+   ナビバー・フッターは style.css の共通ダークテーマをそのまま使う。
+   ============================================================ */
+
+/* === BASE（白テーマ変数とページ地色） === */
+.lpw-body {
+  --lpw-bg: #FFFFFF;
+  --lpw-bg-alt: #F6F8FA;
+  --lpw-heading: #0F1E3D;
+  --lpw-text: #2A3441;
+  --lpw-muted: #66707E;
+  --lpw-border: #E4E8EE;
+  --lpw-accent-text: #009270; /* 白背景で読ませる用の濃いめアクセント */
+  background-color: var(--lpw-bg);
+  color: var(--lpw-text);
+}
+
+.lpw-body .section-title {
+  color: var(--lpw-heading);
+}
+
+.lpw-body .section-lead {
+  color: var(--lpw-muted);
+}
+
+.lp-section-label {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--lpw-accent-text);
+  margin-bottom: 14px;
+}
+
+.pc-only {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .pc-only {
+    display: inline;
+  }
+
+  .sp-only {
+    display: none;
+  }
+}
+
+/* === SCROLL ANIMATION === */
+.lp-animate {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.lp-animate.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* === CTA BUTTON（アクセント塗り・シマーループ） === */
+.lp-cta-btn {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  padding: 18px 56px;
+  background-color: var(--color-accent);
+  color: #04140f;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 28px rgba(0, 200, 150, 0.3);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition),
+              box-shadow var(--transition);
+}
+
+.lp-cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+  transform: translateX(-120%) skewX(-20deg);
+  animation: shimmerPass 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.lp-cta-btn:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
+}
+
+.lp-cta-note {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--lpw-muted);
+  letter-spacing: 0.06em;
+}
+
+/* === HERO === */
+.lp-hero-section {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 118px 24px 56px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 60% 55% at 8% 45%, rgba(0, 200, 150, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 60% at 92% 25%, rgba(15, 30, 61, 0.06) 0%, transparent 50%),
+    var(--lpw-bg);
+}
+
+.lp-hero-section__inner {
+  width: 100%;
+  max-width: 900px;
+  min-width: 0; /* マーキー(max-content)による最小幅の引きずり防止 */
+  position: relative;
+  z-index: 2;
+  animation: heroFadeUp 0.9s ease both;
+}
+
+.lp-hero-section__badge {
+  display: inline-block;
+  padding: 7px 18px;
+  border: 1px solid rgba(0, 146, 112, 0.45);
+  border-radius: 100px;
+  background-color: rgba(0, 200, 150, 0.07);
+  color: var(--lpw-accent-text);
+  font-weight: 500;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 28px;
+}
+
+.lp-hero-section__brand {
+  margin-bottom: 18px;
+}
+
+.lp-hero-section__brand-logo {
+  display: inline-block;
+  font-weight: 700;
+  font-size: clamp(2.1rem, 8.5vw, 3.4rem);
+  line-height: 1.15;
+  letter-spacing: 0.06em;
+  background: linear-gradient(100deg, var(--lpw-heading) 45%, var(--color-accent) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lp-hero-section__brand-sub {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--lpw-muted);
+}
+
+.lp-hero-section__brand-kana {
+  color: var(--lpw-accent-text);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.lp-hero-section__title {
+  font-weight: 700;
+  font-size: clamp(1.2rem, 6vw, 1.6rem);
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: var(--lpw-heading);
+  margin-bottom: 14px;
+}
+
+.lp-hero-section__title-em {
+  color: var(--lpw-accent-text);
+  font-size: 1.3em;
+}
+
+.lp-hero-section__sub {
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: var(--lpw-muted);
+  margin-bottom: 26px;
+}
+
+/* === LOGO MARQUEE（出身ファームロゴ・カラーのまま表示） === */
+.lp-hero-section__logos {
+  max-width: 900px;
+  margin: 34px auto 0;
+}
+
+.lp-hero-section__logos-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--lpw-muted);
+  margin-bottom: 14px;
+}
+
+.lp-logo-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+
+.lp-logo-marquee__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: lpLogoFlow 48s linear infinite;
+}
+
+/* ロゴごとの視覚バランス調整: 各imgの --h（px）を基準高さとして使用 */
+.lp-logo-marquee__track img {
+  height: calc(var(--h, 24) * 1px);
+  width: auto;
+  margin: 0 26px;
+  opacity: 0.85;
+}
+
+@keyframes lpLogoFlow {
+  from { transform: translateX(-50%); }
+  to   { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-logo-marquee__track {
+    animation: none;
+  }
+}
+
+/* === PROBLEM === */
+.lp-problem-section {
+  padding: 84px 24px 72px;
+  background-color: var(--lpw-bg);
+}
+
+.lp-problem-section__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.lp-problem-section__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.lp-problem-section__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 26px 28px;
+  background-color: var(--lpw-bg-alt);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+}
+
+.lp-problem-section__check {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(0, 200, 150, 0.14);
+  color: var(--lpw-accent-text);
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+.lp-problem-section__text {
+  font-weight: 500;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: var(--lpw-text);
+}
+
+.lp-problem-section__arrow {
+  text-align: center;
+  margin-top: 56px;
+}
+
+.lp-problem-section__arrow-icon {
+  display: block;
+  width: 2px;
+  height: 48px;
+  margin: 0 auto 20px;
+  background: linear-gradient(to bottom, transparent, var(--color-accent));
+}
+
+.lp-problem-section__arrow-text {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  color: var(--lpw-heading);
+}
+
+.lp-problem-section__arrow-text strong {
+  color: var(--lpw-accent-text);
+}
+
+/* === SOLUTION（選ばれる理由） === */
+.lp-solution-section {
+  padding: 84px 24px;
+  background-color: var(--lpw-bg-alt);
+}
+
+.lp-solution-section__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.lp-solution-section__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .lp-solution-section__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.lp-solution-section__card {
+  padding: 36px 30px;
+  background-color: var(--lpw-bg);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.lp-solution-section__num {
+  display: block;
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.24em;
+  color: var(--lpw-accent-text);
+  margin-bottom: 14px;
+}
+
+.lp-solution-section__card-title {
+  font-weight: 700;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--lpw-heading);
+  margin-bottom: 12px;
+}
+
+.lp-solution-section__card-text {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: var(--lpw-text);
+}
+
+.lp-solution-section__mode {
+  margin-top: 32px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.92rem;
+  color: var(--lpw-heading);
+}
+
+.lp-solution-section__mode strong {
+  color: var(--lpw-accent-text);
+}
+
+/* === PRICE === */
+.lp-price-section {
+  padding: 84px 24px;
+  background-color: var(--lpw-bg);
+}
+
+.lp-price-section__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.lp-price-section__compare {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .lp-price-section__compare {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+}
+
+.lp-price-section__col {
+  position: relative;
+  padding: 34px 28px;
+  background-color: var(--lpw-bg-alt);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.lp-price-section__col--ours {
+  background-color: rgba(0, 200, 150, 0.06);
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.14);
+}
+
+.lp-price-section__col-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 16px;
+  background-color: var(--color-accent);
+  color: #04140f;
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.lp-price-section__col-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--lpw-heading);
+  margin-bottom: 12px;
+}
+
+.lp-price-section__col-price {
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1.3;
+  color: var(--lpw-heading);
+  margin-bottom: 12px;
+}
+
+.lp-price-section__col--ours .lp-price-section__col-price {
+  color: var(--lpw-accent-text);
+}
+
+.lp-price-section__col-price small {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--lpw-muted);
+}
+
+.lp-price-section__col-desc {
+  font-size: 0.84rem;
+  line-height: 1.8;
+  color: var(--lpw-muted);
+}
+
+.lp-price-section__col-impact {
+  display: inline-block;
+  margin-top: 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--lpw-accent-text);
+}
+
+.lp-price-section__note {
+  margin-top: 20px;
+  font-size: 0.76rem;
+  line-height: 1.8;
+  color: var(--lpw-muted);
+  text-align: center;
+}
+
+.lp-price-section__why {
+  max-width: 760px;
+  margin: 64px auto 0;
+}
+
+.lp-price-section__why-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  color: var(--lpw-heading);
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.lp-price-section__why-list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.lp-price-section__why-item {
+  padding: 22px 26px;
+  background-color: var(--lpw-bg-alt);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+}
+
+.lp-price-section__why-item-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--lpw-heading);
+  margin-bottom: 6px;
+}
+
+.lp-price-section__why-item-text {
+  font-size: 0.88rem;
+  line-height: 1.9;
+  color: var(--lpw-text);
+}
+
+.lp-price-section__message {
+  margin-top: 32px;
+  padding: 26px 28px;
+  border-left: 3px solid var(--color-accent);
+  background-color: var(--lpw-bg-alt);
+  font-size: 0.92rem;
+  line-height: 2;
+  color: var(--lpw-text);
+}
+
+.lp-price-section__message strong {
+  color: var(--lpw-accent-text);
+}
+
+/* === MEMBERS（コンサルタント紹介・横スクロール） === */
+.lp-members-section {
+  padding: 84px 0;
+  background-color: var(--lpw-bg-alt);
+}
+
+.lp-members-section__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.lp-members-section__scroller {
+  position: relative;
+  max-width: 1100px;
+  margin: 40px auto 0;
+}
+
+.lp-members-section__track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px 24px 20px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) transparent;
+}
+
+.lp-members-section__card {
+  flex: 0 0 264px;
+  scroll-snap-align: start;
+  background-color: var(--lpw-bg);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.lp-members-section__photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  background-color: var(--lpw-bg-alt);
+}
+
+.lp-members-section__body {
+  padding: 20px 22px 24px;
+}
+
+.lp-members-section__role {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--lpw-accent-text);
+  margin-bottom: 4px;
+}
+
+.lp-members-section__name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--lpw-heading);
+  margin-bottom: 10px;
+}
+
+.lp-members-section__bio {
+  font-size: 0.8rem;
+  line-height: 1.85;
+  color: var(--lpw-text);
+  margin-bottom: 14px;
+}
+
+.lp-members-section__tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lp-members-section__tags li {
+  padding: 3px 10px;
+  background-color: rgba(0, 200, 150, 0.09);
+  color: var(--lpw-accent-text);
+  font-size: 0.7rem;
+  font-weight: 500;
+  border-radius: 100px;
+}
+
+/* PC用 左右スクロールボタン */
+.lp-members-section__nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .lp-members-section__nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .lp-members-section__nav-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--lpw-border);
+    border-radius: 50%;
+    background-color: var(--lpw-bg);
+    color: var(--lpw-heading);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: border-color var(--transition), color var(--transition),
+                transform var(--transition);
+  }
+
+  .lp-members-section__nav-btn:hover {
+    border-color: var(--color-accent);
+    color: var(--lpw-accent-text);
+    transform: translateY(-2px);
+  }
+}
+
+.lp-members-section__note {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--lpw-muted);
+}
+
+/* === USECASE === */
+.lp-usecase-section {
+  padding: 84px 24px;
+  background-color: var(--lpw-bg);
+}
+
+.lp-usecase-section__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.lp-usecase-section__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .lp-usecase-section__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .lp-usecase-section__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.lp-usecase-section__item {
+  padding: 28px 26px;
+  background-color: var(--lpw-bg-alt);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+}
+
+.lp-usecase-section__item-title {
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--lpw-heading);
+  margin-bottom: 8px;
+}
+
+.lp-usecase-section__item-text {
+  font-size: 0.85rem;
+  line-height: 1.9;
+  color: var(--lpw-text);
+}
+
+/* === FLOW（サービスの流れ） === */
+.lp-flow-section {
+  padding: 84px 24px;
+  background-color: var(--lpw-bg-alt);
+}
+
+.lp-flow-section__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.lp-flow-section__list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.lp-flow-section__item {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 18px;
+  align-items: start;
+  padding: 24px 26px;
+  background-color: var(--lpw-bg);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+}
+
+.lp-flow-section__num {
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: var(--lpw-accent-text);
+  padding-top: 4px;
+}
+
+.lp-flow-section__step-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--lpw-heading);
+  margin-bottom: 6px;
+}
+
+.lp-flow-section__step-text {
+  font-size: 0.86rem;
+  line-height: 1.9;
+  color: var(--lpw-text);
+}
+
+.lp-flow-section__cta {
+  text-align: center;
+  margin-top: 48px;
+}
+
+@media (max-width: 767px) {
+  .lp-flow-section__item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* === FAQ === */
+.lp-faq-section {
+  padding: 84px 24px;
+  background-color: var(--lpw-bg);
+}
+
+.lp-faq-section__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.lp-faq-section__list {
+  display: grid;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.lp-faq-section__item {
+  background-color: var(--lpw-bg-alt);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.lp-faq-section__q {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px 52px 22px 26px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--lpw-heading);
+  position: relative;
+}
+
+.lp-faq-section__q::-webkit-details-marker {
+  display: none;
+}
+
+.lp-faq-section__q::after {
+  content: '+';
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--lpw-accent-text);
+  transition: transform var(--transition);
+}
+
+.lp-faq-section__item[open] .lp-faq-section__q::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.lp-faq-section__a {
+  padding: 0 26px 24px;
+  font-size: 0.88rem;
+  line-height: 2;
+  color: var(--lpw-text);
+  overflow: hidden;
+}
+
+/* === REQUEST（資料請求フォーム） === */
+.lp-request-section {
+  padding: 84px 24px;
+  background:
+    radial-gradient(ellipse 60% 55% at 8% 50%, rgba(0, 200, 150, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 60% at 92% 30%, rgba(15, 30, 61, 0.05) 0%, transparent 50%),
+    var(--lpw-bg-alt);
+}
+
+.lp-request-section__inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.lp-request-section__form {
+  margin-top: 36px;
+  padding: 36px 30px;
+  background-color: var(--lpw-bg);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .lp-request-section__form {
+    padding: 44px 48px;
+  }
+}
+
+.lp-request-section__field {
+  display: grid;
+  gap: 8px;
+}
+
+.lp-request-section__label {
+  font-weight: 700;
+  font-size: 0.86rem;
+  color: var(--lpw-heading);
+}
+
+.lp-request-section__label small {
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: #D0454C;
+  margin-left: 6px;
+}
+
+.lp-request-section__label small.opt {
+  color: var(--lpw-muted);
+}
+
+.lp-request-section__input {
+  width: 100%;
+  padding: 13px 16px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--lpw-text);
+  background-color: var(--lpw-bg);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.lp-request-section__input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.15);
+}
+
+.lp-request-section__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--lpw-muted);
+}
+
+.lp-request-section__consent input {
+  margin-top: 3px;
+  accent-color: var(--color-accent);
+}
+
+.lp-request-section__submit-wrap {
+  text-align: center;
+  margin-top: 6px;
+}
+
+.lp-request-section__submit-wrap .lp-cta-btn {
+  width: 100%;
+}
+
+/* === THANKS（サンクスページ） === */
+.lp-thanks-section {
+  padding: 148px 24px 84px;
+  background:
+    radial-gradient(ellipse 60% 55% at 8% 30%, rgba(0, 200, 150, 0.09) 0%, transparent 55%),
+    var(--lpw-bg);
+  text-align: center;
+}
+
+.lp-thanks-section__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.lp-thanks-section__title {
+  font-weight: 700;
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  letter-spacing: 0.08em;
+  color: var(--lpw-heading);
+  margin-bottom: 18px;
+}
+
+.lp-thanks-section__text {
+  font-size: 0.95rem;
+  line-height: 2.1;
+  color: var(--lpw-text);
+  margin-bottom: 48px;
+}
+
+.lp-thanks-section__booking-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--lpw-heading);
+  margin-bottom: 8px;
+}
+
+.lp-thanks-section__booking-lead {
+  font-size: 0.88rem;
+  color: var(--lpw-muted);
+  margin-bottom: 24px;
+}
+
+.lp-thanks-section__widget {
+  background-color: var(--lpw-bg);
+  border: 1px solid var(--lpw-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  min-height: 480px;
+}
+
+/* === FLOAT CTA（右下固定・資料請求） === */
+.lp-float-cta {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lp-float-cta.is-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.lp-float-cta__btn {
+  display: block;
+  width: 116px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--lpw-border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 32px rgba(15, 30, 61, 0.22);
+  text-decoration: none;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.lp-float-cta__btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(15, 30, 61, 0.3);
+}
+
+.lp-float-cta__figure {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lp-float-cta__text {
+  display: block;
+  padding: 8px 6px;
+  background-color: var(--color-accent);
+  color: #04140f;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .lp-float-cta {
+    right: 28px;
+    bottom: 28px;
+  }
+
+  .lp-float-cta__btn {
+    width: 150px;
+  }
+
+  .lp-float-cta__text {
+    font-size: 0.8rem;
+    padding: 10px 8px;
+  }
+}
