@@ -23,6 +23,58 @@
   color: var(--lpw-heading);
 }
 
+/* === NAVBAR / FOOTER 白テーマ上書き ===
+   共通のダークテーマ(style.css)をLP3ページのみ明色に。
+   背景＝ページ地色にテーマ色をうすくクリアにかけたスタイル */
+.lpw-body .navbar {
+  background-color: rgba(246, 253, 251, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 200, 150, 0.18);
+}
+
+.lpw-body .navbar__list li a {
+  color: #1F2A3A;
+}
+
+.lpw-body .navbar__list li a:hover {
+  color: var(--lpw-accent-text);
+}
+
+.lpw-body .navbar__toggle span {
+  background-color: #1F2A3A;
+}
+
+.lpw-body .navbar__nav.is-open {
+  background-color: rgba(246, 253, 251, 0.97);
+  border-bottom: 1px solid rgba(0, 200, 150, 0.18);
+  box-shadow: 0 8px 24px rgba(15, 30, 61, 0.08);
+}
+
+.lpw-body .footer {
+  background:
+    linear-gradient(rgba(0, 200, 150, 0.05), rgba(0, 200, 150, 0.05)),
+    var(--lpw-bg);
+  color: #5A6675;
+  border-top: 1px solid rgba(0, 200, 150, 0.18);
+}
+
+.lpw-body .footer__col-label {
+  color: var(--lpw-heading);
+}
+
+.lpw-body .footer a {
+  color: #4E5A6B;
+}
+
+.lpw-body .footer a:hover {
+  color: var(--lpw-heading);
+}
+
+.lpw-body .footer__copy {
+  color: rgba(15, 30, 61, 0.35);
+}
+
 .lpw-body .section-lead {
   color: var(--lpw-muted);
 }
@@ -559,38 +611,51 @@
   margin: 40px auto 0;
 }
 
+/* 自動で右→左に流れ、手動スクロール（ドラッグ/スワイプ）も可能。
+   ループ用のカード複製とスクロール制御はページ側のインラインJSで実施 */
 .lp-members-section__track {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
   padding: 4px 24px 20px;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-accent) transparent;
+  scrollbar-width: none; /* 自動フローのため常時バーは非表示 */
+  cursor: grab;
+}
+
+.lp-members-section__track::-webkit-scrollbar {
+  display: none;
+}
+
+.lp-members-section__track.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
 }
 
 .lp-members-section__card {
   flex: 0 0 264px;
-  scroll-snap-align: start;
   background-color: var(--lpw-bg);
   border: 1px solid var(--lpw-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow-card);
   overflow: hidden;
+  user-select: none;
 }
 
 .lp-members-section__photo {
-  width: 100%;
-  aspect-ratio: 1 / 1;
+  width: 176px; /* カード幅比 約2/3 */
+  height: 176px;
   object-fit: cover;
   object-position: center top;
   display: block;
+  margin: 22px auto 0;
+  border-radius: 4px; /* 角形（わずかな面取りのみ） */
   background-color: var(--lpw-bg-alt);
+  pointer-events: none;
 }
 
 .lp-members-section__body {
-  padding: 20px 22px 24px;
+  padding: 18px 22px 24px;
 }
 
 .lp-members-section__role {
@@ -629,42 +694,6 @@
   font-size: 0.7rem;
   font-weight: 500;
   border-radius: 100px;
-}
-
-/* PC用 左右スクロールボタン */
-.lp-members-section__nav {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .lp-members-section__nav {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 8px;
-  }
-
-  .lp-members-section__nav-btn {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--lpw-border);
-    border-radius: 50%;
-    background-color: var(--lpw-bg);
-    color: var(--lpw-heading);
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: border-color var(--transition), color var(--transition),
-                transform var(--transition);
-  }
-
-  .lp-members-section__nav-btn:hover {
-    border-color: var(--color-accent);
-    color: var(--lpw-accent-text);
-    transform: translateY(-2px);
-  }
 }
 
 .lp-members-section__note {
