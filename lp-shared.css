@@ -680,8 +680,8 @@
 }
 
 .lp-members-section__photo--nitta {
-  transform: scale(1.2);
-  transform-origin: 50% 10%;
+  /* 元写真の頭上余白が大きいため、表示窓を下げて頭の位置を揃える */
+  object-position: center 35%;
 }
 
 .lp-members-section__photo--kusano {
