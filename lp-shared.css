@@ -665,14 +665,22 @@
   display: block;
 }
 
-.lp-members-section__photo--zoom-md {
-  transform: scale(1.35);
-  transform-origin: 50% 12%;
+/* 山崎の構図（顔＋肩、顔が枠の4割程度）を基準にした素材別調整 */
+.lp-members-section__photo--kiyokawa {
+  /* 全身写真(ceo-standing.png)から上半身を切り出す */
+  transform: scale(2.3);
+  transform-origin: 50% 8%;
 }
 
-.lp-members-section__photo--zoom-lg {
-  transform: scale(1.9);
-  transform-origin: 50% 14%;
+.lp-members-section__photo--nitta {
+  transform: scale(1.2);
+  transform-origin: 50% 10%;
+}
+
+.lp-members-section__photo--kusano {
+  /* 引きの座り写真から顔まわりを切り出す */
+  transform: scale(2.6);
+  transform-origin: 50% 12%;
 }
 
 /* 写真なしメンバー：イニシャル表示 */
