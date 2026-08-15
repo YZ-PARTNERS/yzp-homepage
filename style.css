@@ -302,11 +302,15 @@ img {
   z-index: 0;
 }
 
-/* 暗いオーバーレイ（テキスト可読性確保） */
+/* 明るいオーバーレイ（テキスト可読性確保）
+   白ベールにミントの淡いハローを重ね、動画をサイトの白×緑基調に馴染ませる */
 .hero-section__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background:
+    radial-gradient(ellipse 60% 55% at 8% 50%, rgba(0, 200, 150, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 60% at 92% 30%, rgba(0, 200, 150, 0.05) 0%, transparent 50%),
+    rgba(255, 255, 255, 0.82);
   pointer-events: none;
   z-index: 1;
 }
@@ -323,7 +327,7 @@ img {
   font-weight: 500;
   font-size: 0.9rem;
   letter-spacing: 0.22em;
-  opacity: 0.65;
+  color: var(--color-text); /* 動画の暗部に重なっても4.5:1を確保するため補足色より濃く */
   margin-bottom: 48px;
 }
 
@@ -332,22 +336,26 @@ img {
   font-size: 1.4rem;
   line-height: 1.45;
   letter-spacing: 0.06em;
+  color: var(--color-heading);
   margin-bottom: 16px;
   text-align: center;
-  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 18px rgba(255, 255, 255, 0.6); /* 白ベール上でのにじみ防止 */
 }
 
+/* LPのCTA（.lp-cta-btn）と同じアクセント塗り＋深緑文字 */
 .hero-section__cta {
   display: inline-block;
   position: relative;
   overflow: hidden;
   padding: 16px 48px;
-  border: 1px solid var(--color-border-strong);
-  color: var(--color-main);
+  background-color: var(--color-accent);
+  border: none;
+  color: #06382B;
   font-weight: 500;
   font-size: 0.88rem;
   letter-spacing: 0.16em;
   border-radius: var(--radius);
+  box-shadow: 0 8px 28px rgba(0, 200, 150, 0.3);
   transition: background-color var(--transition), color var(--transition),
               border-color var(--transition), box-shadow var(--transition),
               transform var(--transition);
@@ -372,9 +380,8 @@ img {
 }
 
 .hero-section__cta:hover {
-  background-color: var(--color-surface-hover);
-  border-color: var(--color-border-strong);
-  box-shadow: 0 8px 32px rgba(15, 30, 61, 0.105);
+  background-color: var(--color-accent-hover);
+  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
   transform: translateY(-2px);
 }
 
