@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -277,7 +277,7 @@
         submitBtn.disabled = true; submitBtn.textContent = '送信中…';
         try {
           const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(contactForm) });
-          if (res.ok) { contactForm.innerHTML = '<p style="text-align:center;color:rgba(255,255,255,0.85);padding:40px 0;line-height:2">お問い合わせを受け付けました。<br>担当者よりご連絡いたします。</p>'; }
+          if (res.ok) { contactForm.innerHTML = '<p style="text-align:center;color:var(--color-heading);padding:40px 0;line-height:2">お問い合わせを受け付けました。<br>担当者よりご連絡いたします。</p>'; }
           else { throw new Error(); }
         } catch { alert('送信に失敗しました。しばらく経ってから再度お試しください。'); submitBtn.disabled = false; submitBtn.textContent = originalText; }
       }, true);

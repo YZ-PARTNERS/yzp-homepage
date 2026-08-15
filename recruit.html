@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -10,14 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    body { background-color: #0a0a0f; }
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 55% at 8% 50%, rgba(0, 200, 150, 0.22) 0%, transparent 55%),
-        radial-gradient(ellipse 45% 60% at 92% 30%, rgba(0, 200, 150, 0.14) 0%, transparent 50%);
+        radial-gradient(ellipse 60% 55% at 8% 50%, rgba(0, 200, 150, 0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 60% at 92% 30%, rgba(0, 200, 150, 0.05) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
@@ -487,7 +486,7 @@
 
           if (res.ok) {
             contactForm.innerHTML =
-              '<p style="text-align:center;color:rgba(255,255,255,0.85);padding:40px 0;line-height:2">' +
+              '<p style="text-align:center;color:var(--color-heading);padding:40px 0;line-height:2">' +
               'お問い合わせを受け付けました。<br>担当者よりご連絡いたします。</p>';
           } else {
             throw new Error('送信失敗');

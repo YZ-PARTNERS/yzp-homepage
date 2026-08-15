@@ -6,50 +6,20 @@
    ナビバー・フッターは style.css の共通ダークテーマをそのまま使う。
    ============================================================ */
 
-/* === BASE（白テーマ変数とページ地色） === */
+/* === BASE（LP用エイリアス） ===
+   サイト全体が白テーマ化されたため、配色の実体は style.css の :root に一本化。
+   ここは既存の --lpw-* 参照を壊さないための別名定義のみ。 */
 .lpw-body {
-  --lpw-bg: #FFFFFF;
-  --lpw-bg-alt: #F6F8FA;
-  --lpw-heading: #0F1E3D;
-  --lpw-text: #2A3441;
-  --lpw-muted: #66707E;
-  --lpw-border: #E4E8EE;
-  --lpw-accent-text: #009270; /* 白背景で読ませる用の濃いめアクセント */
-  background-color: var(--lpw-bg);
-  color: var(--lpw-text);
+  --lpw-bg: var(--color-bg);
+  --lpw-bg-alt: var(--color-bg-alt);
+  --lpw-heading: var(--color-heading);
+  --lpw-text: var(--color-text);
+  --lpw-muted: var(--color-text-muted);
+  --lpw-border: var(--color-border);
+  --lpw-accent-text: var(--color-accent-text);
 }
 
-.lpw-body .section-title {
-  color: var(--lpw-heading);
-}
-
-/* === NAVBAR / FOOTER 白テーマ上書き ===
-   共通のダークテーマ(style.css)をLP3ページのみ明色に。
-   背景＝ページ地色にテーマ色をうすくクリアにかけたスタイル */
-.lpw-body .navbar {
-  background-color: rgba(246, 253, 251, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 200, 150, 0.18);
-}
-
-.lpw-body .navbar__list li a {
-  color: #1F2A3A;
-}
-
-.lpw-body .navbar__list li a:hover {
-  color: var(--lpw-accent-text);
-}
-
-.lpw-body .navbar__toggle span {
-  background-color: #1F2A3A;
-}
-
-.lpw-body .navbar__nav.is-open {
-  background-color: rgba(246, 253, 251, 0.97);
-  border-bottom: 1px solid rgba(0, 200, 150, 0.18);
-  box-shadow: 0 8px 24px rgba(15, 30, 61, 0.08);
-}
+/* ナビバー・フッターの明色化は style.css 側へ移設済み（重複定義を撤去） */
 
 /* ナビ項目が9つあり768px幅では横並びに収まらないため、
    LPページのみハンバーガー表示を1100px未満まで維持する */
@@ -99,30 +69,6 @@
     font-size: 0.84rem;
     white-space: nowrap;
   }
-}
-
-.lpw-body .footer {
-  background:
-    linear-gradient(rgba(0, 200, 150, 0.05), rgba(0, 200, 150, 0.05)),
-    var(--lpw-bg);
-  color: #5A6675;
-  border-top: 1px solid rgba(0, 200, 150, 0.18);
-}
-
-.lpw-body .footer__col-label {
-  color: var(--lpw-heading);
-}
-
-.lpw-body .footer a {
-  color: #4E5A6B;
-}
-
-.lpw-body .footer a:hover {
-  color: var(--lpw-heading);
-}
-
-.lpw-body .footer__copy {
-  color: rgba(15, 30, 61, 0.35);
 }
 
 .lpw-body .section-lead {
@@ -375,7 +321,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: rgba(0, 200, 150, 0.14);
+  background-color: rgba(0, 200, 150, 0.08); /* 0.14 だと地色が濃くなり ✓ が 4.14:1 で AA 未達 */
   color: var(--lpw-accent-text);
   font-weight: 700;
   font-size: 0.85rem;
