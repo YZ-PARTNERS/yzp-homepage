@@ -689,9 +689,8 @@
     })();
   </script>
   <script>
-    // === 資料請求フォーム：Formspree送信 → サンクスページへ ===
+    // === 資料請求フォーム：自社APIへ送信 → 自動返信メール → サンクスページへ ===
     (function () {
-      var FORMSPREE_ID = 'xpqolqvp';
       var form = document.getElementById('lp-request-form');
       if (!form) return;
       form.addEventListener('submit', async function (e) {
@@ -708,15 +707,17 @@
         submitBtn.disabled = true;
         submitBtn.textContent = '送信中…';
         try {
-          var res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+          var payload = {};
+          new FormData(form).forEach(function (v, k) { payload[k] = v; });
+          var res = await fetch('/api/request-document', {
             method: 'POST',
-            headers: { 'Accept': 'application/json' },
-            body: new FormData(form)
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
           });
           if (res.ok) {
             window.location.href = 'request-thanks.html';
           } else {
-            throw new Error();
+            throw new Error('status ' + res.status);
           }
         } catch (err) {
           alert('送信に失敗しました。しばらく経ってから再度お試しください。');
