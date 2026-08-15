@@ -265,6 +265,56 @@ img {
   }
 }
 
+/* ナビ項目が9つあり768px幅では横並びに収まらないため、
+   ハンバーガー表示を1100px未満まで維持する（全ページ共通） */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .navbar__toggle {
+    display: flex;
+  }
+
+  .navbar__nav {
+    display: none;
+  }
+
+  .navbar__nav.is-open {
+    display: block;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 100%;
+    padding: 12px 0 20px;
+  }
+
+  .navbar__list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .navbar__list li a {
+    padding: 13px 32px;
+    font-size: 0.95rem;
+  }
+
+  .navbar__list li a::after {
+    display: none;
+  }
+
+  .navbar__list li a:hover {
+    padding-left: 40px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .navbar__list {
+    gap: 24px;
+  }
+
+  .navbar__list li a {
+    font-size: 0.84rem;
+    white-space: nowrap;
+  }
+}
+
 /* === HERO SECTION === */
 @keyframes heroFadeUp {
   from {
@@ -310,7 +360,7 @@ img {
   background:
     radial-gradient(ellipse 60% 55% at 8% 50%, rgba(0, 200, 150, 0.09) 0%, transparent 55%),
     radial-gradient(ellipse 45% 60% at 92% 30%, rgba(0, 200, 150, 0.05) 0%, transparent 50%),
-    rgba(255, 255, 255, 0.82);
+    rgba(255, 255, 255, 0.62); /* 0.82では動画が見えづらいため薄めに */
   pointer-events: none;
   z-index: 1;
 }
@@ -342,26 +392,26 @@ img {
   text-shadow: 0 2px 18px rgba(255, 255, 255, 0.6); /* 白ベール上でのにじみ防止 */
 }
 
-/* LPのCTA（.lp-cta-btn）と同じアクセント塗り＋深緑文字 */
+/* ゼロイチ伴走のCTA（.lp-cta-btn）と同一仕様 */
 .hero-section__cta {
   display: inline-block;
   position: relative;
   overflow: hidden;
-  padding: 16px 48px;
+  padding: 18px 56px;
   background-color: var(--color-accent);
-  border: none;
-  color: #06382B;
+  color: #06382B; /* 黒ではなく地色と同系の深緑。コントラスト比 約6:1 */
   font-weight: 500;
-  font-size: 0.88rem;
-  letter-spacing: 0.16em;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  border: none;
   border-radius: var(--radius);
   box-shadow: 0 8px 28px rgba(0, 200, 150, 0.3);
-  transition: background-color var(--transition), color var(--transition),
-              border-color var(--transition), box-shadow var(--transition),
-              transform var(--transition);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition),
+              box-shadow var(--transition);
 }
 
-/* シマー光源 */
+/* シマー光源（常時2.8秒ループ） */
 .hero-section__cta::before {
   content: '';
   position: absolute;
@@ -369,24 +419,16 @@ img {
   left: 0;
   width: 45%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.22) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
   transform: translateX(-120%) skewX(-20deg);
+  animation: shimmerPass 2.8s ease-in-out infinite;
   pointer-events: none;
 }
 
 .hero-section__cta:hover {
   background-color: var(--color-accent-hover);
-  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
   transform: translateY(-2px);
-}
-
-.hero-section__cta:hover::before {
-  animation: shimmerPass 0.65s ease forwards;
+  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
 }
 
 @media (min-width: 768px) {
@@ -1092,23 +1134,25 @@ img {
   text-align: center;
 }
 
+/* ゼロイチ伴走のCTA（.lp-cta-btn）と同一仕様 */
 .contact-section__submit {
   display: block;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  padding: 16px 48px;
-  border: 1px solid var(--color-border-strong);
-  background-color: transparent;
-  color: var(--color-main);
+  padding: 18px 56px;
+  background-color: var(--color-accent);
+  color: #06382B;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
-  font-size: 0.88rem;
-  letter-spacing: 0.16em;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  border: none;
   border-radius: var(--radius);
+  box-shadow: 0 8px 28px rgba(0, 200, 150, 0.3);
   cursor: pointer;
-  transition: background-color var(--transition), border-color var(--transition),
-              box-shadow var(--transition), transform var(--transition);
+  transition: background-color var(--transition), transform var(--transition),
+              box-shadow var(--transition);
 }
 
 .contact-section__submit::before {
@@ -1118,25 +1162,16 @@ img {
   left: 0;
   width: 45%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.22) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
   transform: translateX(-120%) skewX(-20deg);
+  animation: shimmerPass 2.8s ease-in-out infinite;
   pointer-events: none;
 }
 
 .contact-section__submit:hover {
-  background-color: var(--color-surface-hover);
-  border-color: var(--color-border-strong);
-  box-shadow: 0 8px 32px rgba(15, 30, 61, 0.105);
+  background-color: var(--color-accent-hover);
   transform: translateY(-2px);
-}
-
-.contact-section__submit:hover::before {
-  animation: shimmerPass 0.65s ease forwards;
+  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
 }
 
 .contact-section__submit:disabled {
@@ -2029,22 +2064,24 @@ img {
   margin-bottom: 40px;
 }
 
+/* ゼロイチ伴走のCTA（.lp-cta-btn）と同一仕様 */
 .case-cta__btn {
   display: inline-block;
   position: relative;
   overflow: hidden;
-  padding: 16px 56px;
+  padding: 18px 56px;
   background-color: var(--color-accent);
-  border: none;
-  color: #06382B; /* LPのCTAと同じ深緑。白背景では白文字だとコントラストが足りない */
+  color: #06382B;
   font-weight: 500;
-  font-size: 0.93rem;
-  border-radius: 4px;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  border: none;
+  border-radius: var(--radius);
   text-decoration: none;
-  letter-spacing: 0.08em;
   box-shadow: 0 8px 28px rgba(0, 200, 150, 0.3);
-  transition: background-color var(--transition), border-color var(--transition),
-              box-shadow var(--transition), transform var(--transition);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition),
+              box-shadow var(--transition);
 }
 
 .case-cta__btn::before {
@@ -2052,19 +2089,16 @@ img {
   position: absolute;
   top: 0; left: 0;
   width: 45%; height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 50%, transparent 100%);
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
   transform: translateX(-120%) skewX(-20deg);
+  animation: shimmerPass 2.8s ease-in-out infinite;
   pointer-events: none;
 }
 
 .case-cta__btn:hover {
   background-color: var(--color-accent-hover);
-  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
   transform: translateY(-2px);
-}
-
-.case-cta__btn:hover::before {
-  animation: shimmerPass 0.65s ease forwards;
+  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
 }
 
 @media (min-width: 768px) {
@@ -2614,21 +2648,23 @@ img {
   line-height: 1.9;
 }
 
+/* ゼロイチ伴走のCTA（.lp-cta-btn）と同一仕様 */
 .service-cta-section__btn {
   display: inline-block;
   position: relative;
   overflow: hidden;
   padding: 18px 56px;
   background-color: var(--color-accent);
-  border: none;
   color: #06382B;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1rem;
   letter-spacing: 0.1em;
+  border: none;
   border-radius: var(--radius);
   box-shadow: 0 8px 28px rgba(0, 200, 150, 0.3);
-  transition: background-color var(--transition), border-color var(--transition),
-              box-shadow var(--transition), transform var(--transition);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition),
+              box-shadow var(--transition);
 }
 
 .service-cta-section__btn::before {
@@ -2636,19 +2672,16 @@ img {
   position: absolute;
   top: 0; left: 0;
   width: 45%; height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 50%, transparent 100%);
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
   transform: translateX(-120%) skewX(-20deg);
+  animation: shimmerPass 2.8s ease-in-out infinite;
   pointer-events: none;
 }
 
 .service-cta-section__btn:hover {
   background-color: var(--color-accent-hover);
-  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
   transform: translateY(-2px);
-}
-
-.service-cta-section__btn:hover::before {
-  animation: shimmerPass 0.65s ease forwards;
+  box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
 }
 
 @media (min-width: 768px) {

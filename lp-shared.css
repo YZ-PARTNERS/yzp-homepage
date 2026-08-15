@@ -19,57 +19,8 @@
   --lpw-accent-text: var(--color-accent-text);
 }
 
-/* ナビバー・フッターの明色化は style.css 側へ移設済み（重複定義を撤去） */
-
-/* ナビ項目が9つあり768px幅では横並びに収まらないため、
-   LPページのみハンバーガー表示を1100px未満まで維持する */
-@media (min-width: 768px) and (max-width: 1099px) {
-  .lpw-body .navbar__toggle {
-    display: flex;
-  }
-
-  .lpw-body .navbar__nav {
-    display: none;
-  }
-
-  .lpw-body .navbar__nav.is-open {
-    display: block;
-    position: absolute;
-    top: 68px;
-    left: 0;
-    width: 100%;
-    padding: 12px 0 20px;
-  }
-
-  .lpw-body .navbar__list {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .lpw-body .navbar__list li a {
-    padding: 13px 32px;
-    font-size: 0.95rem;
-  }
-
-  .lpw-body .navbar__list li a::after {
-    display: none;
-  }
-
-  .lpw-body .navbar__list li a:hover {
-    padding-left: 40px;
-  }
-}
-
-@media (min-width: 1100px) {
-  .lpw-body .navbar__list {
-    gap: 24px;
-  }
-
-  .lpw-body .navbar__list li a {
-    font-size: 0.84rem;
-    white-space: nowrap;
-  }
-}
+/* ナビバー・フッターの明色化とハンバーガー時挙動は style.css 側へ移設済み
+   （全ページがナビ9項目になったため共通化。重複定義を撤去） */
 
 .lpw-body .section-lead {
   color: var(--lpw-muted);
