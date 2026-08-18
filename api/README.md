@@ -60,3 +60,36 @@ Resend への通信をスタブ化したロジックテストを実施済み（�
 - 他ページ（お問い合わせフォーム 15ページ）は従来どおり Formspree のまま。
   自動返信は付いていない。
 - 自動返信の文面は `SERVICES` 定数でサービスごとに出し分けている。
+
+---
+
+## 添付資料と日程調整リンク（2026-08-18 追加）
+
+自動返信メールには、サービスに応じたPDFを添付している。
+
+| サービス | 添付ファイル（実体） | 受信者に見えるファイル名 |
+|---|---|---|
+| サブスク参謀 | `assets/docs/sabusuku-sanbo-service-guide.pdf` | サブスク参謀_サービス紹介資料.pdf |
+| ゼロイチ伴走 | `assets/docs/zeroichi-banso-service-guide.pdf` | ゼロイチ伴走_サービス紹介資料.pdf |
+
+`vercel.json` の `functions.includeFiles` で関数バンドルにPDFを同梱し、
+`fs.readFileSync` で読んで base64 添付している。万一読めない場合は
+公開URL（`https://yz-partners.co.jp/assets/docs/...`）からResendに取得させる。
+
+### 資料を差し替えるとき
+
+`assets/docs/` の該当PDFを同じファイル名で上書きしてコミットするだけでよい。
+ファイル名を変える場合は `api/request-document.js` の `SERVICES[].docFile` も更新する。
+
+### TimeRex について
+
+**メール本文にTimeRexウィジェットは埋め込めない。** ウィジェットは JavaScript
+（`embed.js` + `TimerexCalendar()`）で描画するもので、Gmail・Outlook を含む
+主要メールクライアントはメール内のJavaScriptを実行しない（セキュリティ上の理由で
+`<script>` ごと除去される）。
+
+そのため自動返信では **予約ページへのリンクボタン** で案内している。
+ウィジェット本体は `request-thanks.html`（フォーム送信直後に表示される
+サンクスページ）に埋め込んであり、そちらでは正常に動作する。
+
+予約URL: `https://timerex.net/s/kiyokawa.0712_fd05/9671619e`

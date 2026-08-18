@@ -10,5 +10,10 @@
       "destination": "/zeroichi-banso.html",
       "permanent": true
     }
-  ]
+  ],
+  "functions": {
+    "api/request-document.js": {
+      "includeFiles": "assets/docs/**"
+    }
+  }
 }

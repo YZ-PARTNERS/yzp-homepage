@@ -505,6 +505,7 @@ if (contactForm) {
 
 `sabusuku-sanbo.html` / `zeroichi-banso.html` の資料請求は `/api/request-document`（Vercel Function）が受け、
 Resend 経由で2通送る。実装は `api/request-document.js`、設定手順は `api/README.md`。
+自動返信には **サービス紹介資料PDFを添付** し、TimeRex の日程調整リンクを本文に載せている。
 
 | | 差出人 | 宛先 | 返信先 |
 |---|---|---|---|
