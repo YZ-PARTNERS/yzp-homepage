@@ -142,7 +142,7 @@ body {
 
 ## ナビゲーションバー
 
-全ページ共通。マークアップは `launch.html` のものを正とし、**9項目で統一**する。
+全ページ共通。マークアップは `zeroichi-banso.html` のものを正とし、**9項目で統一**する。
 
 サービス / サブスク参謀 / ゼロイチ伴走 / 実績 / 事例 / 私たちについて / ニュース / お問い合わせ / 採用情報
 
@@ -322,7 +322,7 @@ box-shadow: var(--shadow-card-hover);
 
 ## フッター
 
-全ページ共通。マークアップは `launch.html` のものを正とし、**サービス欄は6件**で統一する。
+全ページ共通。マークアップは `zeroichi-banso.html` のものを正とし、**サービス欄は6件**で統一する。
 
 サブスク参謀 / ゼロイチ伴走 / AIXコンサルティング / DXコンサルティング / AI SaaS事業 / AI Native事業
 
@@ -457,8 +457,8 @@ if (contactForm) {
 
 ## 削除済み：LP「a tenth（アテンス）」
 
-`a-tenth.html` は 2026-08-15 に削除。`sanbo.html`（サブスク参謀）と
-`launch.html`（ゼロイチ伴走）に分割・置き換えられたため。
+`a-tenth.html` は 2026-08-15 に削除。`sabusuku-sanbo.html`（サブスク参謀）と
+`zeroichi-banso.html`（ゼロイチ伴走）に分割・置き換えられたため。
 どこからもリンクされていない独立LPだったため、参照切れは発生していない。
 画像アセット（`image/logos/` など）は分割後のLPが引き続き使用している。
 
@@ -474,8 +474,8 @@ if (contactForm) {
 
 | ファイル | 役割 |
 |---|---|
-| `sanbo.html` | LP-A「サブスク参謀」— 社長の右腕をつくる経営参謀サービス |
-| `launch.html` | LP-B「ゼロイチ伴走」— 新規事業立ち上げ伴走サービス |
+| `sabusuku-sanbo.html` | LP-A「サブスク参謀」— 社長の右腕をつくる経営参謀サービス |
+| `zeroichi-banso.html` | LP-B「ゼロイチ伴走」— 新規事業立ち上げ伴走サービス |
 | `request-thanks.html` | 資料請求サンクスページ（TimeRex埋め込み・noindex） |
 | `lp-shared.css` | 上記3ページ共通の白テーマスタイル |
 
@@ -503,7 +503,7 @@ if (contactForm) {
 
 ## 資料請求フォームの自動返信メール（2026-08-15 セッション）
 
-`sanbo.html` / `launch.html` の資料請求は `/api/request-document`（Vercel Function）が受け、
+`sabusuku-sanbo.html` / `zeroichi-banso.html` の資料請求は `/api/request-document`（Vercel Function）が受け、
 Resend 経由で2通送る。実装は `api/request-document.js`、設定手順は `api/README.md`。
 
 | | 差出人 | 宛先 | 返信先 |

@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/sanbo.html",
+      "destination": "/sabusuku-sanbo.html",
+      "permanent": true
+    },
+    {
+      "source": "/launch.html",
+      "destination": "/zeroichi-banso.html",
+      "permanent": true
+    }
+  ]
+}
