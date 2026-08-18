@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -26,7 +26,8 @@
       <nav class="navbar__nav">
         <ul class="navbar__list">
           <li><a href="index.html#services">サービス</a></li>
-          <li><a href="a-tenth.html">a tenth</a></li>
+          <li><a href="sanbo.html">サブスク参謀</a></li>
+          <li><a href="launch.html">ゼロイチ伴走</a></li>
           <li><a href="index.html#results">実績</a></li>
           <li><a href="index.html#cases">事例</a></li>
           <li><a href="index.html#about">私たちについて</a></li>
@@ -221,10 +222,12 @@
           <span class="footer__col-label-ja">サービス</span>
         </p>
         <ul class="footer__links">
+          <li><a href="sanbo.html">サブスク参謀</a></li>
+          <li><a href="launch.html">ゼロイチ伴走</a></li>
           <li><a href="service-ax.html">AIXコンサルティング</a></li>
           <li><a href="service-dx.html">DXコンサルティング</a></li>
-          <li><a href="service-saas.html">AI SaaS</a></li>
-          <li><a href="service-native.html">AI Native</a></li>
+          <li><a href="service-saas.html">AI SaaS事業</a></li>
+          <li><a href="service-native.html">AI Native事業</a></li>
         </ul>
       </div>
       <div class="footer__col">
@@ -236,7 +239,7 @@
           <li><a href="about.html#company">会社概要</a></li>
           <li><a href="mission.html">ビジョン</a></li>
           <li><a href="members.html">メンバー紹介</a></li>
-          <li><a href="message.html">代表挨拶</a></li>
+          <li><a href="about.html#message">代表挨拶</a></li>
         </ul>
       </div>
       <div class="footer__col">
@@ -291,7 +294,7 @@
         submitBtn.disabled = true; submitBtn.textContent = '送信中…';
         try {
           const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(contactForm) });
-          if (res.ok) { contactForm.innerHTML = '<p style="text-align:center;color:rgba(255,255,255,0.85);padding:40px 0;line-height:2">お問い合わせを受け付けました。<br>担当者よりご連絡いたします。</p>'; }
+          if (res.ok) { contactForm.innerHTML = '<p style="text-align:center;color:var(--color-heading);padding:40px 0;line-height:2">お問い合わせを受け付けました。<br>担当者よりご連絡いたします。</p>'; }
           else { throw new Error(); }
         } catch { alert('送信に失敗しました。しばらく経ってから再度お試しください。'); submitBtn.disabled = false; submitBtn.textContent = originalText; }
       }, true);

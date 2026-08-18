@@ -3,7 +3,11 @@
 ## プロジェクト概要
 
 YZ PARTNERS のコーポレートホームページ。シンプル・誠実・プロフェッショナルなデザインを基本方針とする。
-全体的に **ダークテーマ（#0a0a0f 系）** で統一。アクセントはミントグリーン（#00C896）。
+全体的に **白テーマ（#FFFFFF / #F6F8FA）** で統一。アクセントはミントグリーン（#00C896）。
+
+> 2026-08-15 に全ページをダークテーマ（#0a0a0f 系）から白テーマへ刷新した。
+> 配色の実体は `style.css` の `:root` に一本化してある。旧ダークテーマの記述が
+> 残っている箇所があれば、それは古い情報。
 
 ## 担当ファイル
 
@@ -34,46 +38,78 @@ YZ PARTNERS のコーポレートホームページ。シンプル・誠実・�
 
 ### CSS カスタムプロパティ（:root）
 
+配色の実体は `style.css` の `:root` に一本化されている。**色をベタ書きせず、必ずこの変数を参照すること。**
+
 ```css
 :root {
-  --color-main: #FFFFFF;        /* テキスト・見出し（ダーク背景上） */
-  --color-bg: #f0ede8;          /* ページ背景（ベージュ）※サブページで使用 */
-  --color-bg-light: #f0ede8;    /* セクション背景（--color-bg と同値） */
-  --color-accent: #00C896;      /* アクセント（ロゴカラー：ミントグリーン） */
-  --color-accent-hover: #00DBA9; /* アクセントhover（少し明るいミントグリーン） */
-  --color-text: #0a0a0f;        /* 本文テキスト（ほぼ黒） */
-  --color-text-muted: #6b6b72;  /* 補足・リード文など */
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.07);
-  --shadow-card-hover: 0 12px 36px rgba(0, 0, 0, 0.13);
+  /* サーフェス */
+  --color-bg: #FFFFFF;             /* ページ地色・セクション背景（明） */
+  --color-bg-alt: #F6F8FA;         /* セクション背景（交互に使う淡いグレー） */
+  --color-bg-light: #F6F8FA;       /* 旧名の互換 */
+  --color-surface: #F6F8FA;        /* カード面 */
+  --color-surface-hover: #EEF2F6;  /* カード面 hover */
+
+  /* テキスト */
+  --color-main: #0F1E3D;           /* 見出し（旧ダークテーマでは白だった） */
+  --color-heading: #0F1E3D;
+  --color-text: #2A3441;           /* 本文 */
+  --color-text-muted: #626C7A;     /* 補足・リード文 */
+  --color-muted: #626C7A;          /* 旧名の別名 */
+
+  /* 境界 */
+  --color-border: #E4E8EE;
+  --color-border-strong: #D3DAE3;
+
+  /* アクセント */
+  --color-accent: #00C896;         /* ロゴカラー。面・装飾用 */
+  --color-accent-hover: #00DBA9;
+  --color-accent-text: #00785A;    /* 白背景で読ませる濃いめアクセント */
+
+  --shadow-card: 0 4px 20px rgba(15, 30, 61, 0.06);
+  --shadow-card-hover: 0 12px 36px rgba(15, 30, 61, 0.12);
   --radius: 6px;
   --transition: 0.25s ease;
 }
 ```
 
+### ⚠️ アクセント色の使い分け
+
+ミントグリーン `--color-accent` (#00C896) は**白背景上で 2.16:1 しかない**。
+文字色に使うと WCAG AA を満たさないため、**文字には必ず `--color-accent-text` (#00785A) を使う**。
+`--color-accent` は塗り・枠線・装飾のみ。
+
 ### セクション背景色パターン
 
-**index.html は全セクション ダークテーマで統一**：
+白（`--color-bg`）と淡グレー（`--color-bg-alt`）を**交互**に敷いてリズムをつくる。
 
-| セクション | 背景色 |
+| セクション（index.html） | 背景 |
 |---|---|
-| `.hero-section` | `#0a0a0f` |
-| `.services-section` | `#0a0a0f` |
-| `.results-section` | `#0a0a0f` |
-| `.cases-section` | `#0a0a0f` |
-| `.about-section` | `#0a0a0f` |
-| `.news-section` | `#0a0a0f` |
-| `.contact-section` | `#0a0a0f` |
-| `.footer` | `#0a0a0a` |
-| `.service-recommend-section` | `#0d0d12` |
+| `.hero-section` | 白（背景動画＋白ベール0.62） |
+| `.services-section` | `--color-bg` |
+| `.results-section` | `--color-bg-alt` |
+| `.cases-section` | `--color-bg` |
+| `.about-section` | `--color-bg-alt` |
+| `.news-section` | `--color-bg` |
+| `.contact-section` | `--color-bg-alt` |
+| `.footer` | 白＋ミント5%のグラデーション |
 
 **ラジアルグラデーション（複数セクション共通装飾）**：
 
+白地では濃い緑は汚れて見えるため、不透明度は **0.09 以下**に抑える。
+
 ```css
 background:
-  radial-gradient(ellipse 60% 55% at 8% 50%, rgba(0, 200, 150, 0.22) 0%, transparent 55%),
-  radial-gradient(ellipse 45% 60% at 92% 30%, rgba(0, 200, 150, 0.14) 0%, transparent 50%),
-  #0a0a0f;
+  radial-gradient(ellipse 60% 55% at 8% 50%, rgba(0, 200, 150, 0.09) 0%, transparent 55%),
+  radial-gradient(ellipse 45% 60% at 92% 30%, rgba(0, 200, 150, 0.05) 0%, transparent 50%),
+  var(--color-bg);
 ```
+
+### 例外：白文字を維持している箇所
+
+暗い素材の上に文字を載せるため、ここだけ白文字を使う。
+
+- `.about-section__panel-*`（「私たちについて」の動画・写真パネル4枚）
+- `.hero-section__overlay` 配下ではなく、パネル内のタイトル・説明文
 
 ---
 
@@ -91,8 +127,8 @@ Google Fonts の日本語対応フォントを使用する。
 body {
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 400;
-  color: #0a0a0f;
-  background: #f0ede8;
+  color: var(--color-text);
+  background-color: var(--color-bg);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
 }
@@ -106,47 +142,66 @@ body {
 
 ## ナビゲーションバー
 
+全ページ共通。マークアップは `launch.html` のものを正とし、**9項目で統一**する。
+
+サービス / サブスク参謀 / ゼロイチ伴走 / 実績 / 事例 / 私たちについて / ニュース / お問い合わせ / 採用情報
+
 ```css
 .navbar {
-  background-color: rgba(0, 0, 0, 0.92);
+  background-color: rgba(246, 253, 251, 0.85); /* 地色にテーマ色をうすくかけた半透明 */
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(0, 200, 150, 0.18);
   height: 68px;
 }
 .navbar__list li a {
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--color-heading);
   font-size: 0.9rem;
 }
+.navbar__toggle span {
+  background-color: #1F2A3A; /* 明るいナビバー上のハンバーガー線 */
+}
 /* hover: アンダーライン（2px solid #00C896）がwidth 0→100% */
-/* モバイルhover: color #00C896、padding-left 40px */
 ```
+
+**9項目は768px幅では横並びに収まらない。** そのため `style.css` に
+`@media (min-width: 768px) and (max-width: 1099px)` でハンバーガー表示を維持する
+ルールを置いている。ナビ項目を増減する場合はここも見直すこと。
 
 ---
 
 ## ボタンデザイン
 
-### 標準CTAボタン（Hero / Contact Submit / More）
+### 標準CTAボタン
+
+**サイト内の全CVボタンは同一仕様に統一されている。** 該当クラスは以下の4つ。
+
+`.lp-cta-btn`（LP） / `.hero-section__cta` / `.contact-section__submit` / `.case-cta__btn` / `.service-cta-section__btn`
 
 ```css
-padding: 16px 48px;
-border: 1px solid rgba(255, 255, 255, 0.5);
-color: #FFFFFF;
-background: transparent;
-border-radius: 6px;
+padding: 18px 56px;
+background-color: var(--color-accent);
+color: #06382B;         /* 黒ではなく地色と同系の深緑。約6:1 */
 font-weight: 500;
-font-size: 0.88rem;
-letter-spacing: 0.16em;
+font-size: 1rem;
+letter-spacing: 0.1em;
+border: none;
+border-radius: var(--radius);
+box-shadow: 0 8px 28px rgba(0, 200, 150, 0.3);
 position: relative;
 overflow: hidden;
 
 /* hover */
-background: rgba(255, 255, 255, 0.1);
-border-color: rgba(255, 255, 255, 0.85);
-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+background-color: var(--color-accent-hover);
 transform: translateY(-2px);
+box-shadow: 0 12px 36px rgba(0, 200, 150, 0.4);
 ```
 
+**白背景にミント塗りのボタンでは、白文字は使えない**（コントラスト 2.16:1）。
+文字色は必ず深緑 `#06382B` にすること。
+
 ### シマーエフェクト（::before）
+
+CVボタンは **hover 待ちではなく常時2.8秒ループ**で光らせる。
 
 ```css
 @keyframes shimmerPass {
@@ -159,8 +214,10 @@ transform: translateY(-2px);
   position: absolute;
   top: 0; left: 0;
   width: 45%; height: 100%;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
-  animation: shimmerPass 0.65s ease forwards; /* またはループ: 2.8s ease-in-out infinite */
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  transform: translateX(-120%) skewX(-20deg);
+  animation: shimmerPass 2.8s ease-in-out infinite;
+  pointer-events: none;
 }
 ```
 
@@ -168,37 +225,45 @@ transform: translateY(-2px);
 
 ## カードデザイン
 
-### Glassmorphism カード（サービスセクション等）
+### 標準カード（サービスセクション等）
 
 ```css
 padding: 40px 32px;
-background: rgba(255, 255, 255, 0.05);
-backdrop-filter: blur(20px);
-border: 1px solid rgba(255, 255, 255, 0.09);
+background-color: var(--color-surface);
+border: 1px solid var(--color-border);
 border-radius: 6px; /* = var(--radius) */
 
 /* hover */
-background: rgba(255, 255, 255, 0.09);
+background-color: var(--color-surface-hover);
 border-color: rgba(0, 200, 150, 0.5);
 transform: translateY(-10px);
-box-shadow: 0 0 0 1px rgba(0, 200, 150, 0.2), 0 24px 60px rgba(0, 0, 0, 0.55);
+box-shadow: var(--shadow-card-hover);
 ```
+
+白背景では `backdrop-filter` によるガラス効果は視覚的にほぼ消えるため、
+淡いグレー面（`--color-surface`）＋境界線で表現する。
 
 ### パネルカード（aboutセクション・4パネル）
 
+**このパネルだけは例外的にダーク。** 動画・写真（暗い素材）に黒オーバーレイを
+重ね、その上に白文字を載せる設計のため。
+
 ```css
-background: #1a1a1a;
-border: 1px solid rgba(255, 255, 255, 0.09);
+background-color: #000;          /* 動画背景 */
+border: 1px solid var(--color-border);
 border-radius: 8px;
 min-height: 280px;
 padding: 40px;
+/* オーバーレイ: rgba(0, 0, 0, 0.55) */
+/* タイトル: #FFFFFF / 説明文: rgba(255,255,255,0.82) */
 
 /* hover */
-background: #252525;
 border-color: #00C896;
 transform: translateY(-4px);
 box-shadow: var(--shadow-card-hover);
 ```
+
+> 白いページの中で4枚だけ黒く浮くため、素材差し替えかセクション再設計が検討課題。
 
 ---
 
@@ -257,20 +322,24 @@ box-shadow: var(--shadow-card-hover);
 
 ## フッター
 
+全ページ共通。マークアップは `launch.html` のものを正とし、**サービス欄は6件**で統一する。
+
+サブスク参謀 / ゼロイチ伴走 / AIXコンサルティング / DXコンサルティング / AI SaaS事業 / AI Native事業
+
 ```css
 .footer {
-  background: #0a0a0a;
-  color: rgba(255, 255, 255, 0.55);
+  background:
+    linear-gradient(rgba(0, 200, 150, 0.05), rgba(0, 200, 150, 0.05)),
+    var(--color-bg);
+  color: var(--color-text-muted);
+  border-top: 1px solid rgba(0, 200, 150, 0.18);
   padding: 80px 32px; /* 768px以上: 80px 48px */
 }
 .footer a {
-  color: #aaaaaa;
+  color: #4E5A6B;
 }
 .footer a:hover {
-  color: #ffffff;
-}
-.footer__copy {
-  color: rgba(255, 255, 255, 0.22);
+  color: var(--color-heading);
 }
 ```
 
@@ -314,7 +383,7 @@ if (contactForm) {
       const res = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
         method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(contactForm)
       });
-      if (res.ok) { contactForm.innerHTML = '<p style="text-align:center;color:rgba(255,255,255,0.85);padding:40px 0;line-height:2">お問い合わせを受け付けました。<br>担当者よりご連絡いたします。</p>'; }
+      if (res.ok) { contactForm.innerHTML = '<p style="text-align:center;color:var(--color-heading);padding:40px 0;line-height:2">お問い合わせを受け付けました。<br>担当者よりご連絡いたします。</p>'; }
       else { throw new Error(); }
     } catch { alert('送信に失敗しました。しばらく経ってから再度お試しください。'); submitBtn.disabled = false; submitBtn.textContent = originalText; }
   }, true);
@@ -352,15 +421,15 @@ if (contactForm) {
 - 動画背景：`<video>` を `position: absolute` で配置し `.about-section__panel--video` クラスで制御
 - 画像背景：`background-image` + `overflow: hidden` で制御（`::after` の `border-radius` は削除済み）
 - hover 時：アクセントカラー枠線（`#00C896`）+ `translateY(-4px)` アニメーション
-- 通常時：グレー枠線（`rgba(255,255,255,0.09)`）
+- 通常時：グレー枠線（`var(--color-border)`）
 
-### サービスページ ダークテーマ統一
+### サービスページのセクション背景
 
-サービスページ（service-ax/dx/pmo/ai.html）のセクション背景を index.html に合わせてダークテーマに統一：
+サービスページ（service-ax / dx / native / saas）のセクション背景も index.html と同じトークンを使う：
 
-- `.service-overview-section`：背景 `#0a0a0f` + radial gradient、ガラスカード
-- `.service-recommend-section`：背景 `#0d0d12`、ガラスカード
-- `.service-cta-section`：ダーク背景、シマーボタン
+- `.service-overview-section`：`var(--color-bg)` + ミントのradial gradient
+- `.service-recommend-section`：`var(--color-bg-alt)`
+- `.service-cta-section`：`var(--color-bg)`、アクセント塗りのシマーボタン
 
 ### フッター修正
 
@@ -386,31 +455,16 @@ if (contactForm) {
 
 ---
 
-## LP「a tenth（アテンス）」（2026-08-07 セッション）
+## 削除済み：LP「a tenth（アテンス）」
 
-### `a-tenth.html` — リード獲得用ランディングページ
-
-- **サービス内容**: マッキンゼー・BCG・アクセンチュア・Big4等ビッグファーム出身コンサルタントを低稼働（10〜30%）・低価格（月14〜40万円）でお試し活用できる中小企業向けサービス。AIサービス導入（500〜2000万円規模）受注への「入り口」という位置づけ（大きく儲けない前提）。
-- **サービス名**: 「a tenth（アテンス）」= 英語で「10分の1」。価格破壊（従来の1/10）に由来
-- **フローティングCTA**: 白カード（`.lp-float-cta__btn`）に代表・清川の全身写真（`image/ceo-standing.png`）を入れ、下辺にアクセント色のバー「CEO清川に相談する」を付けた縦型カード。
-  - **写真は加工しない方針**（ユーザー指示）。背景透明化を試すと白シャツ・腕まで削れるため禁止。元画像 `ceo_standing.png`（純白背景・アルファなし）に対し、縦方向の余白トリミングとリサイズのみ実施（369×440px）。白背景はカードの白地と同化させて活用する
-  - `image/ceo-avatar.jpg`（顔クロップ丸アバター）は旧版で現在未使用
-- **構成**: ヒーロー → 課題共感(PROBLEM) → 選ばれる理由(WHY) → 価格比較(PRICE) → 料金プラン(PLAN: 10%/14万・20%/27万・30%/40万) → 実績(TRUST) → 活用シーン(USE CASE) → 利用の流れ(FLOW) → FAQ → 日程調整(RESERVE)
-- **実装方針**:
-  - `style.css` を読み込み、LP固有スタイルは `<head>` 内の `<style>` にインライン記述（クラス名は `lp-*-section` 規則）
-  - ヘッダー・フッターは既存サイトと共通の `.navbar` / `.footer` を使用
-  - CTAボタンはアクセント塗りつぶし（`.lp-cta-btn`、シマーループ 2.8s infinite）。リンク先は `#contact`（RESERVEセクション）
-  - フローティングCTA（`.lp-float-cta`）はRESERVEセクション表示中に自動非表示
-  - CVは TimeRex 埋め込みウィジェットで日程調整（`#timerex_calendar`、URL: timerex.net/s/kiyokawa.0712_fd05/9671619e）。お問い合わせフォーム（Formspree）は廃止済み
-  - FAQ は `<details>` を Web Animations API でスムーズ開閉（インラインスクリプト）
-- どこからもリンクされていない独立LP（広告・営業用URL想定）
-- **出身ファームロゴマーキー**: ヒーロー下部に `image/logos/`（mckinsey / bcg / accenture / kearney / deloitte / pwc / kpmg / ey / baycurrent / sigmaxyz / northsand / fpt の透明PNG、高さ80px）を左→右に流す無限ループ（`.lp-logo-marquee`、48s linear）。bain.png はファイルとして残っているがマーキーからは除外済み（ユーザー指示）。ダーク背景で視認できるよう `filter: brightness(0) invert(1)` で白色モノクロ化（この1行を消せば元のカラーロゴに戻る）。ロゴ元画像の白背景透明化は sharp の白マット除去スクリプトで実施
+`a-tenth.html` は 2026-08-15 に削除。`sanbo.html`（サブスク参謀）と
+`launch.html`（ゼロイチ伴走）に分割・置き換えられたため。
+どこからもリンクされていない独立LPだったため、参照切れは発生していない。
+画像アセット（`image/logos/` など）は分割後のLPが引き続き使用している。
 
 ### ローカルプレビュー
 
 - `.claude/launch.json` に `static-site`（npx http-server ポート8123）を定義済み
-
----
 
 ## LP刷新「サブスク参謀」「ゼロイチ伴走」（2026-08-14 セッション・lp-renewalブランチ）
 
@@ -425,14 +479,17 @@ if (contactForm) {
 | `request-thanks.html` | 資料請求サンクスページ（TimeRex埋め込み・noindex） |
 | `lp-shared.css` | 上記3ページ共通の白テーマスタイル |
 
-### ⚠️ ダークテーマ例外ルール
+### テーマの扱い（2026-08-15 更新）
 
-この3ページは **白背景テーマ（`.lpw-body`）** で、サイト全体のダークテーマ統一ルールの例外。
-ナビバー・フッターは共通の `style.css`（ダーク）をそのまま使用。白テーマの色変数は `lp-shared.css` の `.lpw-body` に定義（`--lpw-*`）。アクセントはミントグリーンを継承しつつ、白背景上の小さめテキストにはコントラスト確保のため濃色 `--lpw-accent-text: #009270` を使用。
+かつてこの3ページだけが白テーマの「例外」だったが、**サイト全体が白テーマになったため例外ではなくなった。**
+
+配色の実体は `style.css` の `:root` に一本化済み。`lp-shared.css` の `--lpw-*` は
+既存の参照を壊さないための**別名（エイリアス）**として残しているだけで、値は持っていない。
+ナビバー・フッターの明色化も `style.css` 側へ移設し、重複定義は撤去した。
 
 ### 主な仕様（旧 a-tenth.html との差分）
 
-- CV は全て「資料請求する」（旧: 無料相談）。フォームは Formspree（ID: `xpqolqvp`）AJAX送信 → `request-thanks.html` にリダイレクト。hidden の `service` / `_subject` でどちらのLPからの請求か判別
+- CV は全て「資料請求する」（旧: 無料相談）。**送信先は Formspree ではなく自社の `/api/request-document`**（詳細は後述）→ `request-thanks.html` にリダイレクト。hidden の `service` でどちらのLPからの請求か判別
 - 金額表示は「月20万円〜」に統一。料金プラン（LIGHT/STANDARD/GROWTH）セクションは廃止
 - 「価格破壊」「稼働率」という言葉は使用禁止（削除済み）
 - FVの数字コンテンツ（稼働率など）は削除
@@ -440,5 +497,20 @@ if (contactForm) {
 - コンサルタント紹介は横スクロールカルーセル（`.lp-members-section__track`、scroll-snap + PC用矢印ボタン）。プロフィールは members.html から流用
 - ロゴマーキーは白背景なので `invert` フィルタなし（カラーのまま）。bain.png は除外（既存方針）
 - TimeRex はサンクスページのみ。白背景なので invert フィルタ不要
-- 資料送付メールの自動化は未実装（Formspree の自動返信 or 手動運用。要検討）
-- 旧 `a-tenth.html` は現状維持。公開時のリダイレクト/振り分けは未決定
+- 旧 `a-tenth.html` は削除済み（2026-08-15）
+
+---
+
+## 資料請求フォームの自動返信メール（2026-08-15 セッション）
+
+`sanbo.html` / `launch.html` の資料請求は `/api/request-document`（Vercel Function）が受け、
+Resend 経由で2通送る。実装は `api/request-document.js`、設定手順は `api/README.md`。
+
+| | 差出人 | 宛先 | 返信先 |
+|---|---|---|---|
+| 自動返信 | info@yz-partners.co.jp | 入力されたアドレス | info@yz-partners.co.jp |
+| 社内通知 | info@yz-partners.co.jp | info@yz-partners.co.jp | 入力されたアドレス |
+
+- 稼働には環境変数 `RESEND_API_KEY` と、Resend でのドメイン認証が必要
+- **その他15ページのお問い合わせフォームは従来どおり Formspree のまま**（自動返信なし）
+- Vercel Functions を有効にするため `package.json` を追加している

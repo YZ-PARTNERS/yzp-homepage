@@ -1,0 +1,9 @@
+{
+  "name": "yzp-corporate-homepage",
+  "private": true,
+  "version": "1.0.0",
+  "description": "YZ PARTNERS コーポレートサイト（静的HTML + Vercel Functions）",
+  "engines": {
+    "node": ">=20"
+  }
+}
