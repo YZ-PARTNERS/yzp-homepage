@@ -360,7 +360,7 @@ img {
   background:
     radial-gradient(ellipse 60% 55% at 8% 50%, rgba(0, 200, 150, 0.09) 0%, transparent 55%),
     radial-gradient(ellipse 45% 60% at 92% 30%, rgba(0, 200, 150, 0.05) 0%, transparent 50%),
-    rgba(255, 255, 255, 0.62); /* 0.82では動画が見えづらいため薄めに */
+    rgba(255, 255, 255, 0.52); /* 動画を活かすため薄め。文字側を濃くして可読性を確保 */
   pointer-events: none;
   z-index: 1;
 }
@@ -377,7 +377,7 @@ img {
   font-weight: 500;
   font-size: 0.9rem;
   letter-spacing: 0.22em;
-  color: var(--color-text); /* 動画の暗部に重なっても4.5:1を確保するため補足色より濃く */
+  color: var(--color-heading); /* 動画が暗く白ベールも薄いため、見出し色まで濃くして4.5:1を確保 */
   margin-bottom: 48px;
 }
 
@@ -2018,6 +2018,15 @@ img {
   left: 20px;
   font-family: Georgia, serif;
   pointer-events: none;
+}
+
+/* 代表挨拶など、装飾の引用符を出さない場合 */
+.case-testimonial__quote--plain::before {
+  content: none;
+}
+
+.case-testimonial__quote--plain {
+  padding-top: 32px;
 }
 
 .case-testimonial__text {

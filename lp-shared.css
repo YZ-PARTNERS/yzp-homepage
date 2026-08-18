@@ -595,7 +595,7 @@
   width: 176px; /* カード幅比 約2/3 */
   height: 176px;
   margin: 22px auto 0;
-  border-radius: 4px; /* 角形（わずかな面取りのみ） */
+  border-radius: 0; /* 角形（面取りなし） */
   overflow: hidden;
   background-color: var(--lpw-bg-alt);
   display: flex;
