@@ -614,7 +614,7 @@
 
 /* 山崎の構図（顔＋肩、顔が枠の4割程度）を基準にした素材別調整 */
 .lp-members-section__photo--kiyokawa {
-  /* 正方形の公式ポートレート(image14.png)をそのまま使うため拡大不要 */
+  /* ほぼ正方形のポートレート(ceo-kiyokawa.jpg)をそのまま使うため拡大不要 */
   object-position: center center;
 }
 
