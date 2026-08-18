@@ -1,5 +1,5 @@
 /**
- * 資料請求フォーム（sanbo.html / launch.html）の受け口。
+ * 資料請求フォーム（sabusuku-sanbo.html / zeroichi-banso.html）の受け口。
  *
  * 1. 入力内容を info@yz-partners.co.jp へ通知
  * 2. 入力されたメールアドレスへ自動返信（差出人も info@yz-partners.co.jp）
@@ -20,12 +20,12 @@ const SERVICES = {
   'サブスク参謀': {
     lead: '「サブスク参謀」の資料をご請求いただき、ありがとうございます。',
     detail: '社長の右腕として経営に伴走する、月額制の経営参謀サービスです。',
-    url: 'https://www.yz-partners.co.jp/sanbo.html',
+    url: 'https://www.yz-partners.co.jp/sabusuku-sanbo.html',
   },
   'ゼロイチ伴走': {
     lead: '「ゼロイチ伴走」の資料をご請求いただき、ありがとうございます。',
     detail: '新規事業の構想づくりから実行まで、社長と共に走る伴走サービスです。',
-    url: 'https://www.yz-partners.co.jp/launch.html',
+    url: 'https://www.yz-partners.co.jp/zeroichi-banso.html',
   },
 };
 
