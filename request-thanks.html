@@ -150,5 +150,36 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // === Google広告：予約ウィジェットへの到達をコンバージョンとして計測 ===
+    // ページ読み込み時の「申し込み」とは別に、予約エリアまで到達した人だけを数える。
+    // 同一ページで2つ発火させると二重計上になるため、こちらはスクロール到達を条件にする。
+    (function () {
+      var target = document.querySelector('.lp-thanks-section__booking-title');
+      if (!target || typeof gtag !== 'function') return;
+
+      var fired = false;
+      function fire() {
+        if (fired) return;
+        fired = true;
+        gtag('event', 'conversion', { 'send_to': 'AW-18240298925/3tIeCJS0p9gcEK2_0_lD' });
+      }
+
+      // IntersectionObserver 非対応環境では取りこぼすより送る側に倒す
+      if (!('IntersectionObserver' in window)) { fire(); return; }
+
+      // 画面下端にかすっただけでは発火させず、下から25%以上入ったら到達とみなす。
+      // threshold ではなく rootMargin で判定するため、要素の高さに左右されない。
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            fire();
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -25% 0px' });
+      io.observe(target);
+    })();
+  </script>
 </body>
 </html>
