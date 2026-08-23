@@ -22,6 +22,22 @@
 /* ナビバー・フッターの明色化とハンバーガー時挙動は style.css 側へ移設済み
    （全ページがナビ9項目になったため共通化。重複定義を撤去） */
 
+/* セクションのアンカーリンク（#case-study 等）でジャンプした際、
+   position: fixed のナビバー（高さ68px）にセクション上端が隠れないための余白。
+   各セクションに id を振っているページでのみ意味を持つ。 */
+.lp-hero-section,
+.lp-problem-section,
+.lp-solution-section,
+.lp-price-section,
+.lp-members-section,
+.lp-usecase-section,
+.lp-case-section,
+.lp-flow-section,
+.lp-faq-section,
+.lp-request-section {
+  scroll-margin-top: 68px;
+}
+
 .lpw-body .section-lead {
   color: var(--lpw-muted);
   margin-bottom: 40px; /* 共通の56pxは間延びするためLPでは詰める */
