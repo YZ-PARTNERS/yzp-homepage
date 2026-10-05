@@ -1226,7 +1226,24 @@
             <script id="timerex_embed" src="https://asset.timerex.net/js/embed.js"></script>
 
             <script type="text/javascript">
-              TimerexCalendar({ primary_color: '#00a498', locale: 'ja' });
+              // Google広告コンバージョンの送信先。Google広告の「イベントスニペット」の
+              // send_to の値（AW-18240298925/XXXXXXXXXX の形）を文字列のまま貼る。
+              // ※ 未設定（XXXX を含む）のあいだは送信しない
+              var LP_CONVERSION_SEND_TO = 'AW-18240298925/m-W0CNPLtpEdEK2_0_lD';
+
+              TimerexCalendar({
+                primary_color: '#00a498',
+                locale: 'ja',
+                // 日程調整が完了したときだけコンバージョンを計測（LP閲覧では計上しない）
+                onBookingComplete: function () {
+                  if (LP_CONVERSION_SEND_TO.indexOf('XXXX') !== -1) return;
+                  if (typeof gtag === 'function') {
+                    gtag('event', 'conversion', {
+                      'send_to': LP_CONVERSION_SEND_TO
+                    });
+                  }
+                }
+              });
             </script>
             <!-- End TimeRex Widget -->
           </div>
