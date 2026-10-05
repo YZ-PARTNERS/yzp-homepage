@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お試しFDE+C｜その場でツールをつくる訪問型AIエンジニア/コンサルを月10万円から by YZ PARTNERS</title>
+  <meta name="description" content="AIエンジニア/コンサルが貴社の現場に通い、業務の困りごとを“その場で”ツール化。業務の整理や経営のご相談にも応じます。まずは2回の無料AIコンサルで課題を洗い出し、動く試作をご確認ください。週1回訪問 月10万円・週2回訪問 月20万円（税別）。">
+  <meta property="og:title" content="お試しFDE+C｜その場でツールをつくる訪問型AIエンジニア/コンサルを月10万円から by YZ PARTNERS">
+  <meta property="og:description" content="AIエンジニア/コンサルが現場に通い、業務の困りごとをその場でツール化。まずは2回の無料AIコンサルから。週1回訪問 月10万円・週2回訪問 月20万円（税別）。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="image/logo_2619300_print.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lp-shared.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18240298925"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-18240298925');
+  </script>
+  <style>
+    /* ============================================================
+       otameshi-fdec.html（お試しFDE+C）固有スタイル
+       共通部分は lp-shared.css を使用。ここはこのLPだけの
+       「LIVE BUILD」「IDENTITY（FDE+C）」セクションと細部調整のみ。
+       ============================================================ */
+
+    /* === 折り返し：単語・文節の途中で行が分かれないようにする ===
+       「です。」の「で」と「す。」が別行になる等を防ぐ。
+       auto-phrase は lang="ja" の文節境界で折り返す（Chrome 119+、他は通常折り返し）。
+       pretty は行末の1〜2文字だけの孤立行を避ける。 */
+    .lpw-body,
+    .lpw-body p,
+    .lpw-body li,
+    .lpw-body h1,
+    .lpw-body h2,
+    .lpw-body h3,
+    .lpw-body summary {
+      word-break: auto-phrase;
+      text-wrap: pretty;
+    }
+
+    .lpw-body .section-title,
+    .lpw-body .lp-hero-section__title,
+    .lpw-body .lp-fde-section__punch {
+      text-wrap: balance;
+    }
+
+    /* 文節判定をすり抜ける語（後日／その場／よくある 等）はこれで固定する */
+    .nobr {
+      white-space: nowrap;
+    }
+
+    /* === HERO 調整（FVだけが画面に収まるよう 100vh、売りを5タイルで提示） === */
+    .lp-hero-section {
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 92px 24px 32px;
+    }
+
+    @media (min-width: 768px) {
+      .lp-hero-section {
+        padding: 92px 48px 32px;
+      }
+    }
+
+    /* FVは要素の種類と色数を絞る：
+       強調色（ミント）はブランド名の末尾と見出しの一語、CTAだけ。
+       それ以外は見出し色＋補足色の2色、装飾は細い罫線のみ。 */
+    .lp-hero-section__badge {
+      display: block;
+      padding: 0;
+      border: none;
+      background: none;
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      color: var(--color-text-muted);
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 767px) {
+      .lp-hero-section__badge {
+        letter-spacing: 0.06em; /* 375px幅で1行に収める */
+      }
+    }
+
+    .lp-hero-section__brand {
+      margin-bottom: 18px;
+    }
+
+    /* ブランド名を320px幅でも1行に収めるため、下限を共通値より下げている */
+    .lp-hero-section__brand-logo {
+      font-size: clamp(1.7rem, 8.5vw, 3.4rem);
+    }
+
+    /* 「by YZ PARTNERS」はブランド名と色を競わせない */
+    .lp-hero-section__brand-kana {
+      color: var(--color-text-muted);
+    }
+
+    /* サブコピーを置かないため、見出しと要点の間はやや広めにとる */
+    .lp-hero-section__title {
+      margin-bottom: 30px;
+    }
+
+    /* 見出しの強調語は色だけ変え、サイズは揃える。途中で改行させない */
+    .lp-hero-section__title-em {
+      font-size: 1em;
+      white-space: nowrap;
+    }
+
+    /* 売りの5項目：カードではなく、上下の罫線で挟んだ1行のスペック表示。
+       ロード時に左から順に浮かび上がる */
+    .lp-hero-section__points {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 860px;
+      margin: 0 auto 30px;
+      padding: 8px 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .lp-hero-section__points li {
+      flex: 1 1 120px;
+      padding: 10px 8px;
+      opacity: 0;
+      animation: heroFadeUp 0.7s ease both;
+      animation-delay: calc(0.35s + var(--d, 0) * 0.1s);
+    }
+
+    @media (min-width: 768px) {
+      .lp-hero-section__points li {
+        flex: 1 1 0;
+        border-left: 1px solid var(--color-border);
+      }
+
+      .lp-hero-section__points li:first-child {
+        border-left: none;
+      }
+    }
+
+    .lp-hero-section__points strong {
+      display: block;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      color: var(--color-heading);
+      white-space: nowrap;
+    }
+
+    @media (min-width: 1100px) {
+      .lp-hero-section__points strong {
+        font-size: 1.08rem;
+      }
+    }
+
+    .lp-hero-section__points span {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--color-text-muted);
+    }
+
+    .lp-hero-section__logos {
+      margin-top: 30px;
+    }
+
+    /* === 予約（TimeRexのカレンダーを直接埋め込み） === */
+    #booking .lp-request-section__inner {
+      max-width: 1000px; /* 共通の640pxではカレンダーが窮屈になるため広げる */
+    }
+
+    /* 縮小表示用のラッパー（高さはJSが追従させる） */
+    .lp-booking__scale {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lp-booking__widget {
+      margin-top: 36px;
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      min-height: 560px;
+    }
+
+    /* === DEMO（LIVE BUILD：訪問1回の再現） === */
+    .lp-demo-section {
+      padding: 72px 24px;
+      background-color: var(--color-bg);
+      scroll-margin-top: 68px;
+    }
+
+    .lp-demo-section__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .lp-demo-section__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 36px;
+      align-items: center;
+    }
+
+    @media (min-width: 1100px) {
+      .lp-demo-section__grid {
+        grid-template-columns: 5fr 7fr;
+        gap: 48px;
+      }
+    }
+
+    /* --- 左：訪問1回のタイムライン --- */
+    .lp-demo-section__timeline {
+      list-style: none;
+    }
+
+    .lp-demo-section__tl-item {
+      position: relative;
+      padding: 0 0 26px 24px;
+      border-left: 2px solid rgba(0, 200, 150, 0.35);
+    }
+
+    .lp-demo-section__tl-item:last-child {
+      padding-bottom: 0;
+      border-left-color: transparent;
+    }
+
+    .lp-demo-section__tl-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 2px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--color-accent);
+      box-shadow: 0 0 0 4px rgba(0, 200, 150, 0.15);
+    }
+
+    .lp-demo-section__tl-time {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      color: var(--color-accent-text);
+      margin-bottom: 4px;
+    }
+
+    .lp-demo-section__tl-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--color-heading);
+      margin-bottom: 4px;
+    }
+
+    .lp-demo-section__tl-text {
+      font-size: 0.83rem;
+      line-height: 1.8;
+      color: var(--color-text);
+    }
+
+    /* --- 右：チャット再現ウィンドウ --- */
+    .lp-demo-section__window {
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      box-shadow: var(--shadow-card-hover);
+      overflow: hidden;
+    }
+
+    .lp-demo-section__window-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 16px;
+      background-color: var(--color-bg-alt);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .lp-demo-section__window-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--color-border-strong);
+    }
+
+    .lp-demo-section__window-title {
+      margin-left: 8px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+    }
+
+    .lp-demo-section__chat {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      padding: 24px 20px;
+    }
+
+    .lp-demo-section__msg {
+      max-width: 86%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--color-text);
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    /* 親チャットが .is-visible になったら、--i の順に浮かび上がる */
+    .lp-demo-section__chat.is-visible .lp-demo-section__msg {
+      animation: lpMsgIn 0.55s ease both;
+      animation-delay: calc(var(--i, 0) * 0.75s);
+    }
+
+    @keyframes lpMsgIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lp-demo-section__msg {
+        opacity: 1;
+        transform: none;
+      }
+
+      .lp-demo-section__chat.is-visible .lp-demo-section__msg {
+        animation: none;
+      }
+    }
+
+    .lp-demo-section__msg--customer {
+      justify-self: start;
+      background-color: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-top-left-radius: 2px;
+    }
+
+    .lp-demo-section__msg--engineer {
+      justify-self: end;
+      background-color: rgba(0, 200, 150, 0.1);
+      border: 1px solid rgba(0, 200, 150, 0.35);
+      border-top-right-radius: 2px;
+    }
+
+    .lp-demo-section__msg-role {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--color-text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* 各発言の時刻（現場の会話なので1ラリーはほぼ同時刻） */
+    .lp-demo-section__msg-time {
+      flex: none;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--color-text-muted);
+    }
+
+    .lp-demo-section__msg--terminal .lp-demo-section__msg-role,
+    .lp-demo-section__msg--terminal .lp-demo-section__msg-time {
+      color: rgba(127, 224, 195, 0.7);
+    }
+
+    /* ターミナル風の「試作中」表示（エンジニア側の作業なので右寄せ） */
+    .lp-demo-section__msg--terminal {
+      justify-self: end;
+      max-width: 86%;
+      background-color: #0F1E3D;
+      border: none;
+      border-radius: 8px;
+      font-family: Consolas, Menlo, monospace;
+      font-size: 0.8rem;
+      line-height: 2;
+      color: #7FE0C3;
+    }
+
+    .lp-demo-section__msg--terminal .done {
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+
+    .lp-demo-section__caret {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      vertical-align: text-bottom;
+      background-color: #7FE0C3;
+      animation: lpCaretBlink 1s steps(1) infinite;
+    }
+
+    @keyframes lpCaretBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .lp-demo-section__window-note {
+      margin: 0;
+      padding: 14px 20px;
+      background-color: rgba(0, 200, 150, 0.07);
+      border-top: 1px solid var(--color-border);
+      font-size: 0.8rem;
+      font-weight: 500;
+      line-height: 1.8;
+      color: var(--color-heading);
+    }
+
+    .lp-demo-section__window-note strong {
+      color: var(--color-accent-text);
+    }
+
+    /* === IDENTITY（このサービスの正体＝FDE+C） === */
+    .lp-fde-section {
+      padding: 72px 24px;
+      background:
+        radial-gradient(ellipse 60% 55% at 50% 0%, rgba(0, 200, 150, 0.08) 0%, transparent 60%),
+        var(--color-bg-alt);
+      scroll-margin-top: 68px;
+      text-align: center;
+    }
+
+    .lp-fde-section__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .lp-fde-section__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    @media (min-width: 768px) {
+      .lp-fde-section__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .lp-fde-section__grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+    }
+
+    .lp-fde-section__card {
+      padding: 36px 24px 32px;
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+    }
+
+    /* 「+C」のカードだけ枠線で“追加された要素”であることを示す */
+    .lp-fde-section__card--plus {
+      border-color: rgba(0, 200, 150, 0.45);
+    }
+
+    /* 頭文字の巨大タイポグラフィ（ブランドロゴと同じグラデーション） */
+    .lp-fde-section__letter {
+      display: block;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 4.4rem;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--color-heading) 35%, var(--color-accent) 95%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 12px;
+    }
+
+    .lp-fde-section__en {
+      display: block;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--color-accent-text);
+      margin-bottom: 6px;
+    }
+
+    .lp-fde-section__ja {
+      font-weight: 700;
+      font-size: 1.12rem;
+      color: var(--color-heading);
+      margin-bottom: 10px;
+    }
+
+    .lp-fde-section__text {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: var(--color-text);
+      text-align: center;
+    }
+
+    .lp-fde-section__punch {
+      margin-top: 44px;
+      font-weight: 700;
+      font-size: clamp(1.05rem, 3.4vw, 1.35rem);
+      line-height: 1.9;
+      letter-spacing: 0.06em;
+      color: var(--color-heading);
+    }
+
+    .lp-fde-section__punch strong {
+      color: var(--color-accent-text);
+    }
+
+    /* === PRICE末尾の中間CTA === */
+    .lp-price-section__cta {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    /* === TOOLS末尾の補記（渡して終わりにしない） — 目立たせず文章で === */
+    .lp-usecase-section__kt {
+      max-width: 760px;
+      margin: 36px auto 0;
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: var(--color-text);
+      text-align: center;
+    }
+
+    .lp-usecase-section__kt strong {
+      font-weight: 700;
+      color: var(--color-heading);
+    }
+
+    /* ============================================================
+       MOBILE（767px以下）
+       スマホでは「1画面に1つの要素」を原則に、FVの情報を絞り、
+       各セクションの余白・文字サイズ・カードの並びを詰める。
+       ============================================================ */
+    @media (max-width: 767px) {
+
+      /* --- 共通：余白と見出し --- */
+      .lp-demo-section,
+      .lp-fde-section,
+      .lp-price-section,
+      .lp-members-section,
+      .lp-usecase-section,
+      .lp-faq-section,
+      .lp-request-section {
+        padding-top: 56px;
+        padding-bottom: 56px;
+      }
+
+      .lp-demo-section,
+      .lp-fde-section,
+      .lp-price-section,
+      .lp-usecase-section,
+      .lp-faq-section,
+      .lp-request-section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .lpw-body .section-title {
+        font-size: 1.5rem;
+        letter-spacing: 0.08em;
+        line-height: 1.5;
+      }
+
+      /* --- HERO：ブランド → 見出し → 3つの要点 → CTA の4要素だけにする --- */
+      .lp-hero-section {
+        padding: 84px 20px 28px;
+      }
+
+      .lp-hero-section__badge {
+        display: none;
+      }
+
+      .lp-hero-section__brand {
+        margin-bottom: 18px;
+      }
+
+      .lp-hero-section__title {
+        font-size: 1.32rem;
+        line-height: 1.55;
+        letter-spacing: 0.02em;
+        margin-bottom: 24px;
+      }
+
+      /* 要点は横並びのスペック表示をやめ、縦の3行リストに */
+      .lp-hero-section__points {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 0 auto 22px;
+        padding: 6px 4px;
+        text-align: left;
+      }
+
+      .lp-hero-section__points li {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        flex: none;
+        padding: 8px 2px;
+      }
+
+      .lp-hero-section__points li::before {
+        content: '';
+        flex: none;
+        align-self: center;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--color-accent);
+      }
+
+      .lp-hero-section__points li.lp-sp-hide {
+        display: none;
+      }
+
+      .lp-hero-section__points strong {
+        font-size: 1rem;
+      }
+
+      .lp-hero-section__points span {
+        margin-top: 0;
+        font-size: 0.78rem;
+      }
+
+      .lp-hero-section .lp-cta-btn {
+        display: block;
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+        padding: 17px 20px;
+        text-align: center;
+      }
+
+      .lp-hero-section__logos {
+        margin-top: 30px;
+      }
+
+      /* --- LIVE BUILD --- */
+      .lp-demo-section__grid {
+        gap: 28px;
+        margin-top: 28px;
+      }
+
+      .lp-demo-section__chat {
+        padding: 18px 14px;
+        gap: 10px;
+      }
+
+      .lp-demo-section__msg {
+        max-width: 92%;
+        font-size: 0.84rem;
+        padding: 10px 14px;
+      }
+
+      /* --- IDENTITY：縦4枚の大カードをやめ、頭文字＋説明の横並びに --- */
+      .lp-fde-section__grid {
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .lp-fde-section__card {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        column-gap: 14px;
+        align-items: center;
+        padding: 18px 16px 18px 12px;
+        text-align: left;
+      }
+
+      /* 「+C」が2行に折れないよう、列幅72pxに収まるサイズ・字間にする */
+      .lp-fde-section__letter {
+        grid-row: 1 / span 3;
+        font-size: 2.4rem;
+        letter-spacing: -0.04em;
+        white-space: nowrap;
+        margin: 0;
+        text-align: center;
+      }
+
+      .lp-fde-section__en {
+        font-size: 0.68rem;
+        margin-bottom: 2px;
+      }
+
+      .lp-fde-section__ja {
+        font-size: 1.02rem;
+        margin-bottom: 4px;
+      }
+
+      .lp-fde-section__text {
+        font-size: 0.82rem;
+        line-height: 1.75;
+        text-align: left; /* 横並びレイアウトでは左揃え（PCは中央） */
+      }
+
+      .lp-fde-section__punch {
+        margin-top: 32px;
+        font-size: 1rem;
+        line-height: 1.8;
+        letter-spacing: 0.04em;
+        text-align: center;
+      }
+
+      /* --- PRICE --- */
+      .lp-price-section__col {
+        padding: 26px 20px;
+      }
+
+      .lp-price-section__cta {
+        margin-top: 32px;
+      }
+
+      .lp-price-section__cta .lp-cta-btn {
+        display: block;
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+        padding: 17px 20px;
+        text-align: center;
+      }
+
+      /* --- TOOLS：中央寄せの長文は読みにくいので左寄せに --- */
+      .lp-usecase-section__kt {
+        margin-top: 28px;
+        text-align: left;
+      }
+
+      /* --- LIVE BUILD：スマホではタイムラインを出さず、
+             チャット各吹き出しの時刻表示で時間の流れを伝える --- */
+      .lp-demo-section__timeline {
+        display: none;
+      }
+
+      /* --- FAQ：余白と行間を詰めて縦幅を抑える --- */
+      .lp-faq-section {
+        padding-top: 44px;
+        padding-bottom: 44px;
+      }
+
+      .lp-faq-section__list {
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .lp-faq-section__q {
+        padding: 14px 44px 14px 16px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .lp-faq-section__a {
+        padding: 0 16px 16px;
+        font-size: 0.84rem;
+        line-height: 1.8;
+      }
+
+      /* --- PRICE：無料枠は全幅、有料2プランは横並び --- */
+      .lp-price-section__compare {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .lp-price-section__col--ours {
+        grid-column: 1 / -1;
+      }
+
+      .lp-price-section__col {
+        padding: 22px 12px 18px;
+      }
+
+      .lp-price-section__col-name {
+        font-size: 0.9rem;
+      }
+
+      .lp-price-section__col-price {
+        font-size: 1.45rem;
+      }
+
+      .lp-price-section__col-desc {
+        font-size: 0.78rem;
+        line-height: 1.7;
+      }
+
+      /* 有料2プランの説明文はPCのみ表示 */
+      .lp-price-section__col-desc--pc {
+        display: none;
+      }
+
+      /* --- TOOLS：見出しだけのリストに（説明文はPCのみ） --- */
+      .lp-usecase-section__grid {
+        gap: 8px;
+        margin-top: 24px;
+      }
+
+      .lp-usecase-section__item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px;
+      }
+
+      .lp-usecase-section__item::before {
+        content: '';
+        flex: none;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--color-accent);
+      }
+
+      .lp-usecase-section__item-title {
+        font-size: 0.95rem;
+        margin: 0;
+      }
+
+      .lp-usecase-section__item-text {
+        display: none;
+      }
+
+      /* --- BOOKING：カレンダーは画面幅いっぱいに広げ（左右の見切れ対策）、
+             枠内スクロールで縦長を防ぐ。
+             ※ overscroll-behavior: contain は「枠の上端で止まりページを上に戻れない」
+                事象を招いたため使わない --- */
+      .lp-booking__widget {
+        margin: 24px -20px 0;
+        max-height: 80vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body class="lpw-body">
+
+  <!-- === NAVBAR === -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <img src="image/logo_2619300_print.png" alt="YZ PARTNERS" class="navbar__logo-img">
+      </a>
+      <button class="navbar__toggle" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="navbar__nav">
+        <ul class="navbar__list">
+          <li><a href="index.html#services">サービス</a></li>
+          <li><a href="otameshi-fdec.html">お試しFDE+C</a></li>
+          <li><a href="index.html#results">実績</a></li>
+          <li><a href="index.html#cases">事例</a></li>
+          <li><a href="index.html#about">私たちについて</a></li>
+          <li><a href="index.html#news">ニュース</a></li>
+          <li><a href="index.html#contact">お問い合わせ</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- === HERO === -->
+    <section class="lp-hero-section" id="hero">
+      <div class="lp-hero-section__inner">
+        <p class="lp-hero-section__badge">中小企業向け｜訪問型 AIエンジニア/コンサル</p>
+        <div class="lp-hero-section__brand">
+          <p class="lp-hero-section__brand-logo">お試しFDE+C</p>
+          <p class="lp-hero-section__brand-sub">by <span class="lp-hero-section__brand-kana">YZ PARTNERS</span></p>
+        </div>
+        <h1 class="lp-hero-section__title">隣席の<span class="nobr">AIエンジニア/コンサル</span>が、<br class="pc-only">困りごとを<span class="lp-hero-section__title-em">“その場で”</span>ツール開発して解決</h1>
+        <ul class="lp-hero-section__points">
+          <!-- スマホでは .lp-sp-hide の2つを隠し、3項目に絞る -->
+          <li style="--d: 0"><strong>2回無料</strong><span>お試しAIコンサル</span></li>
+          <li class="lp-sp-hide" style="--d: 1"><strong>その場で試作</strong><span>バイブコーディング</span></li>
+          <li class="lp-sp-hide" style="--d: 2"><strong>週1〜2回訪問</strong><span>業務の相談もその場で</span></li>
+          <li style="--d: 3"><strong>月10万円〜</strong><span>週1回訪問・税別</span></li>
+          <li style="--d: 4"><strong>使い方まで伝授</strong><span>ゴールは“卒業”</span></li>
+        </ul>
+        <a href="https://timerex.net/s/kiyokawa.0712_fd05/9671619e" target="_blank" rel="noopener" class="lp-cta-btn">無料AIコンサルを予約する</a>
+        <div class="lp-hero-section__logos">
+          <p class="lp-hero-section__logos-label">在籍コンサルタントの出身ファーム</p>
+          <div class="lp-logo-marquee">
+            <div class="lp-logo-marquee__track">
+              <img src="image/logos/mckinsey.png" alt="マッキンゼー・アンド・カンパニー" style="--h: 26">
+              <img src="image/logos/bcg.png" alt="ボストン コンサルティング グループ" style="--h: 23">
+              <img src="image/logos/accenture.png" alt="アクセンチュア" style="--h: 24">
+              <img src="image/logos/kearney.png" alt="カーニー" style="--h: 17">
+              <img src="image/logos/deloitte.png" alt="デロイト" style="--h: 19">
+              <img src="image/logos/pwc.png" alt="PwC" style="--h: 30">
+              <img src="image/logos/kpmg.png" alt="KPMG" style="--h: 27">
+              <img src="image/logos/ey.png" alt="EY" style="--h: 34">
+              <img src="image/logos/baycurrent.png" alt="ベイカレント・コンサルティング" style="--h: 23">
+              <img src="image/logos/sigmaxyz.png" alt="シグマクシス" style="--h: 24">
+              <img src="image/logos/northsand.png" alt="ノースサンド" style="--h: 15">
+              <img src="image/logos/fpt.png" alt="FPTコンサルティングジャパン" style="--h: 33">
+              <!-- 無限ループ用の複製 -->
+              <img src="image/logos/mckinsey.png" alt="" aria-hidden="true" style="--h: 26">
+              <img src="image/logos/bcg.png" alt="" aria-hidden="true" style="--h: 23">
+              <img src="image/logos/accenture.png" alt="" aria-hidden="true" style="--h: 24">
+              <img src="image/logos/kearney.png" alt="" aria-hidden="true" style="--h: 17">
+              <img src="image/logos/deloitte.png" alt="" aria-hidden="true" style="--h: 19">
+              <img src="image/logos/pwc.png" alt="" aria-hidden="true" style="--h: 30">
+              <img src="image/logos/kpmg.png" alt="" aria-hidden="true" style="--h: 27">
+              <img src="image/logos/ey.png" alt="" aria-hidden="true" style="--h: 34">
+              <img src="image/logos/baycurrent.png" alt="" aria-hidden="true" style="--h: 23">
+              <img src="image/logos/sigmaxyz.png" alt="" aria-hidden="true" style="--h: 24">
+              <img src="image/logos/northsand.png" alt="" aria-hidden="true" style="--h: 15">
+              <img src="image/logos/fpt.png" alt="" aria-hidden="true" style="--h: 33">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === DEMO（LIVE BUILD：訪問1回の再現） === -->
+    <section class="lp-demo-section" id="demo">
+      <div class="lp-demo-section__inner">
+        <span class="lp-section-label lp-animate">LIVE BUILD</span>
+        <h2 class="section-title lp-animate">打ち合わせの最中に、<br class="sp-only">ツールが生まれる</h2>
+        <div class="lp-demo-section__grid">
+          <ul class="lp-demo-section__timeline lp-animate">
+            <li class="lp-demo-section__tl-item">
+              <span class="lp-demo-section__tl-time">10:00</span>
+              <h3 class="lp-demo-section__tl-title">現場ヒアリング</h3>
+              <p class="lp-demo-section__tl-text">業務の流れと「困った」を現場で直接伺います。</p>
+            </li>
+            <li class="lp-demo-section__tl-item">
+              <span class="lp-demo-section__tl-time">10:30</span>
+              <h3 class="lp-demo-section__tl-title">課題をひとつ選ぶ</h3>
+              <p class="lp-demo-section__tl-text">コンサルの目で業務を整理し、早く解けて効果の大きい課題を選びます。</p>
+            </li>
+            <li class="lp-demo-section__tl-item">
+              <span class="lp-demo-section__tl-time">11:00</span>
+              <h3 class="lp-demo-section__tl-title">その場で試作</h3>
+              <p class="lp-demo-section__tl-text">バイブコーディングで、隣の席で動くものをつくります。</p>
+            </li>
+            <li class="lp-demo-section__tl-item">
+              <span class="lp-demo-section__tl-time">11:40</span>
+              <h3 class="lp-demo-section__tl-title">デモ＆すり合わせ</h3>
+              <p class="lp-demo-section__tl-text">触っていただき、その場で微調整。完成版は<span class="nobr">後日お渡しします。</span></p>
+            </li>
+          </ul>
+          <div class="lp-demo-section__window lp-animate">
+            <div class="lp-demo-section__window-bar">
+              <span class="lp-demo-section__window-dot"></span>
+              <span class="lp-demo-section__window-dot"></span>
+              <span class="lp-demo-section__window-dot"></span>
+              <span class="lp-demo-section__window-title">経理担当様と現場での会話</span>
+            </div>
+            <ul class="lp-demo-section__chat lp-animate">
+              <li class="lp-demo-section__msg lp-demo-section__msg--customer" style="--i: 0">
+                <span class="lp-demo-section__msg-role">お客様<time class="lp-demo-section__msg-time">11:00</time></span>
+                毎月の請求書づくりに、<span class="nobr">丸2日</span>かかっていて…。
+              </li>
+              <li class="lp-demo-section__msg lp-demo-section__msg--engineer" style="--i: 1">
+                <span class="lp-demo-section__msg-role">エンジニア/コンサル<time class="lp-demo-section__msg-time">11:01</time></span>
+                販売データはこのExcelですね。では今から組んでみます。
+              </li>
+              <li class="lp-demo-section__msg lp-demo-section__msg--terminal" style="--i: 2">
+                <span class="lp-demo-section__msg-role">AIで試作中<time class="lp-demo-section__msg-time">11:01〜11:39</time></span>
+                ▸ 請求書作成ツールを試作中…<span class="lp-demo-section__caret"></span><br>
+                <span class="done">✓ 試作完了（所要38分）</span>
+              </li>
+              <li class="lp-demo-section__msg lp-demo-section__msg--engineer" style="--i: 3">
+                <span class="lp-demo-section__msg-role">エンジニア/コンサル<time class="lp-demo-section__msg-time">11:39</time></span>
+                ここにExcelを置くと請求書PDFが一括で出ます。触ってみてください。
+              </li>
+              <li class="lp-demo-section__msg lp-demo-section__msg--customer" style="--i: 4">
+                <span class="lp-demo-section__msg-role">お客様<time class="lp-demo-section__msg-time">11:40</time></span>
+                えっ、もうできたんですか。
+              </li>
+            </ul>
+            <p class="lp-demo-section__window-note">ここまでが<strong>無料AIコンサル（2回）の範囲</strong>。完成版は<span class="nobr">後日お渡しします。</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === IDENTITY（このサービスの正体＝FDE+C） === -->
+    <section class="lp-fde-section" id="fde">
+      <div class="lp-fde-section__inner">
+        <span class="lp-section-label lp-animate">IDENTITY</span>
+        <h2 class="section-title lp-animate">このサービスの正体は、<br class="sp-only">「<span class="nobr">FDE+C</span>」</h2>
+        <div class="lp-fde-section__grid">
+          <div class="lp-fde-section__card lp-animate">
+            <span class="lp-fde-section__letter">F</span>
+            <span class="lp-fde-section__en">FORWARD</span>
+            <h3 class="lp-fde-section__ja">最前線へ</h3>
+            <p class="lp-fde-section__text">会議室で提案して終わりにせず、現場にエンジニア自身が出向きます。</p>
+          </div>
+          <div class="lp-fde-section__card lp-animate">
+            <span class="lp-fde-section__letter">D</span>
+            <span class="lp-fde-section__en">DEPLOYED</span>
+            <h3 class="lp-fde-section__ja">隣に配備される</h3>
+            <p class="lp-fde-section__text">チームの一員として<span class="nobr">隣の席</span>に座り、同じ画面を見ながら働きます。</p>
+          </div>
+          <div class="lp-fde-section__card lp-animate">
+            <span class="lp-fde-section__letter">E</span>
+            <span class="lp-fde-section__en">ENGINEER</span>
+            <h3 class="lp-fde-section__ja">その場で解く</h3>
+            <p class="lp-fde-section__text">課題を持ち帰らず、動くツールを<span class="nobr">その場でつくり</span>ます。</p>
+          </div>
+          <div class="lp-fde-section__card lp-fde-section__card--plus lp-animate">
+            <span class="lp-fde-section__letter">+C</span>
+            <span class="lp-fde-section__en">CONSULTING</span>
+            <h3 class="lp-fde-section__ja">相談にも乗る</h3>
+            <p class="lp-fde-section__text">つくるだけでなく、業務や経営の相談にも乗ります。</p>
+          </div>
+        </div>
+        <p class="lp-fde-section__punch lp-animate">提案書を書く人ではなく、<strong class="nobr">“その場で解決する人”</strong>を隣に。<br class="pc-only">それが<span class="nobr">FDE+C</span>。まずは<strong>2回、無料で</strong>お試しください。</p>
+      </div>
+    </section>
+
+    <!-- === PRICE === -->
+    <section class="lp-price-section" id="price">
+      <div class="lp-price-section__inner">
+        <span class="lp-section-label lp-animate">PRICE</span>
+        <h2 class="section-title lp-animate">現場に通う<span class="nobr">AIエンジニア/コンサル</span>を、<br class="sp-only">届く価格で</h2>
+        <div class="lp-price-section__compare">
+          <div class="lp-price-section__col lp-price-section__col--ours lp-animate">
+            <span class="lp-price-section__col-badge">まずはここから</span>
+            <p class="lp-price-section__col-name">無料AIコンサル</p>
+            <p class="lp-price-section__col-price">0円<small>／2回</small></p>
+            <p class="lp-price-section__col-desc">課題の洗い出しから<span class="nobr">その場での試作</span>まで。効果を見てからご判断ください。</p>
+            <span class="lp-price-section__col-impact">契約は不要です</span>
+          </div>
+          <div class="lp-price-section__col lp-animate">
+            <p class="lp-price-section__col-name">週1回訪問プラン</p>
+            <p class="lp-price-section__col-price">10万円<small>／月（税別）</small></p>
+            <p class="lp-price-section__col-desc lp-price-section__col-desc--pc">ツールの開発・導入・レクチャーと業務相談。まずはこのペースから。</p>
+          </div>
+          <div class="lp-price-section__col lp-animate">
+            <p class="lp-price-section__col-name">週2回訪問プラン</p>
+            <p class="lp-price-section__col-price">20万円<small>／月（税別）</small></p>
+            <p class="lp-price-section__col-desc lp-price-section__col-desc--pc">スピード重視の企業さまに。複数の課題を並行して解決します。</p>
+          </div>
+        </div>
+        <p class="lp-price-section__note">※ 月額には、現場でのAIコンサル稼働に加え、持ち帰ってツールを最終化する作業稼働も含まれます。</p>
+        <div class="lp-price-section__cta lp-animate">
+          <a href="https://timerex.net/s/kiyokawa.0712_fd05/9671619e" target="_blank" rel="noopener" class="lp-cta-btn">無料AIコンサルを予約する</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- === MEMBERS（担当メンバー紹介・横スクロール） === -->
+    <section class="lp-members-section" id="members">
+      <div class="lp-members-section__inner">
+        <span class="lp-section-label lp-animate">MEMBERS</span>
+        <h2 class="section-title lp-animate">どんなプロが、<br class="sp-only">現場に来るのか</h2>
+      </div>
+      <div class="lp-members-section__scroller lp-animate">
+        <div class="lp-members-section__track" id="lp-members-track">
+          <div class="lp-members-section__card">
+            <div class="lp-members-section__photo-wrap">
+              <img src="image/ceo-kiyokawa.jpg" alt="清川 勇樹" class="lp-members-section__photo lp-members-section__photo--kiyokawa">
+            </div>
+            <div class="lp-members-section__body">
+              <p class="lp-members-section__role">代表取締役 CEO</p>
+              <p class="lp-members-section__name">清川 勇樹</p>
+              <p class="lp-members-section__bio">アクセンチュア出身。自らも<span class="nobr">経営者として</span>年間売上成長200%を牽引。営業・経理の業務をAI活用で自動化し、成果を最大化。</p>
+            </div>
+          </div>
+          <div class="lp-members-section__card">
+            <div class="lp-members-section__photo-wrap">
+              <img src="image/Kusano.JPG" alt="草野 諒" class="lp-members-section__photo">
+            </div>
+            <div class="lp-members-section__body">
+              <p class="lp-members-section__role">取締役 COO</p>
+              <p class="lp-members-section__name">草野 諒</p>
+              <p class="lp-members-section__bio">シグマクシス出身。受注から契約までの業務を自動化するAI駆動システムを、複数の企業に導入。</p>
+            </div>
+          </div>
+          <div class="lp-members-section__card">
+            <div class="lp-members-section__photo-wrap">
+              <img src="image/Nitta_写真.jpeg" alt="新田 義矩" class="lp-members-section__photo lp-members-section__photo--nitta">
+            </div>
+            <div class="lp-members-section__body">
+              <p class="lp-members-section__role">取締役 CHRO</p>
+              <p class="lp-members-section__name">新田 義矩</p>
+              <p class="lp-members-section__bio">アクセンチュア出身。採用・労務・評価などの人事業務をAIで効率化し、管理部門の省力化を実現。</p>
+            </div>
+          </div>
+          <div class="lp-members-section__card">
+            <div class="lp-members-section__photo-wrap">
+              <img src="image/Yamazaki.png" alt="山崎 優介" class="lp-members-section__photo">
+            </div>
+            <div class="lp-members-section__body">
+              <p class="lp-members-section__role">マネージャー</p>
+              <p class="lp-members-section__name">山崎 優介</p>
+              <p class="lp-members-section__bio">FPTコンサルティングジャパン出身。大規模システム導入のPMOとして計画策定から進捗管理まで支援。議事録作成や進捗報告にAIを活用。</p>
+            </div>
+          </div>
+          <div class="lp-members-section__card">
+            <div class="lp-members-section__photo-wrap">
+              <img src="image/Takao.JPG" alt="高尾 弘輝" class="lp-members-section__photo">
+            </div>
+            <div class="lp-members-section__body">
+              <p class="lp-members-section__role">シニアコンサルタント</p>
+              <p class="lp-members-section__name">高尾 弘輝</p>
+              <p class="lp-members-section__bio">アクセンチュア出身。基幹システムの<span class="nobr">刷新</span>・SAP導入を要件定義から安定稼働まで支援。要件整理やテスト設計にAIを活用。</p>
+            </div>
+          </div>
+          <div class="lp-members-section__card">
+            <div class="lp-members-section__photo-wrap">
+              <img src="image/Sato.png" alt="佐藤 豊" class="lp-members-section__photo">
+            </div>
+            <div class="lp-members-section__body">
+              <p class="lp-members-section__role">シニアコンサルタント</p>
+              <p class="lp-members-section__name">佐藤 豊</p>
+              <p class="lp-members-section__bio">ノースサンド出身。大手金融の経理業務改革、大手航空の基幹システム刷新PMOを支援。マニュアル作成やデータ集計にAIを活用。</p>
+            </div>
+          </div>
+          <div class="lp-members-section__card">
+            <div class="lp-members-section__photo-wrap">
+              <span class="lp-members-section__photo-initials">M.K</span>
+            </div>
+            <div class="lp-members-section__body">
+              <p class="lp-members-section__role">コンサルタント</p>
+              <p class="lp-members-section__name">M.K</p>
+              <p class="lp-members-section__bio">MBB（戦略系トップファーム）出身。全社戦略の策定から事業再生までリード。AI駆動の営業高度化システムを構築。</p>
+            </div>
+          </div>
+        </div>
+        <p class="lp-members-section__note">※ 掲載は一例（一部イニシャル）。課題・業界に合わせて担当者をご提案します。</p>
+      </div>
+    </section>
+
+    <!-- === TOOLS（つくれるツールの例） === -->
+    <section class="lp-usecase-section" id="tools">
+      <div class="lp-usecase-section__inner">
+        <span class="lp-section-label lp-animate">TOOLS</span>
+        <h2 class="section-title lp-animate">例えば、こんなツールを<br class="sp-only">つくれます</h2>
+        <div class="lp-usecase-section__grid">
+          <div class="lp-usecase-section__item lp-animate">
+            <h3 class="lp-usecase-section__item-title">見積書・請求書づくりの自動化</h3>
+            <p class="lp-usecase-section__item-text">ExcelのデータからPDFを一括生成。「丸2日仕事」がボタン1つに。</p>
+          </div>
+          <div class="lp-usecase-section__item lp-animate">
+            <h3 class="lp-usecase-section__item-title">転記・集計作業の自動化</h3>
+            <p class="lp-usecase-section__item-text">コピペや二重入力をなくし、集計表が自動でできる状態に。</p>
+          </div>
+          <div class="lp-usecase-section__item lp-animate">
+            <h3 class="lp-usecase-section__item-title">問い合わせ対応・社内FAQボット</h3>
+            <p class="lp-usecase-section__item-text">マニュアルをAIに学ばせ、<span class="nobr">よくある質問</span>の一次対応を任せます。</p>
+          </div>
+          <div class="lp-usecase-section__item lp-animate">
+            <h3 class="lp-usecase-section__item-title">売上・案件の見える化ダッシュボード</h3>
+            <p class="lp-usecase-section__item-text">バラバラのExcelを1画面に集約。経営判断に使う数字が毎朝そろいます。</p>
+          </div>
+          <div class="lp-usecase-section__item lp-animate">
+            <h3 class="lp-usecase-section__item-title">AIの社内活用レクチャー</h3>
+            <p class="lp-usecase-section__item-text">操作画面を見せながら、明日から使えるAIの頼み方をお教えします。</p>
+          </div>
+        </div>
+        <p class="lp-usecase-section__kt lp-animate"><strong>ツールは、渡して終わりではありません。</strong><br class="pc-only">使い方・直し方まで隣でお伝えし、貴社だけで解決できる状態を目指します。</p>
+      </div>
+    </section>
+
+    <!-- === FAQ === -->
+    <section class="lp-faq-section" id="faq">
+      <div class="lp-faq-section__inner">
+        <span class="lp-section-label lp-animate">FAQ</span>
+        <h2 class="section-title lp-animate">よくあるご質問</h2>
+        <div class="lp-faq-section__list">
+          <details class="lp-faq-section__item lp-animate">
+            <summary class="lp-faq-section__q">本当に2回無料ですか？契約の義務は？</summary>
+            <p class="lp-faq-section__a">はい、費用は一切かかりません。効果を確かめてからご判断ください。契約は不要で、無理な営業もしません。</p>
+          </details>
+          <details class="lp-faq-section__item lp-animate">
+            <summary class="lp-faq-section__q">ITに詳しい社員がいなくても大丈夫ですか？</summary>
+            <p class="lp-faq-section__a">はい。専門用語を使わず、画面を見せながら進めます。「詳しい人がいない」企業さまにこそ向いています。</p>
+          </details>
+          <details class="lp-faq-section__item lp-animate">
+            <summary class="lp-faq-section__q">どんなツールでもつくれますか？</summary>
+            <p class="lp-faq-section__a">業務の自動化・効率化・見える化が得意です。基幹システムの<span class="nobr">全面刷新</span>など大規模開発は本サービス対象外ですが、別途提案させて頂きます。</p>
+          </details>
+          <details class="lp-faq-section__item lp-animate">
+            <summary class="lp-faq-section__q">社内データのセキュリティは大丈夫ですか？</summary>
+            <p class="lp-faq-section__a">秘密保持契約（NDA）を締結して、AIに渡してよいデータは事前に取り決め、その範囲でのみ扱います。</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- === BOOKING（無料AIコンサルの予約：TimeRexへ直接） === -->
+    <section class="lp-request-section" id="booking">
+      <div class="lp-request-section__inner">
+        <span class="lp-section-label">FREE CONSULTING</span>
+        <h2 class="section-title">まずは2回、<br class="sp-only">無料のAIコンサルから</h2>
+        <div class="lp-booking__widget">
+          <div class="lp-booking__scale">
+            <!-- Begin TimeRex Widget -->
+            <div id="timerex_calendar" data-url="https://timerex.net/s/kiyokawa.0712_fd05/9671619e"></div>
+
+            <script id="timerex_embed" src="https://asset.timerex.net/js/embed.js"></script>
+
+            <script type="text/javascript">
+              TimerexCalendar({ primary_color: '#00a498', locale: 'ja' });
+            </script>
+            <!-- End TimeRex Widget -->
+          </div>
+          <script>
+            // === TimeRex を画面幅に合わせて縮小表示（スマホの横スクロール対策） ===
+            // カレンダーの週表示が横スクロールなしで収まる幅（BASE）で描画し、
+            // 枠がそれより狭いときは transform: scale で全体を縮める。
+            // iframe の高さは embed.js が随時書き換えるので、監視して枠の高さを追従させる。
+            (function () {
+              var BASE = 460;
+              var wrap = document.querySelector('.lp-booking__scale');
+              var cal = document.getElementById('timerex_calendar');
+              if (!wrap || !cal || !('ResizeObserver' in window)) return;
+
+              function apply() {
+                var w = wrap.clientWidth;
+                var iframe = cal.querySelector('iframe');
+                if (w >= BASE) {
+                  wrap.classList.remove('is-scaled');
+                  wrap.style.height = '';
+                  cal.style.width = '';
+                  cal.style.transform = '';
+                  return;
+                }
+                var s = w / BASE;
+                wrap.classList.add('is-scaled');
+                cal.style.width = BASE + 'px';
+                cal.style.transformOrigin = '0 0';
+                cal.style.transform = 'scale(' + s + ')';
+                var h = iframe ? iframe.offsetHeight : cal.offsetHeight; // transform 前のレイアウト高さ
+                wrap.style.height = Math.ceil(h * s) + 'px';
+              }
+
+              new ResizeObserver(apply).observe(wrap);
+              new MutationObserver(function () {
+                var f = cal.querySelector('iframe');
+                if (f && !f.dataset.lpObserved) {
+                  f.dataset.lpObserved = '1';
+                  new ResizeObserver(apply).observe(f);
+                }
+                apply();
+              }).observe(cal, { childList: true, subtree: true, attributes: true });
+              apply();
+            })();
+          </script>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- === FOOTER === -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img src="image/logo_2619300_print.png" alt="YZ PARTNERS" class="footer__logo">
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-label">
+          <span class="footer__col-label-en">Services</span>
+          <span class="footer__col-label-ja">サービス</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="otameshi-fdec.html">お試しFDE+C</a></li>
+          <li><a href="service-ax.html">AIXコンサルティング</a></li>
+          <li><a href="service-dx.html">DXコンサルティング</a></li>
+          <li><a href="service-saas.html">AI SaaS事業</a></li>
+          <li><a href="service-native.html">AI Native事業</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-label">
+          <span class="footer__col-label-en">About</span>
+          <span class="footer__col-label-ja">会社情報</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="about.html#company">会社概要</a></li>
+          <li><a href="mission.html">ビジョン</a></li>
+          <li><a href="members.html">メンバー紹介</a></li>
+          <li><a href="about.html#message">代表挨拶</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-label">
+          <span class="footer__col-label-en">Works</span>
+          <span class="footer__col-label-ja">事例</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="cases.html">事例一覧</a></li>
+        </ul>
+        <p class="footer__col-label footer__col-label--gap">
+          <span class="footer__col-label-en">News</span>
+          <span class="footer__col-label-ja">ニュース</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="news.html">ニュース一覧</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-label">
+          <span class="footer__col-label-en">Contact</span>
+          <span class="footer__col-label-ja">お問い合わせ</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="index.html#contact">お問い合わせ</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; 2026 YZ PARTNERS Co. Ltd. All rights reserved.</p>
+      <div class="footer__legal">
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">情報セキュリティ基本方針</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // === LP スクロールアニメーション ===
+    (function () {
+      var els = document.querySelectorAll('.lp-animate');
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
+        els.forEach(function (el) { observer.observe(el); });
+      } else {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+      }
+    })();
+  </script>
+  <script>
+    // === メンバー紹介：右→左の自動フロー（ホバー／タッチ中は停止） ===
+    // 初期位置は左端＝代表・清川。ドラッグ・スワイプでの手動操作も可能。
+    (function () {
+      var track = document.getElementById('lp-members-track');
+      if (!track) return;
+
+      // 無限ループ用にカード一式を複製
+      Array.prototype.slice.call(track.children).forEach(function (card) {
+        var clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+      });
+
+      // 複製分を含めた半分の幅でスクロール位置をラップさせる
+      function wrap() {
+        var half = track.scrollWidth / 2;
+        if (track.scrollLeft >= half) track.scrollLeft -= half;
+        else if (track.scrollLeft < 0) track.scrollLeft += half;
+      }
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var paused = false;
+      var SPEED = 0.5; // px/frame ≒ 30px/s
+      (function step() {
+        if (!paused && !reduceMotion) {
+          track.scrollLeft += SPEED;
+          wrap();
+        }
+        requestAnimationFrame(step);
+      })();
+
+      // ホバー／タッチ中は停止
+      track.addEventListener('mouseenter', function () { paused = true; });
+      track.addEventListener('mouseleave', function () { paused = false; });
+      track.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+      track.addEventListener('touchend', function () {
+        setTimeout(function () { paused = false; wrap(); }, 1200);
+      });
+      track.addEventListener('scroll', wrap, { passive: true });
+
+      // PCマウス用ドラッグスクロール
+      var isDown = false;
+      var startX = 0;
+      var startScroll = 0;
+      track.addEventListener('mousedown', function (e) {
+        isDown = true;
+        startX = e.pageX;
+        startScroll = track.scrollLeft;
+        track.classList.add('is-dragging');
+        e.preventDefault();
+      });
+      window.addEventListener('mousemove', function (e) {
+        if (!isDown) return;
+        track.scrollLeft = startScroll - (e.pageX - startX);
+      });
+      window.addEventListener('mouseup', function () {
+        if (!isDown) return;
+        isDown = false;
+        track.classList.remove('is-dragging');
+        wrap();
+      });
+    })();
+  </script>
+  <script>
+    // === FAQ アコーディオン：スムーズ開閉 ===
+    (function () {
+      document.querySelectorAll('.lp-faq-section__item').forEach(function (item) {
+        var summary = item.querySelector('.lp-faq-section__q');
+        var content = item.querySelector('.lp-faq-section__a');
+        if (!summary || !content || !content.animate) return;
+        var animating = false;
+        summary.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (animating) return;
+          var pb = getComputedStyle(content).paddingBottom;
+          if (item.open) {
+            animating = true;
+            var h = content.getBoundingClientRect().height;
+            var anim = content.animate(
+              { height: [h + 'px', '0px'], paddingBottom: [pb, '0px'], opacity: [1, 0] },
+              { duration: 260, easing: 'ease' }
+            );
+            anim.onfinish = function () { item.open = false; animating = false; };
+          } else {
+            item.open = true;
+            animating = true;
+            var h2 = content.getBoundingClientRect().height;
+            var anim2 = content.animate(
+              { height: ['0px', h2 + 'px'], paddingBottom: ['0px', pb], opacity: [0, 1] },
+              { duration: 300, easing: 'ease' }
+            );
+            anim2.onfinish = function () { animating = false; };
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
