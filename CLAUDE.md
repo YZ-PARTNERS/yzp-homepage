@@ -521,7 +521,17 @@ if (contactForm) {
 - **文言の決め事**: 「契約は不要です」（×契約の義務はありません）、FV見出し「業務の困りごとを“その場で”ツールを開発して解決」
 - **注記・サブタイトルは置かない**（ユーザー指示）：「※ 日程調整ページが開きます」等のCTA下の注記、各セクション見出し下の `section-lead` はすべて削除済み。見出し→本文に直結させる
 - **構成**（2026-10-03 改訂）: HERO → LIVE BUILD → IDENTITY（FDE＋Cの正体） → PRICE → MEMBERS → TOOLS → FAQ → BOOKING。PROBLEM / WHY / KNOWLEDGE TRANSFER / FLOW はユーザー指示で廃止。各セクションの `section-lead`（サブタイトル）も LIVE BUILD・IDENTITY では削除済み
-- **CVは資料請求ではなく TimeRex の日程調整へ直接遷移**（`https://timerex.net/s/kiyokawa.0712_fd05/9671619e`、新規タブ）。ヒーロー・PRICE末尾の2箇所がボタン（右下のフローティングCTA（代表写真）は 2026-10-04 にユーザー指示で**撤去**。他LPにはある）。**BOOKINGセクション（`#booking`）はボタンではなく TimeRex のカレンダーを直接埋め込み**（`request-thanks.html` と同じ `embed.js` 方式、`.lp-booking__widget`、inner幅は1000pxに拡張）。資料請求フォーム／`/api/request-document` は使わない（API側の SERVICES 追加も撤回済み。資料PDFも不要）
+- **CV導線（2026-10-13 改修）**: TimeRex直リンクではCVが0件だったため、**「短い申込フォーム → サンクスページでTimeRex予約」**に変更
+  - LPのCTA（ヒーロー `#hero-cta`・PRICE末尾）は `#apply` へのページ内リンク、文言「無料AIコンサルを申し込む」。各ボタン下に補足3点（初回30分・オンライン可／準備物不要／2回目以降の営業なし）を `.lp-cta-notes`（PC1行・スマホ縦積み）
+  - ヒーローのバッジ直下に対応エリア行 `.lp-hero-section__area`「東京・神奈川・千葉・埼玉に訪問／無料AIコンサルはオンラインでも対応」
+  - 申込フォーム `#apply`（`#lp-apply-form`）: 会社名・お名前・メール（必須）、電話・いま困っている業務 `issue`（任意）、同意チェック（必須）。HTML5バリデーション（`novalidate` なし）。送信先は **`/api/request-document`**（hidden `service="お試しFDE+C"`）→ 成功時 `otameshi-fdec-thanks.html` へ。**プライバシーポリシーのリンク先は未定（`href="#"`、TODOコメントあり）**
+  - API側: `SERVICES['お試しFDE+C']`（`kind: 'apply'`、資料添付なし、件名「【お試しFDE+C】無料AIコンサルのお申し込みを受け付けました」）。自動返信は日程調整リンク中心の文面、社内通知に `issue` 行を追加。Resend のドメイン認証・`RESEND_API_KEY` が未設定だと送信エラーになる（`api/README.md`）
+  - **スマホ固定フッターCTA** `.lp-sticky-bar`（768px以下）: 「無料AIコンサルを申し込む」（`#apply`）＋「電話する」（`tel:08067272844`）。ヒーローCTAが画面上に消えたら表示（IntersectionObserver）、表示中は `body.has-sticky-bar` で下余白76px
+  - CTAクリック計測: `.js-cta-apply` → `cta_apply_click`、`.js-cta-tel` → `cta_tel_click` を gtag で送信（GA4未導入のためレポートで見るには GA4 の config 追加が必要）
+  - FAQ末尾に「対応エリア」「契約終了後もツールは使えるか」を追加（6問）
+  - **LPからTimeRexカレンダーと日程調整完了コンバージョンは撤去**し、サンクスページへ移設
+- **サンクスページ `otameshi-fdec-thanks.html`**（noindex, nofollow）: 注意バナー → お礼 → 初回30分で伝えること3点 → 代表紹介（`image/ceo-kiyokawa.jpg`） → TimeRex埋め込み（`embed.js`、スマホは幅460px基準の縮小表示＋`max-height: 80vh` 枠内スクロール） → 電話案内（080-6727-2844、**受付時間「平日 9:00〜18:00」は仮置き**）。計測: ページ到達＝フォーム送信コンバージョン（`THANKS_CONVERSION_SEND_TO` ＝ `AW-18240298925/RnTCCJKJgpsdEK2_0_lD`、Google広告「お試しFDE+C フォーム送信」。2026-10-13 設定済み）。**日程調整完了のコンバージョン（`m-W0CNPLtpEdEK2_0_lD`）はユーザー指示で廃止**（コードから削除済み。Google広告側のアクション「お試しFDE+C 日程調整完了」も不要）
+- 旧来の TimeRex直リンク方式は廃止。以前はヒーロー・PRICE末尾のボタンが新規タブで TimeRex を開き、BOOKINGセクションにカレンダーを直接埋め込んでいた
 - **FV**: `min-height: 100svh` でファーストビューだけが画面に収まる（1280×800で検証）。**要素の種類と色数を絞る**方針（ユーザー指摘「情報が忙しい」）：バッジはピルではなく素の補足色テキスト、「by YZ PARTNERS」も補足色、見出しの強調語は色のみ変えてサイズは揃える、売りの5項目はカードではなく上下罫線で挟んだ1行のスペック表示（768px以上で縦罫線区切り）。ミントを使うのはブランド名末尾・見出しの一語・CTAのみ
 - 長文の説明は置かない方針（読まれない）。「なぜこの価格か」はユーザー指示で**削除**。「渡して終わりにしない」は TOOLS 末尾に目立たせない1段落（`.lp-usecase-section__kt`）として文章で記載
 - **固有セクション**:

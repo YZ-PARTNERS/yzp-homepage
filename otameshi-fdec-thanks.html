@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お申し込みありがとうございます｜お試しFDE+C by YZ PARTNERS</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lp-shared.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18240298925"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-18240298925');
+  </script>
+  <!-- Google広告コンバージョン：フォーム送信（このページ到達）
+       Google広告「お試しFDE+C フォーム送信」のイベントスニペット（2026-10-13 発行）の
+       send_to をそのまま設定済み。ラベルを変える場合は文字列ごと貼り替える
+       （値に CONVERSION_LABEL を含む＝未設定のときは送信しないガードつき） -->
+  <script>
+    var THANKS_CONVERSION_SEND_TO = 'AW-18240298925/RnTCCJKJgpsdEK2_0_lD';
+    if (THANKS_CONVERSION_SEND_TO.indexOf('CONVERSION_LABEL') === -1) {
+      gtag('event', 'conversion', { 'send_to': THANKS_CONVERSION_SEND_TO });
+    }
+  </script>
+  <style>
+    /* ============================================================
+       otameshi-fdec-thanks.html 固有スタイル
+       共通部分は lp-shared.css（.lp-thanks-section__*）を使用。
+       ============================================================ */
+    /* 折り返し：単語・文節の途中で行が分かれないようにする（LPと同じ） */
+    .lpw-body p,
+    .lpw-body li,
+    .lpw-body h1,
+    .lpw-body h2 {
+      word-break: auto-phrase;
+      text-wrap: pretty;
+    }
+
+    .lpw-body .lp-thanks-section__title,
+    .lpw-body .lp-thanks__h2 {
+      text-wrap: balance;
+    }
+
+    .lp-thanks-section {
+      padding-top: 120px;
+    }
+
+    .lp-thanks-section__inner {
+      max-width: 760px;
+    }
+
+    /* 1. 注意バナー */
+    .lp-thanks__notice {
+      margin: 0 auto 36px;
+      padding: 18px 20px;
+      background-color: rgba(0, 200, 150, 0.08);
+      border: 1px solid rgba(0, 200, 150, 0.4);
+      border-radius: var(--radius);
+    }
+
+    .lp-thanks__notice-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      color: var(--color-accent-text);
+      margin-bottom: 4px;
+    }
+
+    .lp-thanks__notice-text {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-heading);
+    }
+
+    .lp-thanks-section__text {
+      margin-bottom: 40px;
+    }
+
+    /* 3. 初回30分で伝えること */
+    .lp-thanks__h2 {
+      font-weight: 700;
+      font-size: clamp(1.05rem, 3.2vw, 1.2rem);
+      letter-spacing: 0.06em;
+      line-height: 1.6;
+      color: var(--color-heading);
+      margin-bottom: 18px;
+    }
+
+    .lp-thanks__checks {
+      list-style: none;
+      max-width: 560px;
+      margin: 0 auto 44px;
+      text-align: left;
+      display: grid;
+      gap: 10px;
+    }
+
+    .lp-thanks__checks li {
+      position: relative;
+      padding: 12px 16px 12px 44px;
+      background-color: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--color-text);
+    }
+
+    .lp-thanks__checks li::before {
+      content: '✓';
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      font-weight: 700;
+      color: var(--color-accent-text);
+    }
+
+    /* 4. 代表の紹介 */
+    .lp-thanks__ceo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      max-width: 560px;
+      margin: 0 auto 48px;
+      padding: 22px 24px;
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      text-align: left;
+    }
+
+    .lp-thanks__ceo-photo {
+      flex: none;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid var(--color-border);
+    }
+
+    .lp-thanks__ceo-role {
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+    }
+
+    .lp-thanks__ceo-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-heading);
+      margin: 2px 0 6px;
+    }
+
+    .lp-thanks__ceo-text {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--color-text);
+    }
+
+    /* 5. 日程調整 */
+    .lp-thanks__booking-note {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+    }
+
+    /* TimeRex 縮小表示用のラッパー（高さはJSが追従させる） */
+    .lp-booking__scale {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 6. 電話案内 */
+    .lp-thanks__tel {
+      max-width: 560px;
+      margin: 44px auto 0;
+      padding: 22px 20px;
+      background-color: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+    }
+
+    .lp-thanks__tel-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--color-heading);
+      margin-bottom: 8px;
+    }
+
+    .lp-thanks__tel-number {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.06em;
+      color: var(--color-accent-text);
+      text-decoration: none;
+    }
+
+    .lp-thanks__tel-hours {
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+
+    /* === MOBILE === */
+    @media (max-width: 767px) {
+      .lp-thanks-section {
+        padding: 100px 20px 56px;
+      }
+
+      .lp-thanks__notice {
+        margin-bottom: 28px;
+        padding: 14px 16px;
+      }
+
+      .lp-thanks-section__text {
+        margin-bottom: 32px;
+      }
+
+      .lp-thanks__checks {
+        margin-bottom: 32px;
+      }
+
+      .lp-thanks__ceo {
+        gap: 14px;
+        padding: 18px 16px;
+        margin-bottom: 36px;
+      }
+
+      .lp-thanks__ceo-photo {
+        width: 68px;
+        height: 68px;
+      }
+
+      /* カレンダーは画面幅いっぱいに広げ、枠内スクロールで縦長を防ぐ */
+      .lp-thanks-section__widget {
+        margin: 0 -20px;
+        max-height: 80vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        border-left: none;
+        border-right: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .lp-thanks__tel {
+        margin-top: 32px;
+      }
+    }
+  </style>
+</head>
+<body class="lpw-body">
+
+  <!-- === NAVBAR === -->
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo">
+        <img src="image/logo_2619300_print.png" alt="YZ PARTNERS" class="navbar__logo-img">
+      </a>
+      <button class="navbar__toggle" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="navbar__nav">
+        <ul class="navbar__list">
+          <li><a href="index.html#services">サービス</a></li>
+          <li><a href="otameshi-fdec.html">お試しFDE+C</a></li>
+          <li><a href="index.html#results">実績</a></li>
+          <li><a href="index.html#cases">事例</a></li>
+          <li><a href="index.html#about">私たちについて</a></li>
+          <li><a href="index.html#news">ニュース</a></li>
+          <li><a href="index.html#contact">お問い合わせ</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- === THANKS === -->
+    <section class="lp-thanks-section">
+      <div class="lp-thanks-section__inner">
+
+        <!-- 1. 注意バナー -->
+        <div class="lp-thanks__notice" role="status">
+          <p class="lp-thanks__notice-title">ご案内がございます</p>
+          <p class="lp-thanks__notice-text">このページはまだ閉じないでください</p>
+        </div>
+
+        <!-- 2. お礼 -->
+        <span class="lp-section-label">THANK YOU</span>
+        <h1 class="lp-thanks-section__title">お申し込み<br class="sp-only">ありがとうございます</h1>
+        <p class="lp-thanks-section__text">ご入力いただいたメールアドレスに、確認メールをお送りしました。</p>
+
+        <!-- 3. 初回30分で伝えること -->
+        <h2 class="lp-thanks__h2">初回30分・オンラインで、<br class="sp-only">こんなことをお伝えします</h2>
+        <ul class="lp-thanks__checks">
+          <li>貴社の業務の中で、AIやツールで楽になりそうな箇所の目星</li>
+          <li>2回の無料コンサルで「その場で試作」できそうな課題の選定</li>
+          <li>無料コンサルの進め方と、2回目以降のご説明（無理な営業はしません）</li>
+        </ul>
+
+        <!-- 4. 代表の紹介 -->
+        <div class="lp-thanks__ceo">
+          <img src="image/ceo-kiyokawa.jpg" alt="清川 勇樹" class="lp-thanks__ceo-photo">
+          <div>
+            <p class="lp-thanks__ceo-role">代表取締役 CEO</p>
+            <p class="lp-thanks__ceo-name">清川 勇樹</p>
+            <p class="lp-thanks__ceo-text">アクセンチュア出身。当日は私が直接お話を伺います。専門用語は使いませんので、準備物も不要です。お気軽にお越しください。</p>
+          </div>
+        </div>
+
+        <!-- 5. 日程調整（TimeRex 公式 embed.js で埋め込み） -->
+        <h2 class="lp-thanks-section__booking-title" id="booking">ご都合の良い日時をお選びください</h2>
+        <div class="lp-thanks-section__widget">
+          <div class="lp-booking__scale">
+            <!-- Begin TimeRex Widget -->
+            <div id="timerex_calendar" data-url="https://timerex.net/s/kiyokawa.0712_fd05/9671619e"></div>
+
+            <script id="timerex_embed" src="https://asset.timerex.net/js/embed.js"></script>
+
+            <script type="text/javascript">
+              TimerexCalendar({ primary_color: '#00a498', locale: 'ja' });
+            </script>
+            <!-- End TimeRex Widget -->
+          </div>
+        </div>
+        <p class="lp-thanks__booking-note">今すぐ決められない場合は、後日こちらからご連絡いたします。</p>
+
+        <!-- 6. 電話案内 -->
+        <div class="lp-thanks__tel">
+          <p class="lp-thanks__tel-title">お急ぎの方はお電話でも受け付けています</p>
+          <a href="tel:08067272844" class="lp-thanks__tel-number">080-6727-2844</a>
+          <!-- TODO: 受付時間は仮置き。確定次第差し替える -->
+          <p class="lp-thanks__tel-hours">受付時間：平日 9:00〜18:00</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- === FOOTER === -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <img src="image/logo_2619300_print.png" alt="YZ PARTNERS" class="footer__logo">
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-label">
+          <span class="footer__col-label-en">Services</span>
+          <span class="footer__col-label-ja">サービス</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="otameshi-fdec.html">お試しFDE+C</a></li>
+          <li><a href="service-ax.html">AIXコンサルティング</a></li>
+          <li><a href="service-dx.html">DXコンサルティング</a></li>
+          <li><a href="service-saas.html">AI SaaS事業</a></li>
+          <li><a href="service-native.html">AI Native事業</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-label">
+          <span class="footer__col-label-en">About</span>
+          <span class="footer__col-label-ja">会社情報</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="about.html#company">会社概要</a></li>
+          <li><a href="mission.html">ビジョン</a></li>
+          <li><a href="members.html">メンバー紹介</a></li>
+          <li><a href="about.html#message">代表挨拶</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-label">
+          <span class="footer__col-label-en">Works</span>
+          <span class="footer__col-label-ja">事例</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="cases.html">事例一覧</a></li>
+        </ul>
+        <p class="footer__col-label footer__col-label--gap">
+          <span class="footer__col-label-en">News</span>
+          <span class="footer__col-label-ja">ニュース</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="news.html">ニュース一覧</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <p class="footer__col-label">
+          <span class="footer__col-label-en">Contact</span>
+          <span class="footer__col-label-ja">お問い合わせ</span>
+        </p>
+        <ul class="footer__links">
+          <li><a href="index.html#contact">お問い合わせ</a></li>
+          <li><a href="recruit.html">採用情報</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; 2026 YZ PARTNERS Co. Ltd. All rights reserved.</p>
+      <div class="footer__legal">
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">情報セキュリティ基本方針</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // === TimeRex を画面幅に合わせて縮小表示（スマホの横スクロール対策） ===
+    // カレンダーの週表示が横スクロールなしで収まる幅（BASE）で描画し、
+    // 枠がそれより狭いときは transform: scale で全体を縮める。
+    // iframe の高さは embed.js が随時書き換えるので、監視して枠の高さを追従させる。
+    (function () {
+      var BASE = 460;
+      var wrap = document.querySelector('.lp-booking__scale');
+      var cal = document.getElementById('timerex_calendar');
+      if (!wrap || !cal || !('ResizeObserver' in window)) return;
+
+      function apply() {
+        var w = wrap.clientWidth;
+        var iframe = cal.querySelector('iframe');
+        if (w >= BASE) {
+          wrap.classList.remove('is-scaled');
+          wrap.style.height = '';
+          cal.style.width = '';
+          cal.style.transform = '';
+          return;
+        }
+        var s = w / BASE;
+        wrap.classList.add('is-scaled');
+        cal.style.width = BASE + 'px';
+        cal.style.transformOrigin = '0 0';
+        cal.style.transform = 'scale(' + s + ')';
+        var h = iframe ? iframe.offsetHeight : cal.offsetHeight; // transform 前のレイアウト高さ
+        wrap.style.height = Math.ceil(h * s) + 'px';
+      }
+
+      new ResizeObserver(apply).observe(wrap);
+      new MutationObserver(function () {
+        var f = cal.querySelector('iframe');
+        if (f && !f.dataset.lpObserved) {
+          f.dataset.lpObserved = '1';
+          new ResizeObserver(apply).observe(f);
+        }
+        apply();
+      }).observe(cal, { childList: true, subtree: true, attributes: true });
+      apply();
+    })();
+  </script>
+</body>
+</html>

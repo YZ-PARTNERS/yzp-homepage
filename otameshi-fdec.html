@@ -176,25 +176,113 @@
       margin-top: 30px;
     }
 
-    /* === 予約（TimeRexのカレンダーを直接埋め込み） === */
-    #booking .lp-request-section__inner {
-      max-width: 1000px; /* 共通の640pxではカレンダーが窮屈になるため広げる */
+    /* === HERO：対応エリアの1行（バッジの直下） === */
+    .lp-hero-section__area {
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--color-text-muted);
+      margin: -4px 0 14px;
     }
 
-    /* 縮小表示用のラッパー（高さはJSが追従させる） */
-    .lp-booking__scale {
-      position: relative;
-      overflow: hidden;
+    /* === CTAボタン下の補足3点（PCは1行、スマホは縦積み） === */
+    .lp-cta-notes {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2px 18px;
+      margin: 12px auto 0;
+      font-size: 0.76rem;
+      letter-spacing: 0.02em;
+      color: var(--color-text-muted);
     }
 
-    .lp-booking__widget {
-      margin-top: 36px;
-      background-color: var(--color-bg);
-      border: 1px solid var(--color-border);
+    .lp-cta-notes li::before {
+      content: '✓';
+      margin-right: 5px;
+      font-weight: 700;
+      color: var(--color-accent-text);
+    }
+
+    /* === APPLY（申込フォーム） === */
+    .lp-request-section__textarea {
+      resize: vertical;
+      min-height: 4.2em;
+      line-height: 1.6;
+    }
+
+    .lp-request-section__consent a {
+      color: var(--color-accent-text);
+      text-decoration: underline;
+    }
+
+    .lp-apply__pre-submit {
+      margin: -6px 0 0;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      text-align: center;
+      color: var(--color-text);
+    }
+
+    /* === スマホ用の固定フッターCTA（768px以下、ヒーローCTAが隠れたら表示） === */
+    .lp-sticky-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 90;
+      display: none;
+      gap: 8px;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background-color: rgba(255, 255, 255, 0.96);
+      border-top: 1px solid var(--color-border);
+      box-shadow: 0 -6px 20px rgba(15, 30, 61, 0.08);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .lp-sticky-bar.is-visible {
+      transform: none;
+    }
+
+    .lp-sticky-bar__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 10px 12px;
       border-radius: var(--radius);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-      min-height: 560px;
+      font-weight: 500;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .lp-sticky-bar__btn--apply {
+      flex: 1 1 0;
+      background-color: var(--color-accent);
+      color: #06382B;
+      box-shadow: 0 6px 18px rgba(0, 200, 150, 0.3);
+    }
+
+    .lp-sticky-bar__btn--tel {
+      flex: 0 0 auto;
+      padding: 10px 18px;
+      background-color: var(--color-bg);
+      color: var(--color-accent-text);
+      border: 1px solid var(--color-accent-text);
+    }
+
+    @media (max-width: 768px) {
+      .lp-sticky-bar {
+        display: flex;
+      }
+
+      /* 固定バーがフッター・最終セクションに被らないよう、ページ下部に余白を確保 */
+      body.has-sticky-bar {
+        padding-bottom: 76px;
+      }
     }
 
     /* === DEMO（LIVE BUILD：訪問1回の再現） === */
@@ -843,19 +931,24 @@
         display: none;
       }
 
-      /* --- BOOKING：カレンダーは画面幅いっぱいに広げ（左右の見切れ対策）、
-             枠内スクロールで縦長を防ぐ。
-             ※ overscroll-behavior: contain は「枠の上端で止まりページを上に戻れない」
-                事象を招いたため使わない --- */
-      .lp-booking__widget {
-        margin: 24px -20px 0;
-        max-height: 80vh;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        border-left: none;
-        border-right: none;
-        border-radius: 0;
-        box-shadow: none;
+      /* --- HERO：対応エリア行とCTA補足 --- */
+      .lp-hero-section__area {
+        margin: 0 0 14px;
+        font-size: 0.74rem;
+      }
+
+      .lp-cta-notes {
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        margin-top: 10px;
+      }
+
+      /* --- APPLY --- */
+      .lp-request-section__form {
+        margin-top: 24px;
+        padding: 26px 18px;
+        gap: 16px;
       }
     }
   </style>
@@ -894,6 +987,7 @@
     <section class="lp-hero-section" id="hero">
       <div class="lp-hero-section__inner">
         <p class="lp-hero-section__badge">中小企業向け｜訪問型 AIエンジニア/コンサル</p>
+        <p class="lp-hero-section__area">東京・神奈川・千葉・埼玉に訪問／無料AIコンサルはオンラインでも対応</p>
         <div class="lp-hero-section__brand">
           <p class="lp-hero-section__brand-logo">お試しFDE+C</p>
           <p class="lp-hero-section__brand-sub">by <span class="lp-hero-section__brand-kana">YZ PARTNERS</span></p>
@@ -907,7 +1001,12 @@
           <li style="--d: 3"><strong>月10万円〜</strong><span>週1回訪問・税別</span></li>
           <li style="--d: 4"><strong>使い方まで伝授</strong><span>ゴールは“卒業”</span></li>
         </ul>
-        <a href="https://timerex.net/s/kiyokawa.0712_fd05/9671619e" target="_blank" rel="noopener" class="lp-cta-btn">無料AIコンサルを予約する</a>
+        <a href="#apply" class="lp-cta-btn js-cta-apply" id="hero-cta" data-cta="hero">無料AIコンサルを申し込む</a>
+        <ul class="lp-cta-notes">
+          <li>初回は30分・オンラインでも可</li>
+          <li>準備物は不要です</li>
+          <li>2回目以降の営業は行いません</li>
+        </ul>
         <div class="lp-hero-section__logos">
           <p class="lp-hero-section__logos-label">在籍コンサルタントの出身ファーム</p>
           <div class="lp-logo-marquee">
@@ -1068,7 +1167,12 @@
         </div>
         <p class="lp-price-section__note">※ 月額には、現場でのAIコンサル稼働に加え、持ち帰ってツールを最終化する作業稼働も含まれます。</p>
         <div class="lp-price-section__cta lp-animate">
-          <a href="https://timerex.net/s/kiyokawa.0712_fd05/9671619e" target="_blank" rel="noopener" class="lp-cta-btn">無料AIコンサルを予約する</a>
+          <a href="#apply" class="lp-cta-btn js-cta-apply" data-cta="price">無料AIコンサルを申し込む</a>
+          <ul class="lp-cta-notes">
+            <li>初回は30分・オンラインでも可</li>
+            <li>準備物は不要です</li>
+            <li>2回目以降の営業は行いません</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -1209,91 +1313,66 @@
             <summary class="lp-faq-section__q">社内データのセキュリティは大丈夫ですか？</summary>
             <p class="lp-faq-section__a">秘密保持契約（NDA）を締結して、AIに渡してよいデータは事前に取り決め、その範囲でのみ扱います。</p>
           </details>
+          <details class="lp-faq-section__item lp-animate">
+            <summary class="lp-faq-section__q">対応エリアはどこですか？</summary>
+            <p class="lp-faq-section__a">訪問は東京・神奈川・千葉・埼玉が対象です。無料AIコンサルはオンラインでも実施できますので、エリア外の企業さまもまずはご相談ください。</p>
+          </details>
+          <details class="lp-faq-section__item lp-animate">
+            <summary class="lp-faq-section__q">つくったツールは契約終了後も使えますか？</summary>
+            <p class="lp-faq-section__a">はい。お渡ししたツールは貴社のものとして、契約終了後も自由にお使いいただけます。使い方・直し方もお伝えするので、貴社だけで運用できる状態を目指します。</p>
+          </details>
         </div>
       </div>
     </section>
 
-    <!-- === BOOKING（無料AIコンサルの予約：TimeRexへ直接） === -->
-    <section class="lp-request-section" id="booking">
+    <!-- === APPLY（無料AIコンサルの申込フォーム → 自社API → サンクスページでTimeRex予約） === -->
+    <section class="lp-request-section" id="apply">
       <div class="lp-request-section__inner">
         <span class="lp-section-label">FREE CONSULTING</span>
         <h2 class="section-title">まずは2回、<br class="sp-only">無料のAIコンサルから</h2>
-        <div class="lp-booking__widget">
-          <div class="lp-booking__scale">
-            <!-- Begin TimeRex Widget -->
-            <div id="timerex_calendar" data-url="https://timerex.net/s/kiyokawa.0712_fd05/9671619e"></div>
-
-            <script id="timerex_embed" src="https://asset.timerex.net/js/embed.js"></script>
-
-            <script type="text/javascript">
-              // Google広告コンバージョンの送信先。Google広告の「イベントスニペット」の
-              // send_to の値（AW-18240298925/XXXXXXXXXX の形）を文字列のまま貼る。
-              // ※ 未設定（XXXX を含む）のあいだは送信しない
-              var LP_CONVERSION_SEND_TO = 'AW-18240298925/m-W0CNPLtpEdEK2_0_lD';
-
-              TimerexCalendar({
-                primary_color: '#00a498',
-                locale: 'ja',
-                // 日程調整が完了したときだけコンバージョンを計測（LP閲覧では計上しない）
-                onBookingComplete: function () {
-                  if (LP_CONVERSION_SEND_TO.indexOf('XXXX') !== -1) return;
-                  if (typeof gtag === 'function') {
-                    gtag('event', 'conversion', {
-                      'send_to': LP_CONVERSION_SEND_TO
-                    });
-                  }
-                }
-              });
-            </script>
-            <!-- End TimeRex Widget -->
+        <form class="lp-request-section__form" id="lp-apply-form">
+          <input type="hidden" name="service" value="お試しFDE+C">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="lp-request-section__field">
+            <label class="lp-request-section__label" for="apply-company">会社名<small>必須</small></label>
+            <input class="lp-request-section__input" type="text" id="apply-company" name="company" required autocomplete="organization">
           </div>
-          <script>
-            // === TimeRex を画面幅に合わせて縮小表示（スマホの横スクロール対策） ===
-            // カレンダーの週表示が横スクロールなしで収まる幅（BASE）で描画し、
-            // 枠がそれより狭いときは transform: scale で全体を縮める。
-            // iframe の高さは embed.js が随時書き換えるので、監視して枠の高さを追従させる。
-            (function () {
-              var BASE = 460;
-              var wrap = document.querySelector('.lp-booking__scale');
-              var cal = document.getElementById('timerex_calendar');
-              if (!wrap || !cal || !('ResizeObserver' in window)) return;
-
-              function apply() {
-                var w = wrap.clientWidth;
-                var iframe = cal.querySelector('iframe');
-                if (w >= BASE) {
-                  wrap.classList.remove('is-scaled');
-                  wrap.style.height = '';
-                  cal.style.width = '';
-                  cal.style.transform = '';
-                  return;
-                }
-                var s = w / BASE;
-                wrap.classList.add('is-scaled');
-                cal.style.width = BASE + 'px';
-                cal.style.transformOrigin = '0 0';
-                cal.style.transform = 'scale(' + s + ')';
-                var h = iframe ? iframe.offsetHeight : cal.offsetHeight; // transform 前のレイアウト高さ
-                wrap.style.height = Math.ceil(h * s) + 'px';
-              }
-
-              new ResizeObserver(apply).observe(wrap);
-              new MutationObserver(function () {
-                var f = cal.querySelector('iframe');
-                if (f && !f.dataset.lpObserved) {
-                  f.dataset.lpObserved = '1';
-                  new ResizeObserver(apply).observe(f);
-                }
-                apply();
-              }).observe(cal, { childList: true, subtree: true, attributes: true });
-              apply();
-            })();
-          </script>
-        </div>
+          <div class="lp-request-section__field">
+            <label class="lp-request-section__label" for="apply-name">お名前<small>必須</small></label>
+            <input class="lp-request-section__input" type="text" id="apply-name" name="name" required autocomplete="name">
+          </div>
+          <div class="lp-request-section__field">
+            <label class="lp-request-section__label" for="apply-email">メールアドレス<small>必須</small></label>
+            <input class="lp-request-section__input" type="email" id="apply-email" name="email" required autocomplete="email" placeholder="確認メールをお送りします">
+          </div>
+          <div class="lp-request-section__field">
+            <label class="lp-request-section__label" for="apply-tel">電話番号<small class="opt">任意</small></label>
+            <input class="lp-request-section__input" type="tel" id="apply-tel" name="tel" autocomplete="tel">
+          </div>
+          <div class="lp-request-section__field">
+            <label class="lp-request-section__label" for="apply-issue">いま困っている業務<small class="opt">任意</small></label>
+            <textarea class="lp-request-section__input lp-request-section__textarea" id="apply-issue" name="issue" rows="2" placeholder="例：毎月の請求書づくりに丸2日かかっている"></textarea>
+          </div>
+          <label class="lp-request-section__consent">
+            <input type="checkbox" name="consent" required>
+            <!-- TODO: プライバシーポリシーのURLが決まり次第 href を差し替える -->
+            <span><a href="#" target="_blank" rel="noopener">プライバシーポリシー</a>に同意のうえ送信します。ご入力いただいた情報は、無料AIコンサルのご案内とご連絡の目的にのみ使用します。</span>
+          </label>
+          <p class="lp-apply__pre-submit">送信後、ご都合の良い日時をそのまま選べます。後日こちらからのご連絡も可能です。</p>
+          <div class="lp-request-section__submit-wrap">
+            <button type="submit" class="lp-cta-btn" id="lp-apply-submit">無料AIコンサルを申し込む</button>
+          </div>
+        </form>
       </div>
     </section>
 
   </main>
+
+  <!-- === スマホ用 固定フッターCTA（768px以下） === -->
+  <div class="lp-sticky-bar" id="lp-sticky-bar" aria-hidden="true">
+    <a href="#apply" class="lp-sticky-bar__btn lp-sticky-bar__btn--apply js-cta-apply" data-cta="sticky">無料AIコンサルを申し込む</a>
+    <a href="tel:08067272844" class="lp-sticky-bar__btn lp-sticky-bar__btn--tel js-cta-tel" data-cta="sticky">電話する</a>
+  </div>
 
   <!-- === FOOTER === -->
   <footer class="footer">
@@ -1363,6 +1442,73 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // === 申込フォーム：自社API（/api/request-document）へ送信 → 自動返信メール → サンクスページへ ===
+    // 必須項目はHTML5バリデーション（required / type=email）に任せ、submit はそれを通過したときだけ発火する
+    (function () {
+      var form = document.getElementById('lp-apply-form');
+      if (!form) return;
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var submitBtn = document.getElementById('lp-apply-submit');
+        var originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送信中…';
+        try {
+          var payload = {};
+          new FormData(form).forEach(function (v, k) { payload[k] = v; });
+          var res = await fetch('/api/request-document', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (res.ok) {
+            window.location.href = 'otameshi-fdec-thanks.html';
+          } else {
+            throw new Error('status ' + res.status);
+          }
+        } catch (err) {
+          alert('送信に失敗しました。しばらく経ってから再度お試しください。');
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      });
+    })();
+  </script>
+  <script>
+    // === スマホ用 固定フッターCTA：ヒーローのCTAボタンが画面から上に消えたら表示 ===
+    (function () {
+      var bar = document.getElementById('lp-sticky-bar');
+      var heroCta = document.getElementById('hero-cta');
+      if (!bar || !heroCta || !('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var show = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          bar.classList.toggle('is-visible', show);
+          bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+          document.body.classList.toggle('has-sticky-bar', show);
+        });
+      }, { threshold: 0 });
+      io.observe(heroCta);
+    })();
+  </script>
+  <script>
+    // === CTAクリック計測 ===
+    // gtag はGoogle広告タグ（AW-18240298925）で定義済み。イベントはそのまま送られるが、
+    // GA4 のレポートで見るには <head> に GA4 の gtag('config', 'G-XXXXXXXXXX') を追加する。
+    (function () {
+      function send(name, label) {
+        if (typeof gtag !== 'function') return;
+        gtag('event', name, { 'event_category': 'cta', 'event_label': label });
+      }
+      document.querySelectorAll('.js-cta-apply').forEach(function (el) {
+        el.addEventListener('click', function () { send('cta_apply_click', el.getAttribute('data-cta') || ''); });
+      });
+      document.querySelectorAll('.js-cta-tel').forEach(function (el) {
+        el.addEventListener('click', function () { send('cta_tel_click', el.getAttribute('data-cta') || ''); });
+      });
+    })();
+  </script>
   <script>
     // === LP スクロールアニメーション ===
     (function () {
