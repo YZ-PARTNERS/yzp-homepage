@@ -3508,3 +3508,88 @@ img {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* === POLICY PAGE（プライバシーポリシー・情報セキュリティ基本方針） === */
+.policy-section {
+  padding: 56px 20px 96px;
+  background-color: var(--color-bg);
+}
+
+.policy-section__inner {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  line-height: 2;
+}
+
+.policy-section__inner p {
+  margin-bottom: 16px;
+}
+
+.policy-section__lead {
+  padding-bottom: 16px;
+}
+
+.policy-section__heading {
+  margin: 48px 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-heading);
+  line-height: 1.5;
+}
+
+.policy-section__list {
+  margin: 0 0 16px;
+  padding-left: 1.4em;
+  list-style: disc;
+}
+
+.policy-section__list li {
+  margin-bottom: 6px;
+}
+
+.policy-section__dl {
+  display: grid;
+  grid-template-columns: 5em 1fr;
+  gap: 6px 16px;
+  margin-bottom: 16px;
+  padding: 20px 24px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.policy-section__dl dt {
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.policy-section__inner a {
+  color: var(--color-accent-text);
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+
+.policy-section__sign {
+  margin-top: 56px;
+  text-align: right;
+  color: var(--color-text-muted);
+}
+
+/* フォームの同意文に置くポリシーへのリンク */
+.contact-section__checkbox-label a,
+.policy-link {
+  color: var(--color-accent-text);
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .policy-section {
+    padding: 72px 48px 120px;
+  }
+  .policy-section__inner {
+    font-size: 1rem;
+  }
+}

@@ -524,7 +524,7 @@ if (contactForm) {
 - **CV導線（2026-10-13 改修）**: TimeRex直リンクではCVが0件だったため、**「短い申込フォーム → サンクスページでTimeRex予約」**に変更
   - LPのCTA（ヒーロー `#hero-cta`・PRICE末尾）は `#apply` へのページ内リンク、文言「無料AIコンサルを申し込む」。各ボタン下に補足3点（初回30分・オンライン可／準備物不要／2回目以降の営業なし）を `.lp-cta-notes`（PC1行・スマホ縦積み）
   - ヒーローのバッジ直下に対応エリア行 `.lp-hero-section__area`「東京・神奈川・千葉・埼玉に訪問／無料AIコンサルはオンラインでも対応」
-  - 申込フォーム `#apply`（`#lp-apply-form`）: 会社名・お名前・メール（必須）、電話・いま困っている業務 `issue`（任意）、同意チェック（必須）。HTML5バリデーション（`novalidate` なし）。送信先は **`/api/request-document`**（hidden `service="お試しFDE+C"`）→ 成功時 `otameshi-fdec-thanks.html` へ。**プライバシーポリシーのリンク先は未定（`href="#"`、TODOコメントあり）**
+  - 申込フォーム `#apply`（`#lp-apply-form`）: 会社名・お名前・メール（必須）、電話・いま困っている業務 `issue`（任意）、同意チェック（必須）。HTML5バリデーション（`novalidate` なし）。送信先は **`/api/request-document`**（hidden `service="お試しFDE+C"`）→ 成功時 `otameshi-fdec-thanks.html` へ。プライバシーポリシーのリンク先は `privacy-policy.html`（2026-11-16 作成）
   - API側: `SERVICES['お試しFDE+C']`（`kind: 'apply'`、資料添付なし、件名「【お試しFDE+C】無料AIコンサルのお申し込みを受け付けました」）。自動返信は日程調整リンク中心の文面、社内通知に `issue` 行を追加。Resend のドメイン認証・`RESEND_API_KEY` が未設定だと送信エラーになる（`api/README.md`）
   - **スマホ固定フッターCTA** `.lp-sticky-bar`（768px以下）: 「無料AIコンサルを申し込む」（`#apply`）＋「電話する」（`tel:08067272844`）。ヒーローCTAが画面上に消えたら表示（IntersectionObserver）、表示中は `body.has-sticky-bar` で下余白76px
   - CTAクリック計測: `.js-cta-apply` → `cta_apply_click`、`.js-cta-tel` → `cta_tel_click` を gtag で送信（GA4未導入のためレポートで見るには GA4 の config 追加が必要）
@@ -554,3 +554,13 @@ Resend 経由で2通送る。実装は `api/request-document.js`、設定手順�
 - 稼働には環境変数 `RESEND_API_KEY` と、Resend でのドメイン認証が必要
 - **その他15ページのお問い合わせフォームは従来どおり Formspree のまま**（自動返信なし）
 - Vercel Functions を有効にするため `package.json` を追加している
+
+## プライバシーポリシー・情報セキュリティ基本方針（2026-11-16 セッション）
+
+Google広告の不承認対策として `privacy-policy.html` / `security-policy.html` を新規作成。
+
+- ヘッダー・ナビ・フッターは `about.html` と同じ。本文は `.policy-section`（`style.css` 末尾の `/* === POLICY PAGE === */`）
+- 全ページのフッター `.footer__legal` と、フォームの同意文（「プライバシーポリシーに同意します」等）から両ページへリンク済み。新しいページを作るときも `href="#"` にしないこと
+- 会社情報（住所・代表者・TEL・メール）は `about.html` の会社概要と同じ値。変更時は両方直す
+- 外部サービス（Formspree / Resend / TimeRex / Vercel / Google 広告）を増減したら、プライバシーポリシー 5章・6章を見直す
+- 文面は一般的なひな形ベースの下書き。法務確認は未実施
