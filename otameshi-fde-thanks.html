@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/png" href="favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>お申し込みありがとうございます｜お試しFDE+C by YZ PARTNERS</title>
+  <title>資料請求ありがとうございます｜お試しFDE by YZ PARTNERS</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,7 @@
   </script>
   <style>
     /* ============================================================
-       otameshi-fdec-thanks.html 固有スタイル
+       otameshi-fde-thanks.html 固有スタイル
        共通部分は lp-shared.css（.lp-thanks-section__*）を使用。
        ============================================================ */
     /* 折り返し：単語・文節の途中で行が分かれないようにする（LPと同じ） */
@@ -49,88 +49,63 @@
       text-wrap: balance;
     }
 
+    /* ファーストビューで日程調整の頭が見えるよう、上から全体を詰めている */
     .lp-thanks-section {
-      padding-top: 120px;
+      padding-top: 88px;
     }
 
     .lp-thanks-section__inner {
       max-width: 760px;
     }
 
-    /* 1. 注意バナー */
+    /* 1. 注意バナー：注意マークを上、その下に文言を中央揃えで置く */
     .lp-thanks__notice {
-      margin: 0 auto 36px;
-      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin: 0 auto 18px;
+      padding: 10px 20px 12px;
       background-color: rgba(0, 200, 150, 0.08);
       border: 1px solid rgba(0, 200, 150, 0.4);
       border-radius: var(--radius);
+      text-align: center;
     }
 
-    .lp-thanks__notice-title {
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      color: var(--color-accent-text);
-      margin-bottom: 4px;
+    .lp-thanks__notice-icon {
+      flex: none;
+      display: block;
+      width: 30px;
+      height: 30px;
     }
 
     .lp-thanks__notice-text {
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: var(--color-heading);
+    }
+
+    /* 2. お礼 */
+    .lp-thanks-section .lp-section-label {
+      margin-bottom: 6px;
+    }
+
+    .lp-thanks-section__title {
+      font-size: clamp(1.3rem, 4.4vw, 1.7rem);
+      margin-bottom: 8px;
     }
 
     .lp-thanks-section__text {
-      margin-bottom: 40px;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
     }
 
-    /* 3. 初回30分で伝えること */
-    .lp-thanks__h2 {
-      font-weight: 700;
-      font-size: clamp(1.05rem, 3.2vw, 1.2rem);
-      letter-spacing: 0.06em;
-      line-height: 1.6;
-      color: var(--color-heading);
-      margin-bottom: 18px;
-    }
-
-    .lp-thanks__checks {
-      list-style: none;
-      max-width: 560px;
-      margin: 0 auto 44px;
-      text-align: left;
-      display: grid;
-      gap: 10px;
-    }
-
-    .lp-thanks__checks li {
-      position: relative;
-      padding: 12px 16px 12px 44px;
-      background-color: var(--color-bg-alt);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      font-size: 0.92rem;
-      line-height: 1.7;
-      color: var(--color-text);
-    }
-
-    .lp-thanks__checks li::before {
-      content: '✓';
-      position: absolute;
-      left: 16px;
-      top: 12px;
-      font-weight: 700;
-      color: var(--color-accent-text);
-    }
-
-    /* 4. 代表の紹介 */
-    .lp-thanks__ceo {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      max-width: 560px;
-      margin: 0 auto 48px;
-      padding: 22px 24px;
+    /* 3. 代表の紹介＋初回30分で伝えること（1枚のカードにまとめる） */
+    .lp-thanks__card {
+      max-width: 640px;
+      margin: 0 auto 22px;
+      padding: 16px 22px 18px;
       background-color: var(--color-bg);
       border: 1px solid var(--color-border);
       border-radius: var(--radius);
@@ -138,10 +113,54 @@
       text-align: left;
     }
 
+    .lp-thanks__ceo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lp-thanks__agenda {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .lp-thanks__h2 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+      color: var(--color-heading);
+      margin-bottom: 6px;
+    }
+
+    .lp-thanks__checks {
+      list-style: none;
+      display: grid;
+      gap: 2px;
+    }
+
+    .lp-thanks__checks li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 0.86rem;
+      line-height: 1.7;
+      color: var(--color-text);
+    }
+
+    .lp-thanks__checks li::before {
+      content: '✓';
+      position: absolute;
+      left: 2px;
+      top: 0;
+      font-weight: 700;
+      color: var(--color-accent-text);
+    }
+
     .lp-thanks__ceo-photo {
       flex: none;
-      width: 84px;
-      height: 84px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       object-fit: cover;
       object-position: center top;
@@ -149,21 +168,21 @@
     }
 
     .lp-thanks__ceo-role {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       letter-spacing: 0.08em;
       color: var(--color-text-muted);
     }
 
     .lp-thanks__ceo-name {
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--color-heading);
-      margin: 2px 0 6px;
+      margin: 0 0 2px;
     }
 
     .lp-thanks__ceo-text {
-      font-size: 0.88rem;
-      line-height: 1.8;
+      font-size: 0.84rem;
+      line-height: 1.7;
       color: var(--color-text);
     }
 
@@ -215,31 +234,97 @@
     /* === MOBILE === */
     @media (max-width: 767px) {
       .lp-thanks-section {
-        padding: 100px 20px 56px;
+        padding: 80px 20px 48px;
       }
 
       .lp-thanks__notice {
-        margin-bottom: 28px;
-        padding: 14px 16px;
+        gap: 3px;
+        margin-bottom: 16px;
+        padding: 8px 12px 10px;
+      }
+
+      .lp-thanks__notice-icon {
+        width: 26px;
+        height: 26px;
+      }
+
+      .lp-thanks__notice-text {
+        font-size: 0.92rem;
+      }
+
+      /* スマホは日程調整を1画面目に入れるため「THANK YOU」の小見出しを省く */
+      .lp-thanks-section .lp-section-label {
+        display: none;
+      }
+
+      .lp-thanks-section__title {
+        font-size: 1.22rem;
+        letter-spacing: 0.04em;
+        margin-bottom: 4px;
       }
 
       .lp-thanks-section__text {
-        margin-bottom: 32px;
+        font-size: 0.84rem;
+        line-height: 1.7;
+        margin-bottom: 16px;
       }
 
-      .lp-thanks__checks {
-        margin-bottom: 32px;
+      .lp-thanks__card {
+        margin-bottom: 20px;
+        padding: 14px 14px 14px;
+      }
+
+      .lp-thanks__agenda {
+        margin-top: 12px;
+        padding-top: 10px;
+      }
+
+      .lp-thanks__h2 {
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin-bottom: 6px;
+      }
+
+      .lp-thanks__checks li {
+        padding-left: 20px;
+        font-size: 0.8rem;
+        line-height: 1.6;
+      }
+
+      .lp-thanks__checks li + li {
+        margin-top: 4px;
+      }
+
+      /* 肩書と名前を1行にまとめる */
+      .lp-thanks__ceo-role,
+      .lp-thanks__ceo-name {
+        display: inline;
+      }
+
+      .lp-thanks__ceo-role {
+        margin-right: 8px;
       }
 
       .lp-thanks__ceo {
-        gap: 14px;
-        padding: 18px 16px;
-        margin-bottom: 36px;
+        gap: 12px;
       }
 
       .lp-thanks__ceo-photo {
-        width: 68px;
-        height: 68px;
+        width: 52px;
+        height: 52px;
+      }
+
+      .lp-thanks__ceo-name {
+        font-size: 0.95rem;
+      }
+
+      .lp-thanks__ceo-text {
+        font-size: 0.8rem;
+        line-height: 1.65;
+      }
+
+      .lp-thanks-section__booking-title {
+        font-size: 1.05rem;
       }
 
       /* カレンダーは画面幅いっぱいに広げ、枠内スクロールで縦長を防ぐ */
@@ -276,7 +361,7 @@
       <nav class="navbar__nav">
         <ul class="navbar__list">
           <li><a href="index.html#services">サービス</a></li>
-          <li><a href="otameshi-fdec.html">お試しFDE+C</a></li>
+          <li><a href="otameshi-fde.html">お試しFDE</a></li>
           <li><a href="index.html#results">実績</a></li>
           <li><a href="index.html#cases">事例</a></li>
           <li><a href="index.html#about">私たちについて</a></li>
@@ -296,35 +381,48 @@
 
         <!-- 1. 注意バナー -->
         <div class="lp-thanks__notice" role="status">
-          <p class="lp-thanks__notice-title">ご案内がございます</p>
-          <p class="lp-thanks__notice-text">このページはまだ閉じないでください</p>
+          <!-- 注意マーク（支給画像をSVGで再現。アイコンなので配色トークンではなく固定色） -->
+          <svg class="lp-thanks__notice-icon" viewBox="150 150 500 500" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="lp-warn-grad" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#EDA70A"/>
+                <stop offset="1" stop-color="#FBE14F"/>
+              </linearGradient>
+            </defs>
+            <path d="M400 170 L630 625 H170 Z" fill="url(#lp-warn-grad)" stroke="#4A4220" stroke-width="22" stroke-linejoin="round"/>
+            <rect x="381" y="327" width="39" height="157" fill="#4A4220"/>
+            <rect x="381" y="520" width="39" height="39" fill="#4A4220"/>
+          </svg>
+          <p class="lp-thanks__notice-text">ご案内がございますので、<br class="sp-only">このページはまだ閉じないでください</p>
         </div>
 
         <!-- 2. お礼 -->
         <span class="lp-section-label">THANK YOU</span>
-        <h1 class="lp-thanks-section__title">お申し込み<br class="sp-only">ありがとうございます</h1>
-        <p class="lp-thanks-section__text">ご入力いただいたメールアドレスに、確認メールをお送りしました。</p>
+        <h1 class="lp-thanks-section__title">資料請求ありがとうございます</h1>
+        <p class="lp-thanks-section__text">ご入力のメールアドレスに、資料（PDF）を添付してお送りしました。</p>
 
-        <!-- 3. 初回30分で伝えること -->
-        <h2 class="lp-thanks__h2">初回30分・オンラインで、<br class="sp-only">こんなことをお伝えします</h2>
-        <ul class="lp-thanks__checks">
-          <li>貴社の業務の中で、AIやツールで楽になりそうな箇所の目星</li>
-          <li>2回の無料コンサルで「その場で試作」できそうな課題の選定</li>
-          <li>無料コンサルの進め方と、2回目以降のご説明（無理な営業はしません）</li>
-        </ul>
-
-        <!-- 4. 代表の紹介 -->
-        <div class="lp-thanks__ceo">
-          <img src="image/ceo-kiyokawa.jpg" alt="清川 勇樹" class="lp-thanks__ceo-photo">
-          <div>
-            <p class="lp-thanks__ceo-role">代表取締役 CEO</p>
-            <p class="lp-thanks__ceo-name">清川 勇樹</p>
-            <p class="lp-thanks__ceo-text">アクセンチュア出身。当日は私が直接お話を伺います。専門用語は使いませんので、準備物も不要です。お気軽にお越しください。</p>
+        <!-- 3. 代表の紹介＋初回1時間の面談で整理すること（1枚のカード） -->
+        <div class="lp-thanks__card">
+          <div class="lp-thanks__ceo">
+            <img src="image/ceo-kiyokawa.jpg" alt="清川 勇樹" class="lp-thanks__ceo-photo">
+            <div>
+              <p class="lp-thanks__ceo-role">代表取締役 CEO</p>
+              <p class="lp-thanks__ceo-name">清川 勇樹</p>
+              <p class="lp-thanks__ceo-text">アクセンチュア出身。当日は私が直接お話を伺います。専門用語は使いませんので、準備物も不要です。お気軽にご相談ください。</p>
+            </div>
+          </div>
+          <div class="lp-thanks__agenda">
+            <h2 class="lp-thanks__h2">初回1時間のオンライン面談をご調整頂き、<br class="sp-only">こんなことを整理させて頂きます</h2>
+            <ul class="lp-thanks__checks">
+              <li>いまの業務の流れと、手作業・二重入力などの困りごとの洗い出し</li>
+              <li>効果が大きく、すぐに着手できる課題の優先順位づけ</li>
+              <li>無料コンサル第1回で「その場で試作」する業務とツールのイメージ</li>
+            </ul>
           </div>
         </div>
 
         <!-- 5. 日程調整（TimeRex 公式 embed.js で埋め込み） -->
-        <h2 class="lp-thanks-section__booking-title" id="booking">ご都合の良い日時をお選びください</h2>
+        <h2 class="lp-thanks-section__booking-title" id="booking">無料AIコンサルのご予約はこちら</h2>
         <div class="lp-thanks-section__widget">
           <div class="lp-booking__scale">
             <!-- Begin TimeRex Widget -->
@@ -365,7 +463,7 @@
           <span class="footer__col-label-ja">サービス</span>
         </p>
         <ul class="footer__links">
-          <li><a href="otameshi-fdec.html">お試しFDE+C</a></li>
+          <li><a href="otameshi-fde.html">お試しFDE</a></li>
           <li><a href="service-ax.html">AIXコンサルティング</a></li>
           <li><a href="service-dx.html">DXコンサルティング</a></li>
           <li><a href="service-saas.html">AI SaaS事業</a></li>

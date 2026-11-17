@@ -9,6 +9,16 @@
       "source": "/launch.html",
       "destination": "/zeroichi-banso.html",
       "permanent": true
+    },
+    {
+      "source": "/otameshi-fdec.html",
+      "destination": "/otameshi-fde.html",
+      "permanent": true
+    },
+    {
+      "source": "/otameshi-fdec-thanks.html",
+      "destination": "/otameshi-fde-thanks.html",
+      "permanent": true
     }
   ],
   "functions": {

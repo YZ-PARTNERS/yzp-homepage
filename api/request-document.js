@@ -1,5 +1,5 @@
 /**
- * 資料請求フォーム（sabusuku-sanbo.html / zeroichi-banso.html）の受け口。
+ * 資料請求フォーム（sabusuku-sanbo.html / zeroichi-banso.html / otameshi-fde.html）の受け口。
  *
  * 1. 入力されたメールアドレスへ自動返信（サービス紹介資料PDFを添付、日程調整リンク入り）
  * 2. 入力内容を info@yz-partners.co.jp へ通知
@@ -40,14 +40,20 @@ const SERVICES = {
     docFile: 'zeroichi-banso-service-guide.pdf',
     docName: 'ゼロイチ伴走_サービス紹介資料.pdf',
   },
-  // 無料AIコンサルの申込（otameshi-fdec.html）。資料添付なし・日程調整リンクを案内する
-  'お試しFDE+C': {
-    kind: 'apply',
-    lead: '「お試しFDE+C」無料AIコンサルにお申し込みいただき、ありがとうございます。',
-    detail: 'AIエンジニア/コンサルが現場に伺い、業務の困りごとをその場でツール化するサービスです。初回は30分・オンラインでも実施でき、準備物は不要です。',
-    url: SITE + '/otameshi-fdec.html',
-    subject: '【お試しFDE+C】無料AIコンサルのお申し込みを受け付けました｜YZ PARTNERS',
-    notifyLabel: '無料AIコンサル申込',
+  // お試しFDE（otameshi-fde.html）。ご提案資料PDFを添付し、無料AIコンサルの予約へつなぐ。
+  // 任意項目（docNote / bookingTitle / bookingLead / inquiry / footnote）で既定の文面を差し替えている
+  'お試しFDE': {
+    lead: '「お試しFDE」の資料をご請求いただき、ありがとうございます。',
+    detail: 'AIエンジニア/コンサルが現場に伺い、困りごとをその場でツール化するサービスです。',
+    url: SITE + '/otameshi-fde.html',
+    docFile: 'otameshi-fde-proposal.pdf',
+    docName: 'お試しFDE_ご提案資料.pdf',
+    docNote: 'ご提案資料（PDF）を添付しましたので、ご確認ください。',
+    noDocLink: true, // 資料はメール添付のみで届ける（ダウンロードリンクは載せない）
+    bookingTitle: '無料AIコンサルのご予約はこちら',
+    bookingLead: ['初回1時間・オンライン可。資料の内容もその場でご説明します。'],
+    inquiry: 'ご不明点は本メールにご返信ください。',
+    footnote: '※ 本メールは資料請求受付の自動送信です。',
   },
 };
 
@@ -103,40 +109,40 @@ async function sendMail(apiKey, payload) {
   return res.json();
 }
 
+// サービスごとの任意項目がなければ、資料請求の既定文面を使う
+function copyOf(s) {
+  return {
+    docNote: s.docNote || 'サービス紹介資料を本メールに添付しておりますので、ご確認ください。',
+    bookingTitle: s.bookingTitle || '個別のご相談も承っています',
+    bookingLead: s.bookingLead || ['30〜60分のオンライン面談です。ご相談のみでも構いません。', '下のボタンからご都合のよい日時をお選びください。'],
+    inquiry: s.inquiry || 'ご不明な点やご相談は、本メールにそのままご返信ください。',
+    footnote: s.footnote || '※ 本メールは資料請求の受付を自動でお知らせするものです。',
+  };
+}
+
 function autoReplyHtml({ name, company, service }) {
   const s = svcOf(service);
-  const isApply = s.kind === 'apply';
+  const c = copyOf(s);
   const docUrl = SITE + '/assets/docs/' + s.docFile;
-  // 資料請求：添付資料の案内 ／ 申込：添付なしで日程調整を主役にする
-  const detailBlock = isApply
-    ? '    <p style="margin:0 0 24px">' + escapeHtml(s.detail) + '</p>\n'
-    : '    <p style="margin:0 0 24px">' + escapeHtml(s.detail) + '<br><strong>サービス紹介資料を本メールに添付</strong>しておりますので、ご確認ください。</p>\n'
-      + '    <div style="margin:0 0 28px;padding:20px 22px;background:#F6F8FA;border:1px solid #E4E8EE;border-radius:6px">\n'
-      + '      <p style="margin:0 0 6px;font-weight:700;color:#0F1E3D">添付資料</p>\n'
-      + '      <p style="margin:0;font-size:0.9rem">' + escapeHtml(s.docName) + '</p>\n'
-      + '      <p style="margin:10px 0 0;font-size:0.85rem;color:#626C7A">添付が開けない場合は <a href="' + docUrl + '" style="color:#00785A">こちらからダウンロード</a> いただけます。</p>\n'
-      + '    </div>\n';
-  const bookingTitle = isApply ? 'ご都合の良い日時をお選びください' : '個別のご相談も承っています';
-  const bookingLead = isApply
-    ? '初回は30分・オンラインでも実施できます。下のボタンから日程をお選びください。<br>今すぐ決められない場合は、後日こちらからご連絡いたします。'
-    : '30〜60分のオンライン面談です。ご相談のみでも構いません。<br>下のボタンからご都合のよい日時をお選びください。';
-  const footnote = isApply
-    ? '※ 本メールは無料AIコンサルのお申し込み受付を自動でお知らせするものです。'
-    : '※ 本メールは資料請求の受付を自動でお知らせするものです。';
   return '<!doctype html>\n'
     + '<html lang="ja"><body style="margin:0;padding:24px;background:#F6F8FA;font-family:\'Hiragino Sans\',\'Noto Sans JP\',sans-serif;color:#2A3441;line-height:1.9">\n'
     + '  <div style="max-width:560px;margin:0 auto;background:#FFFFFF;border:1px solid #E4E8EE;border-radius:6px;padding:32px 28px">\n'
     + '    <p style="margin:0 0 24px;font-weight:700;font-size:1.05rem;color:#0F1E3D">' + escapeHtml(company) + '<br>' + escapeHtml(name) + ' 様</p>\n'
     + '    <p style="margin:0 0 16px">' + escapeHtml(s.lead) + '</p>\n'
-    + detailBlock
+    + '    <p style="margin:0 0 24px">' + escapeHtml(s.detail) + '<br><strong>' + escapeHtml(c.docNote) + '</strong></p>\n'
+    + '    <div style="margin:0 0 28px;padding:20px 22px;background:#F6F8FA;border:1px solid #E4E8EE;border-radius:6px">\n'
+    + '      <p style="margin:0 0 6px;font-weight:700;color:#0F1E3D">添付資料</p>\n'
+    + '      <p style="margin:0;font-size:0.9rem">' + escapeHtml(s.docName) + '</p>\n'
+    + (s.noDocLink ? '' : '      <p style="margin:10px 0 0;font-size:0.85rem;color:#626C7A">添付が開けない場合は <a href="' + docUrl + '" style="color:#00785A">こちらからダウンロード</a> いただけます。</p>\n')
+    + '    </div>\n'
     + '    <div style="margin:0 0 28px;padding:24px 22px;background:#FFFFFF;border:2px solid #00C896;border-radius:6px;text-align:center">\n'
-    + '      <p style="margin:0 0 8px;font-weight:700;font-size:1.02rem;color:#0F1E3D">' + bookingTitle + '</p>\n'
-    + '      <p style="margin:0 0 18px;font-size:0.88rem;color:#626C7A">' + bookingLead + '</p>\n'
+    + '      <p style="margin:0 0 8px;font-weight:700;font-size:1.02rem;color:#0F1E3D">' + escapeHtml(c.bookingTitle) + '</p>\n'
+    + '      <p style="margin:0 0 18px;font-size:0.88rem;color:#626C7A">' + c.bookingLead.map(escapeHtml).join('<br>') + '</p>\n'
     + '      <a href="' + BOOKING_URL + '" style="display:inline-block;padding:15px 40px;background-color:#00C896;color:#06382B;font-weight:700;font-size:0.95rem;letter-spacing:0.06em;border-radius:6px;text-decoration:none">日程を調整する</a>\n'
     + '      <p style="margin:14px 0 0;font-size:0.78rem;color:#626C7A;word-break:break-all">ボタンが押せない場合はこちら：<br><a href="' + BOOKING_URL + '" style="color:#00785A">' + BOOKING_URL + '</a></p>\n'
     + '    </div>\n'
-    + '    <p style="margin:0 0 24px;font-size:0.9rem">ご不明な点やご相談は、本メールにそのままご返信ください。<br>サービス詳細： <a href="' + escapeHtml(s.url) + '" style="color:#00785A">' + escapeHtml(s.url) + '</a></p>\n'
-    + '    <p style="margin:0 0 8px;font-size:0.85rem;color:#626C7A">' + footnote + '</p>\n'
+    + '    <p style="margin:0 0 24px;font-size:0.9rem">' + escapeHtml(c.inquiry) + '<br>サービス詳細： <a href="' + escapeHtml(s.url) + '" style="color:#00785A">' + escapeHtml(s.url) + '</a></p>\n'
+    + '    <p style="margin:0 0 8px;font-size:0.85rem;color:#626C7A">' + escapeHtml(c.footnote) + '</p>\n'
     + '    <hr style="border:none;border-top:1px solid #E4E8EE;margin:24px 0">\n'
     + '    <p style="margin:0;font-size:0.82rem;color:#626C7A">株式会社YZ PARTNERS<br><a href="mailto:info@yz-partners.co.jp" style="color:#00785A">info@yz-partners.co.jp</a></p>\n'
     + '  </div>\n'
@@ -145,47 +151,30 @@ function autoReplyHtml({ name, company, service }) {
 
 function autoReplyText({ name, company, service }) {
   const s = svcOf(service);
-  const isApply = s.kind === 'apply';
-  const detailLines = isApply
-    ? [s.detail, '']
-    : [
-      s.detail,
-      'サービス紹介資料を本メールに添付しておりますので、ご確認ください。',
-      '',
-      '[添付資料]',
-      s.docName,
-      '添付が開けない場合: ' + SITE + '/assets/docs/' + s.docFile,
-      '',
-    ];
-  const bookingLines = isApply
-    ? [
-      '[ご都合の良い日時をお選びください]',
-      '初回は30分・オンラインでも実施できます。下記から日程をお選びください。',
-      '今すぐ決められない場合は、後日こちらからご連絡いたします。',
-    ]
-    : [
-      '[個別のご相談も承っています]',
-      '30〜60分のオンライン面談です。ご相談のみでも構いません。',
-      'ご都合のよい日時を下記からお選びください。',
-    ];
+  const c = copyOf(s);
   return [
     company,
     name + ' 様',
     '',
     s.lead,
     '',
-    ...detailLines,
+    s.detail,
+    c.docNote,
+    '',
+    '[添付資料]',
+    s.docName,
+    ...(s.noDocLink ? [] : ['添付が開けない場合: ' + SITE + '/assets/docs/' + s.docFile]),
+    '',
     '----------------------------------------',
-    ...bookingLines,
+    '[' + c.bookingTitle + ']',
+    ...c.bookingLead,
     BOOKING_URL,
     '----------------------------------------',
     '',
-    'ご不明な点やご相談は、本メールにそのままご返信ください。',
+    c.inquiry,
     'サービス詳細: ' + s.url,
     '',
-    isApply
-      ? '※ 本メールは無料AIコンサルのお申し込み受付を自動でお知らせするものです。'
-      : '※ 本メールは資料請求の受付を自動でお知らせするものです。',
+    c.footnote,
     '',
     '株式会社YZ PARTNERS',
     'info@yz-partners.co.jp',
@@ -193,26 +182,22 @@ function autoReplyText({ name, company, service }) {
 }
 
 function notifyHtml({ name, company, email, tel, service, issue }) {
-  const s = svcOf(service);
-  const isApply = s.kind === 'apply';
   const row = (k, v) => '<tr>'
     + '<th style="text-align:left;padding:8px 12px;background:#F6F8FA;border:1px solid #E4E8EE;white-space:nowrap">' + escapeHtml(k) + '</th>'
     + '<td style="padding:8px 12px;border:1px solid #E4E8EE;white-space:pre-wrap">' + escapeHtml(v || '（未入力）') + '</td></tr>';
   return '<!doctype html>\n'
     + '<html lang="ja"><body style="font-family:\'Hiragino Sans\',\'Noto Sans JP\',sans-serif;color:#2A3441">\n'
-    + '  <p style="font-weight:700;color:#0F1E3D">' + (isApply ? '無料AIコンサルの申込がありました' : '資料請求がありました') + '（' + escapeHtml(service) + '）</p>\n'
+    + '  <p style="font-weight:700;color:#0F1E3D">資料請求がありました（' + escapeHtml(service) + '）</p>\n'
     + '  <table style="border-collapse:collapse;font-size:0.9rem">\n'
     + row('サービス', service)
     + row('会社名', company)
     + row('お名前', name)
     + row('メールアドレス', email)
     + row('電話番号', tel)
-    + (isApply ? row('いま困っている業務', issue) : '')
+    + (issue ? row('いま困っている業務', issue) : '')
     + '  </table>\n'
     + '  <p style="font-size:0.85rem;color:#626C7A">'
-    + (isApply
-      ? '※ 申込者には日程調整リンクを添えた自動返信を送信済みです。サンクスページでそのまま予約した場合は TimeRex から別途通知が届きます。'
-      : '※ 申込者には資料PDFと日程調整リンクを添えた自動返信を送信済みです。')
+    + '※ 申込者には資料PDFと日程調整リンクを添えた自動返信を送信済みです。サンクスページから予約した場合は TimeRex から別途通知が届きます。'
     + '</p>\n'
     + '</body></html>';
 }
@@ -235,7 +220,7 @@ module.exports = async function handler(req, res) {
   const email = String(body.email || '').trim();
   const tel = String(body.tel || '').trim();
   const service = String(body.service || '').trim();
-  const issue = String(body.issue || '').trim().slice(0, 2000); // 申込フォームの「いま困っている業務」（任意）
+  const issue = String(body.issue || '').trim().slice(0, 2000); // お試しFDEのフォームの「いま困っている業務」（任意）
 
   // ハニーポット：ボットが埋めたら成功を装って捨てる
   if (body._gotcha) return res.status(200).json({ ok: true });
@@ -246,7 +231,6 @@ module.exports = async function handler(req, res) {
 
   const payload = { name, company, email, tel, service, issue };
   const svc = svcOf(service);
-  const isApply = svc.kind === 'apply';
 
   try {
     // 自動返信は失敗させたくないので先に送る
@@ -254,13 +238,10 @@ module.exports = async function handler(req, res) {
       from: FROM,
       to: [email],
       reply_to: NOTIFY_TO,
-      subject: isApply
-        ? svc.subject
-        : '【' + (service || '資料請求') + '】資料をお送りします｜YZ PARTNERS',
+      subject: '【' + (service || '資料請求') + '】資料をお送りします｜YZ PARTNERS',
       html: autoReplyHtml(payload),
       text: autoReplyText(payload),
     };
-    // 資料があるサービスだけPDFを添付する
     if (svc.docFile) mail.attachments = [buildAttachment(svc)];
     await sendMail(apiKey, mail);
   } catch (err) {
@@ -273,7 +254,7 @@ module.exports = async function handler(req, res) {
       from: FROM,
       to: [NOTIFY_TO],
       reply_to: email,
-      subject: '【' + (isApply ? svc.notifyLabel : '資料請求') + '】' + service + '／' + company + '／' + name + ' 様',
+      subject: '【資料請求】' + service + '／' + company + '／' + name + ' 様',
       html: notifyHtml(payload),
     });
   } catch (err) {
